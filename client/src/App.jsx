@@ -1,7 +1,21 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
+import Dashboard from "./pages/Dashboard"
+import SignUp from "./pages/SignUp"
+import SignIn from "./pages/SignIn"
+import Header from "./components/Header"
 
 function App() {
   return (
-    <h1>hello world!</h1>
+    <BrowserRouter>
+        <Header />
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-in" element={<SignIn />} />
+        </Routes>
+    </BrowserRouter>
   )
 }
 
