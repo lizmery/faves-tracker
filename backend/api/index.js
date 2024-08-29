@@ -3,10 +3,11 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import path from 'path'
 import authRoutes from './routes/auth.route.js'
+import userRoutes from './routes/user.route.js'
 
 dotenv.config()
 
-mongoose.connect(process.env.MONGO)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('MongoDb is connected')
     })
@@ -14,7 +15,7 @@ mongoose.connect(process.env.MONGO)
         console.log(err)
     })
 
-const __dirname = path.resolve
+const __dirname = path.resolve()
 
 const app = express()
 
@@ -26,3 +27,15 @@ app.listen(process.env.PORT, () => {
 })
 
 app.use('/api/auth', authRoutes)
+app.use('/api/user', userRoutes)
+
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500
+    const message = err.message || 'Internal Server Error'
+
+    res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+    })
+})
