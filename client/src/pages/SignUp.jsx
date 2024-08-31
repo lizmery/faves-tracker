@@ -7,6 +7,7 @@ import {
   TextInput
 } from 'flowbite-react'
 import { Link, useNavigate } from 'react-router-dom'
+import signupSvg from '../assets/3.svg'
 
 export default function SignUp() {
     const [formData, setFormData] = useState({})
@@ -53,16 +54,9 @@ export default function SignUp() {
 
     return (
         <div className="min-h-screen mt-20">
-            <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
+            <div className="flex p-3 max-w-5xl mx-auto flex-col-reverse md:flex-row md:items-center gap-6">
                 {/* left column */}
-                <div className="flex-1">
-                    <Link to='/' className=''>
-                        test
-                    </Link>
-                </div>
-
-                {/* right column */}
-                <div className="flex-1">
+                <div className="flex-1 lg:pr-2">
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                         <div>
                             <Label value='Email' />
@@ -101,6 +95,14 @@ export default function SignUp() {
                     {errorMessage && (
                         <Alert className='mt-5' color='failure'>{errorMessage}</Alert>
                     )}
+                </div>
+
+                {/* right column */}
+                <div className="flex-1 md:border-l flex justify-center lg:pl-2">
+                    <img 
+                        src={signupSvg}
+                        className='w-2/3 lg:w-auto lg:pl-5'
+                    />
                 </div>
             </div>
         </div>
