@@ -9,10 +9,7 @@ export default function FooterComponent() {
             <Footer container className='bg-[#eee]'>
                 <div className="w-full">
                     <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-                        <Footer.Brand 
-                            href='/'
-                            name='FavesTracker'
-                        />
+                        <Link to='/' className='text-2xl font-bold'>Faves Tracker</Link>
                         <Footer.LinkGroup>
                             <Footer.Link href='/'>Home</Footer.Link>
                             <Footer.Link href='/'>About</Footer.Link>
