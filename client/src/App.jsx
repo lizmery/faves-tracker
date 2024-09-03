@@ -5,6 +5,9 @@ import SignUp from "./pages/SignUp"
 import SignIn from "./pages/SignIn"
 import Header from "./components/Header"
 import FooterComponent from "./components/Footer"
+import PrivateRoute from "./components/PrivateRoute"
+
+//TODO: create ABOUT, and CONTACT pages
 
 function App() {
   return (
@@ -12,9 +15,11 @@ function App() {
         <Header />
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
         </Routes>
         <FooterComponent />
     </BrowserRouter>
