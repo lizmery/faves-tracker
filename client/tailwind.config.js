@@ -13,13 +13,18 @@ export default {
       'primary': '#BFFF70',
       'secondary': '#EFB2FE',
       'bgDark': '#170F2B',
-      'bgDarkSecondary': '#1E1732',
+      'bgDarkSecondary': '#221A36',
       'bgDarkTertiary' : '#321F6A',
       'darkGray': '#292929',
       'textLight': '',
-      'textDark': '#B8B8B8' 
+      'textDark': '#B8B8B8' ,
+      gray: {
+        800: '#1E1732'
+      }
     },
-    extend: {},
+    extend: {
+
+    },
   },
   plugins: [
     flowbite.plugin(),

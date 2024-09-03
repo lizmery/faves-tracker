@@ -31,7 +31,7 @@ export default function SignIn() {
             dispatch(signInStart())
 
             const res = await fetch('/api/auth/signin', {
-                method: POST,
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             })
@@ -71,10 +71,10 @@ export default function SignIn() {
                                     id="email" 
                                     name="email" 
                                     type="email" 
-                                    autocomplete="email" 
+                                   
                                     required 
                                     onChange={handleChange}
-                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -85,10 +85,10 @@ export default function SignIn() {
                                     id="password" 
                                     name="password" 
                                     type="password" 
-                                    autocomplete="password" 
+                                    
                                     required 
                                     onChange={handleChange}
-                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
