@@ -7,7 +7,7 @@ import {
   TextInput
 } from 'flowbite-react'
 import { Link, useNavigate } from 'react-router-dom'
-import signupSvg from '../assets/3.svg'
+import signupSvg from '../assets/7.svg'
 import OAuth from '../components/OAuth'
 
 export default function SignUp() {
@@ -55,17 +55,46 @@ export default function SignUp() {
 
     return (
         <div className="min-h-screen mt-20">
-            <div className="flex p-3 max-w-5xl mx-auto flex-col-reverse md:flex-row md:items-center gap-6">
+            <div className="flex p-3 max-w-5xl mx-auto flex-col-reverse lg:flex-row lg:items-center gap-6">
                 {/* left column */}
                 <div className="flex-1 lg:pr-2">
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                         {/* TODO: add name input */}
                         <div>
+                            <label for="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-[#eee]">Email</label>
+                            <div className="mt-2">
+                                <input 
+                                    id="email" 
+                                    name="email" 
+                                    type="email" 
+                                    autocomplete="email" 
+                                    required 
+                                    onChange={handleChange}
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-[#eee]">Password</label>
+                            <div className="mt-2">
+                                <input 
+                                    id="password" 
+                                    name="password" 
+                                    type="password" 
+                                    autocomplete="password" 
+                                    required 
+                                    onChange={handleChange}
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                />
+                            </div>
+                        </div>
+                        {/* <div>
                             <Label value='Email' />
                             <TextInput 
                                 type='email'
                                 placeholder='name@email.com'
                                 id='email'
+                                className='bg-bgDarkSecondary text-accent rounded-md'
                                 onChange={handleChange}
                             />
                         </div>
@@ -77,8 +106,8 @@ export default function SignUp() {
                                 id='password'
                                 onChange={handleChange}
                             />
-                        </div>
-                        <Button type='submit' disabled={loading} className='bg-accent text-black'>
+                        </div> */}
+                        <Button type='submit' disabled={loading} className='bg-primary text-black mt-5'>
                             {loading ? (
                                 <>
                                     <Spinner size='sm' />
@@ -92,7 +121,7 @@ export default function SignUp() {
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
                         <span>Have an account?</span>
-                        <Link to='/sign-in' className='text-primary'>Sign In</Link>
+                        <Link to='/sign-in' className='dark:text-secondary text-bgDarkTertiary flex items-center font-bold'>Sign In</Link>
                     </div>
 
                     {errorMessage && (
@@ -101,10 +130,10 @@ export default function SignUp() {
                 </div>
 
                 {/* right column */}
-                <div className="flex-1 md:border-l flex justify-center lg:pl-2">
+                <div className="flex-1 lg:border-l dark:border-darkGray flex justify-center lg:pl-2">
                     <img 
                         src={signupSvg}
-                        className='w-2/3 lg:w-auto lg:pl-5'
+                        className='w-2/3 md:w-1/2 lg:w-auto lg:pl-5'
                     />
                 </div>
             </div>

@@ -52,12 +52,12 @@ export default function SignIn() {
 
     return (
         <div className='min-h-screen mt-20'>
-            <div className='flex p-3 max-w-5xl mx-auto flex-col md:flex-row md:items-center gap-6'>
+            <div className='flex p-3 max-w-5xl mx-auto flex-col lg:flex-row lg:items-center gap-6'>
                  {/* left column */}
-                 <div className="flex-1 md:border-r flex justify-center lg:pr-2">
+                 <div className="flex-1 lg:border-r flex justify-center lg:pr-2 dark:border-darkGray">
                     <img 
                         src={signupSvg}
-                        className='w-2/3 lg:w-auto lg:pr-5'
+                        className='w-2/3 md:w-1/2 lg:w-auto lg:pr-5'
                     />
                 </div>
 
@@ -65,24 +65,34 @@ export default function SignIn() {
                 <div className="flex-1">
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                         <div>
-                            <Label value='Email' />
-                            <TextInput 
-                                type='email'
-                                placeholder='name@email.com'
-                                id='email'
-                                onChange={handleChange}
-                            />
+                            <label for="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-[#eee]">Email</label>
+                            <div className="mt-2">
+                                <input 
+                                    id="email" 
+                                    name="email" 
+                                    type="email" 
+                                    autocomplete="email" 
+                                    required 
+                                    onChange={handleChange}
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                />
+                            </div>
                         </div>
                         <div>
-                            <Label value='Password' />
-                            <TextInput 
-                                type='password'
-                                placeholder='******'
-                                id='password'
-                                onChange={handleChange}
-                            />
+                            <label for="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-[#eee]">Password</label>
+                            <div className="mt-2">
+                                <input 
+                                    id="password" 
+                                    name="password" 
+                                    type="password" 
+                                    autocomplete="password" 
+                                    required 
+                                    onChange={handleChange}
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                />
+                            </div>
                         </div>
-                        <Button type='submit' disabled={loading} className='bg-accent text-black'>
+                        <Button type='submit' disabled={loading} className='bg-primary text-black mt-5'>
                             {loading ? (
                                 <>
                                     <Spinner size='sm' />
@@ -96,7 +106,7 @@ export default function SignIn() {
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
                         <span>Don't have an account?</span>
-                        <Link to='/sign-up' className='text-primary'>Sign Up</Link>
+                        <Link to='/sign-up' className='dark:text-secondary text-bgDarkTertiary font-bold'>Sign Up</Link>
                     </div>
 
                     {errorMessage && (

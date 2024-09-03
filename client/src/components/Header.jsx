@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import {
     Avatar,
     Button,
@@ -9,6 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutSuccess } from '../redux/user/userSlice'
+import { toggleTheme }from '../redux/theme/themeSlice'
 
 export default function Header() {
     const path = useLocation().pathname
@@ -16,6 +16,7 @@ export default function Header() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { currentUser } = useSelector((state) => state.user)
+    const { theme } = useSelector((state) => state.theme)
 
     const handleSignout = async () => {
         try {
@@ -35,11 +36,17 @@ export default function Header() {
     }
     
   return (
-    <Navbar className='border-b border-zinc-200'>
-        <Navbar.Brand href='/' className='dark:text-accent text-xl text-primary font-semibold'>
+    <Navbar className='dark:bg-transparent bg-transparent border-b dark:border-[#292929] backdrop-blur-xl sticky top-0'>
+        <Navbar.Brand href='/' className='dark:text-primary text-2xl text-accent font-semibold'>
             Faves Tracker
         </Navbar.Brand>
         <div className='flex md:order-2 gap-2'>
+            <Button
+                className='w-14 h-14 inline text-bgDark dark:text-white'
+                onClick={() => dispatch(toggleTheme())}
+            >
+                {theme === 'dark' ? <FaSun /> : <FaMoon />}
+            </Button>
             {currentUser ? (
                 <Dropdown
                     arrowIcon={false}
@@ -63,28 +70,28 @@ export default function Header() {
             ) : (
                 <>
                     <Link to='/sign-in' className='items-center hidden lg:flex'>
-                        <Button className='text-darkPurple border-accent'>Sign In</Button>
+                        <Button className='dark:text-secondary text-bgDarkTertiary font-bold'>Sign In</Button>
                      </Link>
-                    <Link to='/sign-up'>
-                        <Button className='text-darkPurple bg-accent'>Sign Up</Button>
+                    <Link to='/sign-up' className='flex items-center'>
+                        <Button className='text-bgDark bg-primary'>Sign Up</Button>
                     </Link>
                 </>
                
             )}
-            <Navbar.Toggle />
+            <Navbar.Toggle  className='text-bgDarkSecondary'/>
         </div>
-        <Navbar.Collapse>
-            <Navbar.Link active={path === '/'} as={'div'}>
+        <Navbar.Collapse className='dark:text-[#B8B8B8]'>
+            <Navbar.Link active={path === '/'} as={'div'} className='dark:text-[#B8B8B8] border-none'>
                 <Link to='/'>Home</Link>
             </Navbar.Link>
-            <Navbar.Link active={path === '/about'} as={'div'}>
+            <Navbar.Link active={path === '/about'} as={'div'} className='dark:text-[#B8B8B8] border-none'>
                 <Link to='/about'>About</Link>
             </Navbar.Link>
-            <Navbar.Link active={path === '/contact'} as={'div'}>
+            <Navbar.Link active={path === '/contact'} as={'div'} className='dark:text-[#B8B8B8] pb-6 dark:border-[#292929]'>
                 <Link to='/contact'>Contact</Link>
             </Navbar.Link>
-            <Navbar.Link as={'div'}>
-                <Link to='/sign-in' className='lg:hidden'>Sign In</Link>
+            <Navbar.Link as={'div'} className='border-none font-bold'>
+                <Link to='/sign-in' className='lg:hidden text-bgDarkTertiary dark:text-secondary font-bold'>Sign In</Link>
             </Navbar.Link>
         </Navbar.Collapse>
     </Navbar>
