@@ -14,17 +14,17 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const customTheme = {
     root: {
-        inner: "dark:bg-bgDarkSecondary p-2"
+        inner: "dark:bg-bgDarkSecondary bg-bgLightSecondary p-2"
     },
     "item": {
         "base": "flex items-center justify-center rounded-lg p-2 text-base font-normal  dark:hover:text-white opacity-75 hover:opacity-100 py-3 px-5",
-        "active": "dark:bg-bgDarkTertiary rounded-2xl dark:text-white opacity-100",
+        "active": "dark:bg-bgDarkTertiary bg-[#EDFFD6] rounded-2xl dark:text-white opacity-100",
   
         "icon": {
-          "base": "h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-secondary dark:group-hover:text-white",
+          "base": "h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-secondary text-secondaryDark dark:group-hover:text-white",
           "active": ""
         },
-        label: 'bg-primary text-bgDark'
+        label: 'dark:bg-primary dark:text-bgDark bg-accent text-white'
       },
 }
 

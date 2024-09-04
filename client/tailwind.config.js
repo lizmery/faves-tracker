@@ -11,16 +11,15 @@ export default {
     colors: {
       'accent': '#724CF9',
       'primary': '#BFFF70',
-      'secondary': '#EFB2FE',
+      'secondary': '#F5AAFD',
+      'secondaryDark': '#BB02CF',
       'bgDark': '#170F2B',
       'bgDarkSecondary': '#221A36',
       'bgDarkTertiary' : '#321F6A',
+      'bgLightSecondary': '#F7F7F7',
       'darkGray': '#292929',
       'textLight': '',
       'textDark': '#B8B8B8' ,
-      gray: {
-        800: '#1E1732'
-      }
     },
     extend: {
 

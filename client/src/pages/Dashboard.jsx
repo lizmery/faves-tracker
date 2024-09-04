@@ -17,7 +17,7 @@ export default function Dashboard() {
 
     return (
         <div className='min-h-screen flex flex-col lg:flex-row lg:pl-6 lg:pt-6 p-2'>
-            <div className='lg:w-65 dark:bg-bgDarkSecondaey bg-bgDarkSecondary rounded-md px-3 pt-5'>
+            <div className='lg:w-65 dark:bg-bgDarkSecondary bg-bgLightSecondary rounded-lg px-3 pt-5'>
                 <DashSidebar />
             </div>
         </div>

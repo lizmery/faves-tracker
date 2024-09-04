@@ -70,7 +70,7 @@ export default function Header() {
             ) : (
                 <>
                     <Link to='/sign-in' className='items-center hidden lg:flex'>
-                        <Button className='dark:text-secondary text-bgDarkTertiary font-bold'>Sign In</Button>
+                        <Button className='dark:text-secondary text-secondaryDark font-bold'>Sign In</Button>
                      </Link>
                     <Link to='/sign-up' className='flex items-center'>
                         <Button className='text-bgDark bg-primary'>Sign Up</Button>
@@ -90,9 +90,11 @@ export default function Header() {
             <Navbar.Link active={path === '/contact'} as={'div'} className='dark:text-[#B8B8B8] pb-6 dark:border-[#292929]'>
                 <Link to='/contact'>Contact</Link>
             </Navbar.Link>
-            <Navbar.Link as={'div'} className='border-none font-bold'>
-                <Link to='/sign-in' className='lg:hidden text-bgDarkTertiary dark:text-secondary font-bold'>Sign In</Link>
-            </Navbar.Link>
+            {!currentUser && (
+                <Navbar.Link as={'div'} className='border-none font-bold'>
+                    <Link to='/sign-in' className='lg:hidden text-secondaryDark dark:text-secondary font-bold'>Sign In</Link>
+                </Navbar.Link>
+            )}
         </Navbar.Collapse>
     </Navbar>
   )
