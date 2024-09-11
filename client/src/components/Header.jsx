@@ -36,7 +36,7 @@ export default function Header() {
     }
     
   return (
-    <Navbar className='dark:bg-transparent bg-transparent border-b dark:border-[#292929] backdrop-blur-3xl sticky top-0 z-[100]'>
+    <Navbar className='dark:bg-transparent bg-transparent border-b dark:border-[#292929] backdrop-blur-3xl sticky top-0 z-[100] w-full'>
         <Navbar.Brand href='/' className='dark:text-primary text-2xl text-accent font-semibold'>
             Faves Tracker
         </Navbar.Brand>

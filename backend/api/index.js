@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import path from 'path'
 import authRoutes from './routes/auth.route.js'
 import userRoutes from './routes/user.route.js'
+import cookieParser from 'cookie-parser'
 
 dotenv.config()
 
@@ -20,7 +21,7 @@ const __dirname = path.resolve()
 const app = express()
 
 app.use(express.json())
-// app.use()
+app.use(cookieParser())
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on ${process.env.PORT}`)

@@ -9,7 +9,7 @@ import {
 } from 'react-icons/hi'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { signOutSuccess } from '../redux/user/userSlice'
+import { signOutSuccess } from '../../redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const customTheme = {
