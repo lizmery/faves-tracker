@@ -16,6 +16,18 @@ const customTheme = {
     },
 }
 
+const dropdownTheme = {
+    floating: {
+        divider: 'my-1 h-px bg-gray-100 dark:bg-grayLine',
+        item: {
+            base: 'flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-gray-200 dark:hover:bg-grayLine dark:hover:text-white dark:focus:bg-grayLine dark:focus:text-white',
+        },
+        style: {
+            auto: 'border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-darkGray dark:text-white'
+        }
+    }
+}
+
 export default function Header() {
     const path = useLocation().pathname
     const location = useLocation()
@@ -46,9 +58,9 @@ export default function Header() {
         <Navbar.Brand href='/' className=' text-2xl  font-semibold'>
             Faves Tracker
         </Navbar.Brand>
-        <div className='flex md:order-2 gap-3'>
+        <div className='flex md:order-2 lg:gap-3 gap-2'>
             <Button
-                className='w-14 h-14 inline text-bgDark dark:text-white focus:ring-transparent hover:opacity-80'
+                className='w-14 h-14 inline text-bgDark dark:text-white focus:ring-transparent hover:opacity-80 text-xl'
                 onClick={() => dispatch(toggleTheme())}
             >
                 {theme === 'dark' ? <FaSun /> : <FaMoon />}
@@ -60,10 +72,11 @@ export default function Header() {
                     label={
                         <Avatar alt='user' img={currentUser.profilePicture} rounded />
                     }
+                    theme={dropdownTheme}
                 >
                     <Dropdown.Header>
                         {/* <span className='block text-sm'>Hi {currentUser.name}</span> */}
-                        <span className='block text-sm font-medium truncate'>
+                        <span className='block text-sm font-medium truncate text-primary'>
                             {currentUser.email}
                         </span>
                     </Dropdown.Header>
