@@ -74,7 +74,7 @@ export default function SignIn() {
                                    
                                     required 
                                     onChange={handleChange}
-                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-2 ring-inset ring-lightGray dark:ring-darkGray placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -88,11 +88,11 @@ export default function SignIn() {
                                     
                                     required 
                                     onChange={handleChange}
-                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-2 ring-inset ring-lightGray dark:ring-darkGray placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
-                        <Button type='submit' disabled={loading} className='bg-primary text-black mt-5'>
+                        <Button type='submit' disabled={loading} className='dark:bg-white dark:text-black bg-black text-white mt-5'>
                             {loading ? (
                                 <>
                                     <Spinner size='sm' />
@@ -106,7 +106,7 @@ export default function SignIn() {
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
                         <span>Don't have an account?</span>
-                        <Link to='/sign-up' className='dark:text-secondary text-secondaryDark font-bold'>Sign Up</Link>
+                        <Link to='/sign-up' className='text-primary font-bold'>Sign Up</Link>
                     </div>
 
                     {errorMessage && (

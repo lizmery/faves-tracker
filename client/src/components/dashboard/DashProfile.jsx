@@ -22,6 +22,16 @@ import {
 } from '../../redux/user/userSlice'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 
+const customTheme = {
+    field: {
+        input: {
+            colors: {
+                info: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary'
+            },
+        },
+    },
+}
+
 export default function DashProfile() {
     const { currentUser, error, loading } = useSelector((state) => state.user)
     const [imageFile, setImageFile] = useState(null);
@@ -168,7 +178,7 @@ export default function DashProfile() {
     return (
         <div className='max-w-lg mx-auto p-3 w-full'>
             <h1 className='my-7 text-center font-semibold text-4xl pb-2'>Profile</h1>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
                 <input 
                     type='file'
                     accept='image/*'
@@ -227,22 +237,26 @@ export default function DashProfile() {
                     defaultValue={currentUser.email}
                     onChange={handleChange}
                     className='pt-4'
+                    theme={customTheme}
+                    color='info'
                 />
                 <TextInput 
                     type='password'
                     id='password'
                     placeholder='password'
                     onChange={handleChange}
+                    theme={customTheme}
+                    color='info'
                 />
                 <Button
                     type='submit'
-                    className='bg-primary text-bgDark'
+                    className='bg-black dark:bg-white text-white dark:text-black mt-4'
                     disabled={loading || imageFileUploading}
                 >
                     {loading ? 'Loading...' : 'Save Changes'}
                 </Button>
             </form>
-            <div className='text-secondaryDark dark:text-secondary flex justify-between mt-5'>
+            <div className='text-primary flex justify-between mt-6'>
                 <span onClick={() => setShowModal(true)} className='cursor-pointer'>
                     Delete Account
                 </span>

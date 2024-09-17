@@ -70,7 +70,7 @@ export default function SignUp() {
                                     
                                     required 
                                     onChange={handleChange}
-                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-2 ring-inset ring-lightGray dark:ring-darkGray placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -84,7 +84,7 @@ export default function SignUp() {
                                     
                                     required 
                                     onChange={handleChange}
-                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 dark:ring-[#5C5C5C] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary dark:focus:ring-secondary sm:text-sm sm:leading-6"
+                                    className="dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-2 ring-inset ring-lightGray dark:ring-darkGray placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -107,7 +107,7 @@ export default function SignUp() {
                                 onChange={handleChange}
                             />
                         </div> */}
-                        <Button type='submit' disabled={loading} className='bg-primary text-black mt-5'>
+                        <Button type='submit' disabled={loading} className='dark:bg-white dark:text-black bg-black text-white mt-5'>
                             {loading ? (
                                 <>
                                     <Spinner size='sm' />
@@ -121,7 +121,7 @@ export default function SignUp() {
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
                         <span>Have an account?</span>
-                        <Link to='/sign-in' className='dark:text-secondary text-secondaryDark flex items-center font-bold'>Sign In</Link>
+                        <Link to='/sign-in' className='text-primary flex items-center font-bold'>Sign In</Link>
                     </div>
 
                     {errorMessage && (

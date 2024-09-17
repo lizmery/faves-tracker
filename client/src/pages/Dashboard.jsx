@@ -17,8 +17,8 @@ export default function Dashboard() {
     }, [location.search])
 
     return (
-        <div className='min-h-screen flex flex-col lg:flex-row lg:pl-6 lg:pt-6 p-2'>
-            <div className='lg:w-65 dark:bg-bgDarkSecondary bg-bgLightSecondary rounded-lg px-3 pt-5'>
+        <div className='min-h-screen flex flex-col lg:flex-row lg:pl-6 lg:pt-6 p-2 pb-10'>
+            <div className='lg:w-65  rounded-lg px-1 pt-5'>
                 <DashSidebar />
             </div>
             {tab === 'profile' && <DashProfile />}

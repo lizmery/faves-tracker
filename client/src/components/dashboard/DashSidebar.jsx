@@ -14,17 +14,16 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const customTheme = {
     root: {
-        inner: "dark:bg-bgDarkSecondary bg-bgLightSecondary p-2"
+        inner: "bg-transparent p-2"
     },
     "item": {
-        "base": "flex items-center justify-center rounded-lg p-2 text-base font-normal  dark:hover:text-white opacity-75 hover:opacity-100 py-3 px-5",
-        "active": "dark:bg-bgDarkTertiary bg-[#EDFFD6] rounded-2xl dark:text-white opacity-100",
+        "base": "flex items-center justify-center rounded-lg p-2 text-base font-normal  dark:hover:text-white opacity-60 hover:opacity-100 py-3 px-5",
+        "active": "dark:bg-white bg-black text-white rounded-2xl dark:text-black opacity-100 rounded-full",
   
         "icon": {
-          "base": "h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-secondary text-secondaryDark dark:group-hover:text-white",
+          "base": "h-6 w-6 flex-shrink-0 text-bgDark transition duration-75 group-hover:text-gray-900 text-primary dark:group-hover:text-white",
           "active": ""
         },
-        label: 'dark:bg-primary dark:text-bgDark bg-accent text-white'
       },
 }
 
@@ -61,14 +60,14 @@ export default function DashSidebar() {
     }
 
     return (
-        <Sidebar className='w-full lg:w-60' theme={customTheme}>
+        <Sidebar className='w-full lg:w-50' theme={customTheme}>
             <Sidebar.Items className=''>
                 <Sidebar.ItemGroup className='flex flex-col gap-1'>
                     <Link to='/dashboard?tab=profile'>
                         <Sidebar.Item
                             active={tab === 'profile'}
                             icon={HiUser}
-                            label='User'
+                            
                             labelColor='#BFFF70'
                             as='div'
                         >
@@ -112,7 +111,7 @@ export default function DashSidebar() {
                         </Sidebar.Item>
                     </Link>
                 </Sidebar.ItemGroup>
-                <Sidebar.ItemGroup>
+                <Sidebar.ItemGroup className='dark:border-darkGray lg:mt-20 border-lightGray'>
                     <Sidebar.Item
                         className='cursor-pointer'
                         icon={HiLogout}
