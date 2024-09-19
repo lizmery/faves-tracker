@@ -6,7 +6,7 @@ const trackerSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        name: {
+        title: {
             type: String,
             required: true,
         },
@@ -19,7 +19,6 @@ const trackerSchema = new mongoose.Schema(
         },
         by: {
             type: String,
-            required: true,
         },
         rating: {
             type: Number,
