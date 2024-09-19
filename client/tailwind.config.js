@@ -9,7 +9,7 @@ export default {
   ],
   theme: {
     colors: {
-      'accent': '#F1A7B1',
+      'accent': '#A1E091',
       'primary': '#826EBF',
       'bgDark': '#121212',
       'lightGray': '#D4D2D2',
