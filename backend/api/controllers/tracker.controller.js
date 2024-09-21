@@ -62,3 +62,7 @@ export const deleteTracker = async (req, res, next) => {
         next(error)
     }
 }
+
+export const getTrackers = async (req, res, next) => {
+    
+}
