@@ -1,4 +1,4 @@
-import Tracker from '../models/tracker.model'
+import Tracker from '../models/tracker.model.js'
 import { errorHandler } from '../utils/error.js'
 
 export const createTracker = async (req, res, next) => {
@@ -45,6 +45,19 @@ export const updateTracker = async (req, res, next) => {
         )
 
         res.status(200).json(updatedTracker)
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const deleteTracker = async (req, res, next) => {
+    if (req.user.id !== req.params.userId) {
+        return next(errorHandler(403, 'You are not allow to delete this tracker'))
+    }
+
+    try {
+        await Tracker.findByIdAndDelete(req.params.trackerId)
+        res.status(200).json('Tracker has been deleted')
     } catch (error) {
         next(error)
     }
