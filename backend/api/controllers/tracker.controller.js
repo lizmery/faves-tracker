@@ -2,7 +2,7 @@ import Tracker from '../models/tracker.model.js'
 import { errorHandler } from '../utils/error.js'
 
 export const createTracker = async (req, res, next) => {
-    if (!req.body.title || !req.body.genre || !req.body.category) {
+    if (!req.body.title || !req.body.genres || !req.body.category) {
         return next(errorHandler(400, 'Please provide all required fields'))
     }
 
@@ -30,7 +30,7 @@ export const updateTracker = async (req, res, next) => {
             {
                 $set: {
                     title: req.body.title,
-                    genre: req.body.genre,
+                    genres: req.body.genres,
                     status: req.body.status,
                     by: req.body.by,
                     rating: req.body.rating,
@@ -64,5 +64,43 @@ export const deleteTracker = async (req, res, next) => {
 }
 
 export const getTrackers = async (req, res, next) => {
-    
+    try {
+        const startIndex = parseInt(req.query.startIndex) || 0
+        const limit = parseInt(req.query.limit) || 10
+        const sortDirection = req.query.order === 'asc' ? 1 : -1
+        const trackers = await Tracker.find({
+            ...(req.query.userId && { userId: req.query.userId }),
+            ...(req.query.category && { category: req.query.category }),
+            ...(req.query.type && { type: req.query.type }),
+            ...(req.query.trackerId && { _id: req.query.trackerId }),
+            ...(req.query.searchTerm && {
+                $or: [
+                    { title: { $regex: req.query.searchTerm, $options: 'i' } },
+                    { tags: { $regex: req.query.searchTerm, $options: 'i' } },
+                ],
+            }),
+        })
+            .sort({ dateStarted: sortDirection })
+            .skip(startIndex)
+            .limit(limit)
+
+            const totalTrackers = await Tracker.countDocuments()
+            const now = new Date()
+            const oneMonthAgo = new Date(
+                now.getFullYear(),
+                now.getMonth() - 1,
+                now.getDate()
+            )
+            const prevMonthTrackers = await Tracker.countDocuments({
+                dateStarted: { $gte: oneMonthAgo },
+            })
+
+            res.status(200).json({
+                trackers,
+                totalTrackers,
+                prevMonthTrackers,
+            })
+    } catch (error) {
+        next(error)
+    }
 }

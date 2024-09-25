@@ -10,8 +10,8 @@ const trackerSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        genre: {
-            type: String,
+        genres: {
+            type: Array,
             required: true,
         },
         status: {
@@ -37,6 +37,10 @@ const trackerSchema = new mongoose.Schema(
             type: String,
         },
         category: {
+            type: String,
+            required: true,
+        },
+        type: {
             type: String,
             required: true,
         },
