@@ -6,6 +6,8 @@ import {
   HiMusicNote,
   HiOutlineBookOpen,
   HiOutlineFilm,
+  HiDesktopComputer,
+  HiOutlineDesktopComputer
 } from 'react-icons/hi'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -83,13 +85,13 @@ export default function DashSidebar() {
                             Overview
                         </Sidebar.Item>
                     </Link>
-                    <Link to='/dashboard?tab=music'>
+                    <Link to='/dashboard?tab=series'>
                         <Sidebar.Item
-                            active={tab === 'music'}
-                            icon={HiMusicNote}
+                            active={tab === 'series'}
+                            icon={HiOutlineDesktopComputer}
                             as='div'
                         >
-                            Music
+                            Series
                         </Sidebar.Item>
                     </Link>
                     <Link to='/dashboard?tab=books'>

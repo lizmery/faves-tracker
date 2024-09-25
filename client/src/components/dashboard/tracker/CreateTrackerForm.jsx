@@ -63,11 +63,11 @@ export default function CreateTrackerForm() {
                     </Select>
                     <TextInput 
                         type='text'
-                        placeholder='Genre'
+                        placeholder='Genre(s)'
                         required
-                        id='genre'
+                        id='genres'
                         className='flex-1'
-                        onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
+                        onChange={(e) => setFormData({ ...formData, genres: e.target.value })}
                     />
                     <Select
                         onChange={(e) => setFormData({ ...formData, status: e.target.value })}
