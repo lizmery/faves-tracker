@@ -19,7 +19,7 @@ export default function Dashboard() {
 
     return (
         <div className='min-h-screen flex flex-col lg:flex-row lg:pl-6 lg:pt-6 p-2 pb-10'>
-            <div className='lg:w-65 border-r pr-6 dark:border-darkGray lg:mr-6'>
+            <div className='lg:w-65 lg:border-r lg:pr-6 dark:border-darkGray lg:mr-6'>
                 <DashSidebar />
             </div>
             {tab === 'profile' && <DashProfile />}
