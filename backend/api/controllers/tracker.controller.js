@@ -85,6 +85,19 @@ export const getTrackers = async (req, res, next) => {
             .limit(limit)
 
             const totalTrackers = await Tracker.countDocuments()
+            const totalCompleted = await Tracker.find({
+                status: 'Completed',
+                category: req.query.category
+            }).countDocuments()
+            const totalInProgress = await Tracker.find({
+                status: 'In Progress',
+                category: req.query.category
+            }).countDocuments()
+            const totalNotStarted = await Tracker.find({
+                status: 'Not Started',
+                category: req.query.category
+            }).countDocuments()
+
             const now = new Date()
             const oneMonthAgo = new Date(
                 now.getFullYear(),
@@ -95,9 +108,14 @@ export const getTrackers = async (req, res, next) => {
                 dateStarted: { $gte: oneMonthAgo },
             })
 
+            console.log('completed: ' + totalCompleted)
+
             res.status(200).json({
                 trackers,
                 totalTrackers,
+                totalCompleted,
+                totalInProgress,
+                totalNotStarted,
                 prevMonthTrackers,
             })
     } catch (error) {
