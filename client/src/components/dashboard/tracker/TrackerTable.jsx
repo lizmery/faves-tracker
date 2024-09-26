@@ -1,18 +1,20 @@
-import { Table } from 'flowbite-react'
+import { Table, Drawer } from 'flowbite-react'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { FaCheck, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import TrackerDetails from './TrackerDetails'
 
-const customTheme = {
+const tableTheme = {
     head: {
         base: 'font-normal',
         cell: {
-            base: 'lg:px-9 lg:py-6 p-4'
+            base: 'lg:px-8 lg:py-6 p-4 2xl:px-16'
         }
     },
     body: {
         cell: {
-            base: 'lg:px-9 lg:py-6 p-4'
+            base: 'lg:px-8 lg:py-6 p-4 2xl:px-16'
         }
     },
     root: {
@@ -20,20 +22,36 @@ const customTheme = {
     }
 }
 
+const drawerTheme = {
+    root: {
+        position: {
+            right: {
+                'on': 'right-0 top-0 h-screen lg:w-[30rem] w-80 transform-none',
+                'off': 'right-0 top-0 h-screen lg:w-[30rem] w-80 translate-x-full',
+            },
+        },
+    },
+}
+
 export default function TrackerTable({ userData, trackerType }) {
+    const [isOpen, setIsOpen] = useState(false)
+    const [tracker, setTracker] = useState({})
+    const handleClose = () => setIsOpen(false)
+
     return (
         <div className='overflow-x-scroll dark:border-darkGray border rounded-lg table-auto md:mx-auto scrollbar scrollbar-track-transparent scrollbar-thumb-[#F5F5F5] dark:scrollbar-thumb-darkGray'>
             {userData.length > 0 ? (
                 <>
-                    <Table className='rounded-lg' theme={customTheme}>
+                    <Table className='rounded-lg' theme={tableTheme}>
                         <Table.Head className='border-b  dark:border-b-darkGray font-normal'>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Title</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>By</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Status</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Rating</Table.HeadCell>
-                            {/* <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Tags</Table.HeadCell> */}
-                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Notes</Table.HeadCell>
+                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Type</Table.HeadCell>
+                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Tags</Table.HeadCell>
+                            {/* <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Notes</Table.HeadCell> */}
                             <Table.HeadCell>
                                 <span className="sr-only">Edit</span>
                             </Table.HeadCell>
@@ -41,7 +59,7 @@ export default function TrackerTable({ userData, trackerType }) {
                         {userData.map((tracker) => (
                             <Table.Body className='divide-y' key={tracker._id}>
                                 <Table.Row className='bg-transparent'>
-                                    <Table.Cell className='lg:whitespace-nowrap lg:font-medium'>
+                                    <Table.Cell className='lg:whitespace-nowrap lg:font-medium cursor-pointer' onClick={() => {setIsOpen(true); setTracker(tracker)}}>
                                         {tracker.title}
                                     </Table.Cell>
                                     <Table.Cell className='lg:whitespace-nowrap lg:font-medium'>
@@ -62,12 +80,15 @@ export default function TrackerTable({ userData, trackerType }) {
                                     <Table.Cell>
                                         {tracker.rating}
                                     </Table.Cell>
-                                    {/* <Table.Cell>
-                                        {(tracker.tags).map((tag) => (tag + ' '))}
-                                    </Table.Cell> */}
                                     <Table.Cell>
-                                        <span className='truncate'>{tracker.notes}</span>
+                                        {tracker.type}
                                     </Table.Cell>
+                                    <Table.Cell>
+                                        {(tracker.tags).map((tag) => (tag + ', '))}
+                                    </Table.Cell>
+                                    {/* <Table.Cell>
+                                        <span className='truncate'>{tracker.notes}</span>
+                                    </Table.Cell> */}
                                     <Table.Cell>
                                         <Link
                                             className='bg-black px-3 py-2 rounded-md text-white dark:bg-white dark:text-black hover:underline'
@@ -80,6 +101,16 @@ export default function TrackerTable({ userData, trackerType }) {
                             </Table.Body>
                         ))}
                     </Table>
+                    <Drawer 
+                        open={isOpen} 
+                        onClose={handleClose} 
+                        position='right' 
+                        className='z-[100]' 
+                        theme={drawerTheme}
+                    >
+                        <TrackerDetails tracker={tracker} />
+                    </Drawer>
+            
                 </>
             ) : (
                 <p>You have not added any {trackerType} yet.</p>
