@@ -26,14 +26,19 @@ const drawerTheme = {
     root: {
         position: {
             right: {
-                'on': 'right-0 top-0 h-screen lg:w-[30rem] w-80 transform-none',
-                'off': 'right-0 top-0 h-screen lg:w-[30rem] w-80 translate-x-full',
+                'on': 'right-0 top-0 h-screen lg:w-[35rem] w-80 transform-none',
+                'off': 'right-0 top-0 h-screen lg:w-[35rem] w-80 translate-x-full',
             },
         },
     },
+    header: {
+        inner: {
+            titleText: 'mb-4 inline-flex items-center text-base font-semibold text-lg'
+        }
+    }
 }
 
-export default function TrackerTable({ userData, trackerType }) {
+export default function TrackerTable({ userData, trackerCategory }) {
     const [isOpen, setIsOpen] = useState(false)
     const [tracker, setTracker] = useState({})
     const handleClose = () => setIsOpen(false)
@@ -105,15 +110,14 @@ export default function TrackerTable({ userData, trackerType }) {
                         open={isOpen} 
                         onClose={handleClose} 
                         position='right' 
-                        className='z-[100]' 
+                        className='z-[100] dark:bg-bgDark' 
                         theme={drawerTheme}
                     >
                         <TrackerDetails tracker={tracker} />
                     </Drawer>
-            
                 </>
             ) : (
-                <p>You have not added any {trackerType} yet.</p>
+                <p>You have not added any {trackerCategory} yet.</p>
             )}
         </div>
     )

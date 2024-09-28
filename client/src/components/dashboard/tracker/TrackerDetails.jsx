@@ -1,47 +1,207 @@
-import { Drawer } from "flowbite-react"
+import { Drawer, TextInput, Select, Button, Alert, Datepicker, Label, Textarea } from 'flowbite-react'
+import { PiListMagnifyingGlassBold } from 'react-icons/pi'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 export default function TrackerDetails({ tracker }) {
+    const { currentUser } = useSelector((state) => state.user)
+    const [formData, setFormData] = useState({})
+    const [publishError, setPublishError] = useState(null)
+    const [success, setSuccess] = useState(false)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const res = await fetch(`/api/tracker/update/${tracker._id}/${currentUser._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            const data = await res.json()
+            
+            if (!res.ok) {
+                setPublishError(data.message)
+                return
+            } else {
+                setPublishError(null)
+                setSuccess(true)
+                // navigate(`/`)
+            }
+        } catch (error) {
+            setPublishError('Something went wrong. Please try again.')
+        }
+    }
+
     return (
         <>
-            <Drawer.Header title={tracker.title} />
+            <Drawer.Header title={tracker.title} titleIcon={PiListMagnifyingGlassBold} />
             <Drawer.Items>
-                <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
-                    Supercharge your hiring by taking advantage of our&nbsp;
-                    <a href="#" className="text-cyan-600 underline hover:no-underline dark:text-cyan-500">
-                    limited-time sale
-                    </a>
-                    &nbsp;for Flowbite Docs + Job Board. Unlimited access to over 190K top-ranked candidates and the #1 design
-                    job board.
-                </p>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <a
-                    href="#"
-                    className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
-                    >
-                    Learn more
-                    </a>
-                    <a
-                    href="#"
-                    className="inline-flex items-center rounded-lg bg-cyan-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
-                    >
-                    Get access&nbsp;
-                    <svg
-                        className="ms-2 h-3.5 w-3.5 rtl:rotate-180"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 14 10"
-                    >
-                        <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9"
-                        />
-                    </svg>
-                    </a>
+            <form className='' onSubmit={handleSubmit}>
+                <div className="mb-6 mt-3">
+                    <Label htmlFor="title" className="mb-2 block">
+                        Title
+                    </Label>
+                    <TextInput 
+                        type='text'
+                        placeholder='Title'
+                        required
+                        id='title'
+                        className='flex-1'
+                        defaultValue={tracker?.title || ''}
+                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                    />
                 </div>
+                <div className="mb-6">
+                    <Label htmlFor="category" className="mb-2 block">
+                        Category
+                    </Label>
+                    <Select
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                        id='category'
+                        value={tracker?.category || ''}
+                    >
+                        <option></option>
+                        <option value='Series'>Series</option>
+                        <option value='Books'>Books</option>
+                        <option value='Movies'>Movies</option>
+                    </Select>
+                </div>
+                <div className="mb-6 mt-3">
+                    <Label htmlFor="type" className="mb-2 block">
+                        Type
+                    </Label>
+                    <TextInput 
+                        type='text'
+                        placeholder='Type of Category (ex: Anime, Manga, etc...)'
+                        required
+                        id='type'
+                        className='flex-1'
+                        defaultValue={tracker?.type || ''}
+                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="genre" className="mb-2 block">
+                        Genre(s)
+                    </Label>
+                    <TextInput 
+                        type='text'
+                        placeholder='Genre(s)'
+                        required
+                        id='genres'
+                        className='flex-1'
+                        defaultValue={tracker?.genres || ''}
+                        onChange={(e) => setFormData({ ...formData, genres: e.target.value })}
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="status" className="mb-2 block">
+                        Status
+                    </Label>
+                    <Select
+                        onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                        id='status'
+                        value={tracker?.status || ''}
+                    >
+                        <option></option>
+                        <option value='Not Started'>Have Not Started</option>
+                        <option value='In Progress'>In Progress</option>
+                        <option value='Completed'>Completed</option>
+                    </Select>
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="by" className="mb-2 block">
+                        By
+                    </Label>
+                    <TextInput 
+                        type='text'
+                        placeholder='ex: Author, Producer, etc...'
+                        id='by'
+                        className='flex-1'
+                        defaultValue={tracker?.by || ''}
+                        onChange={(e) => setFormData({ ...formData, by: e.target.value })}
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="rating" className="mb-2 block">
+                        Rating
+                    </Label>
+                    <TextInput 
+                        type='number'
+                        placeholder='1 - 10'
+                        id='rating'
+                        className='flex-1'
+                        defaultValue={tracker?.rating || ''}
+                        onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="dateStarted" className="mb-2 block">
+                        Date Started
+                    </Label>
+                    {/* <Datepicker /> */}
+                    <TextInput 
+                        type='date'
+                        id='dateStarted'
+                        className='flex-1'
+                        defaultValue={tracker?.dateStarted || ''}
+                        onChange={(e) => setFormData({ ...formData, dateStarted: e.target.value })}
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="dateCompleted" className="mb-2 block">
+                        Date Completed
+                    </Label>
+                    {/* <Datepicker /> */}
+                    <TextInput 
+                        type='date'
+                        id='dateCompleted'
+                        className='flex-1'
+                        defaultValue={tracker?.dateCompleted || ''}
+                        onChange={(e) => setFormData({ ...formData, dateCompleted: e.target.value })}
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="tags" className="mb-2 block">
+                        Tags
+                    </Label>
+                    <TextInput 
+                        type='text'
+                        placeholder='tag1, tag2, ...'
+                        id='tags'
+                        className='flex-1'
+                        defaultValue={tracker?.tags || ''}
+                        onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+                    />
+                </div>
+                <div className="mb-8">
+                    <Label htmlFor="notes" className="mb-2 block">
+                        Notes
+                    </Label>
+                    <ReactQuill 
+                        theme='snow'
+                        placeholder='Enter notes here...'
+                        className='h-60 pb-12'
+                        defaultValue={tracker.notes}
+                        onChange={(value) => { setFormData({ ...formData, notes: value }) }}
+                    />
+                </div>
+            
+                <div className='mt-6'>
+                    <Button type='submit' className='bg-black w-full mt-5 dark:bg-white'>Update</Button>
+                    {success && (
+                        <Alert className='mt-5' color='success'>Success!</Alert>
+                    )}
+                    {publishError && (
+                        <Alert className='mt-5' color='failure'>{publishError}</Alert>
+                    )}
+                </div>
+            </form>
             </Drawer.Items>
       </>
     )

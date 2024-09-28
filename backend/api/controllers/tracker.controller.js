@@ -2,7 +2,7 @@ import Tracker from '../models/tracker.model.js'
 import { errorHandler } from '../utils/error.js'
 
 export const createTracker = async (req, res, next) => {
-    if (!req.body.title || !req.body.genres || !req.body.category) {
+    if (!req.body.title || !req.body.genres || !req.body.category || !req.body.type) {
         return next(errorHandler(400, 'Please provide all required fields'))
     }
 
@@ -39,6 +39,7 @@ export const updateTracker = async (req, res, next) => {
                     tags: req.body.tags,
                     notes: req.body.notes,
                     category: req.body.category,
+                    type: req.body.type,
                 },
             },
             { new: true }
@@ -107,8 +108,6 @@ export const getTrackers = async (req, res, next) => {
             const prevMonthTrackers = await Tracker.countDocuments({
                 dateStarted: { $gte: oneMonthAgo },
             })
-
-            console.log('completed: ' + totalCompleted)
 
             res.status(200).json({
                 trackers,
