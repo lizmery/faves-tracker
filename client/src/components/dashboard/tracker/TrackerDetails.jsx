@@ -5,6 +5,22 @@ import 'react-quill/dist/quill.snow.css'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
+const customTheme = {
+    field: {
+        input: {
+            colors: {
+                info: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary',
+            },
+        },
+        select: {
+            colors: {
+                info: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary',
+            },
+        }
+    },
+}
+
+
 export default function TrackerDetails({ tracker }) {
     const { currentUser } = useSelector((state) => state.user)
     const [formData, setFormData] = useState({})
@@ -39,7 +55,7 @@ export default function TrackerDetails({ tracker }) {
 
     return (
         <>
-            <Drawer.Header title={tracker.title} titleIcon={PiListMagnifyingGlassBold} />
+            <Drawer.Header title='Edit Details' titleIcon={PiListMagnifyingGlassBold} />
             <Drawer.Items>
             <form className='' onSubmit={handleSubmit}>
                 <div className="mb-6 mt-3">
@@ -54,6 +70,8 @@ export default function TrackerDetails({ tracker }) {
                         className='flex-1'
                         defaultValue={tracker?.title || ''}
                         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -64,6 +82,8 @@ export default function TrackerDetails({ tracker }) {
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         id='category'
                         value={tracker?.category || ''}
+                        theme={customTheme}
+                        color='info'
                     >
                         <option></option>
                         <option value='Series'>Series</option>
@@ -83,6 +103,8 @@ export default function TrackerDetails({ tracker }) {
                         className='flex-1'
                         defaultValue={tracker?.type || ''}
                         onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -97,6 +119,8 @@ export default function TrackerDetails({ tracker }) {
                         className='flex-1'
                         defaultValue={tracker?.genres || ''}
                         onChange={(e) => setFormData({ ...formData, genres: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -107,6 +131,8 @@ export default function TrackerDetails({ tracker }) {
                         onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                         id='status'
                         value={tracker?.status || ''}
+                        theme={customTheme}
+                        color='info'
                     >
                         <option></option>
                         <option value='Not Started'>Have Not Started</option>
@@ -125,6 +151,8 @@ export default function TrackerDetails({ tracker }) {
                         className='flex-1'
                         defaultValue={tracker?.by || ''}
                         onChange={(e) => setFormData({ ...formData, by: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -138,6 +166,8 @@ export default function TrackerDetails({ tracker }) {
                         className='flex-1'
                         defaultValue={tracker?.rating || ''}
                         onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -151,6 +181,8 @@ export default function TrackerDetails({ tracker }) {
                         className='flex-1'
                         defaultValue={tracker?.dateStarted || ''}
                         onChange={(e) => setFormData({ ...formData, dateStarted: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -164,6 +196,8 @@ export default function TrackerDetails({ tracker }) {
                         className='flex-1'
                         defaultValue={tracker?.dateCompleted || ''}
                         onChange={(e) => setFormData({ ...formData, dateCompleted: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -177,6 +211,8 @@ export default function TrackerDetails({ tracker }) {
                         className='flex-1'
                         defaultValue={tracker?.tags || ''}
                         onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-8">
@@ -193,7 +229,7 @@ export default function TrackerDetails({ tracker }) {
                 </div>
             
                 <div className='mt-6'>
-                    <Button type='submit' className='bg-black w-full mt-5 dark:bg-white'>Update</Button>
+                    <Button type='submit' className='bg-black w-full mt-5 dark:bg-white dark:text-black'>Update</Button>
                     {success && (
                         <Alert className='mt-5' color='success'>Success!</Alert>
                     )}

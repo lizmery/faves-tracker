@@ -43,7 +43,7 @@ export default function SignIn() {
 
             if (res.ok) {
                 dispatch(signInSuccess(data))
-                navigate('/dashboard') 
+                navigate('/dashboard?tab=overview') 
             }
         } catch (error) {
             dispatch(signInFailure(error.message))

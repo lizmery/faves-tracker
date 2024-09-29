@@ -7,6 +7,21 @@ import { HiCalendar, HiUserAdd } from "react-icons/hi";
 
 // TODO: if category = 'other' --> add text input for user to add a new category
 
+const customTheme = {
+    field: {
+        input: {
+            colors: {
+                info: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary',
+            },
+        },
+        select: {
+            colors: {
+                info: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary',
+            },
+        }
+    },
+}
+
 export default function CreateTrackerForm({ trackerCategory }) {
     const [formData, setFormData] = useState({})
     const [publishError, setPublishError] = useState(null)
@@ -40,7 +55,7 @@ export default function CreateTrackerForm({ trackerCategory }) {
     }
 
     return (
-        <div className=''>
+        <div className='dark:bg-bgDark'>
             <h1 className='text-center text-3xl mb-6 font-semibold'>Add {trackerCategory}</h1>
             <form className='' onSubmit={handleSubmit}>
                 <div className="mb-6 mt-3">
@@ -54,6 +69,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='title'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -63,6 +80,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                     <Select
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         id='category'
+                        theme={customTheme}
+                        color='info'
                     >
                         <option></option>
                         <option value='Series'>Series</option>
@@ -81,6 +100,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='type'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -94,6 +115,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='genres'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, genres: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -103,6 +126,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                     <Select
                         onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                         id='status'
+                        theme={customTheme}
+                        color='info'
                     >
                         <option></option>
                         <option value='Not Started'>Have Not Started</option>
@@ -120,6 +145,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='by'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, by: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -132,6 +159,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='rating'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -144,6 +173,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='dateStarted'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, dateStarted: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -156,6 +187,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='dateCompleted'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, dateCompleted: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-6">
@@ -168,6 +201,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='tags'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+                        theme={customTheme}
+                        color='info'
                     />
                 </div>
                 <div className="mb-8">
