@@ -60,7 +60,7 @@ export default function DashSeries() {
                 trackersNotStarted={seriesNotStarted}
             />
             <div className=''>
-                <TrackerTable userData={userSeries} trackerCategory='series' />
+                <TrackerTable userTrackers={userSeries} trackerCategory='series' />
             </div>
             <Modal 
                 show={showForm} 
