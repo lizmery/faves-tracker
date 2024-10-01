@@ -3,17 +3,32 @@ import {
     Button,
     Dropdown,
     Navbar,
+    Drawer
 } from 'flowbite-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutSuccess } from '../redux/user/userSlice'
 import { toggleTheme }from '../redux/theme/themeSlice'
+import { useState } from 'react'
+import DashSidebar from './dashboard/DashSidebar'
 
 const customTheme = {
     toggle: {
         base: 'inline-flex items-center rounded-lg p-2 text-sm text-gray-500 focus:outline-none dark:text-grayLine md:hidden dark:hover:text-lightGray hover:text-black'
     },
+}
+
+const dashboardNavTheme = {
+    toggle: {
+        base: 'lg:p-3 p-2 inline-flex items-center text-sm text-gray-500 focus:outline-none dark:text-grayLine dark:hover:text-lightGray hover:text-black'
+    },
+    root: {
+        base: 'py-2.5',
+        inner: {
+            base: 'flex items-center justify-between px-2 lg:px-6'
+        }
+    }
 }
 
 const dropdownTheme = {
@@ -28,6 +43,18 @@ const dropdownTheme = {
     }
 }
 
+const drawerTheme = {
+    root: {
+        base: 'fixed z-40 overflow-y-auto bg-white py-1 px-4 transition-transform',
+        position: {
+            left: {
+                on: 'left-0 top-0 h-screen lg:w-80 w-full transform-none',
+                off: 'left-0 top-0 h-screen lg:w-80 w-full -translate-x-full',
+            }
+        }
+    }
+}
+
 export default function Header() {
     const path = useLocation().pathname
     const location = useLocation()
@@ -35,6 +62,8 @@ export default function Header() {
     const dispatch = useDispatch()
     const { currentUser } = useSelector((state) => state.user)
     const { theme } = useSelector((state) => state.theme)
+    const [openDrawer, setOpenDrawer] = useState(false)
+    const handleClose = () => setOpenDrawer(false)
 
     const handleSignout = async () => {
         try {
@@ -53,64 +82,90 @@ export default function Header() {
         }
     }
     
-  return (
-    <Navbar className='dark:bg-transparent bg-transparent border-b dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={customTheme}>
-        <Navbar.Brand href='/' className=' text-2xl  font-semibold'>
-            Faves Tracker
-        </Navbar.Brand>
-        <div className='flex md:order-2 lg:gap-3 gap-2'>
-            <Button
-                className='w-14 h-14 inline text-bgDark dark:text-white focus:ring-transparent hover:opacity-80 text-xl'
-                onClick={() => dispatch(toggleTheme())}
-            >
-                {theme === 'dark' ? <FaSun /> : <FaMoon />}
-            </Button>
+    return (
+        <>
             {currentUser ? (
-                <Dropdown
-                    arrowIcon={false}
-                    inline
-                    label={
-                        <Avatar alt='user' img={currentUser.profilePicture} rounded />
-                    }
-                    theme={dropdownTheme}
-                >
-                    <Dropdown.Header>
-                        {/* <span className='block text-sm'>Hi {currentUser.name}</span> */}
-                        <span className='block text-sm font-medium truncate text-primary'>
-                            {currentUser.email}
-                        </span>
-                    </Dropdown.Header>
-                    <Link to={'/dashboard?tab=profile'}>
-                        <Dropdown.Item>Profile</Dropdown.Item>
-                    </Link>
-                    <Dropdown.Divider />
-                    <Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
-                </Dropdown>
+                <>
+                    <Navbar fluid className='dark:bg-bgDark bg-white sticky top-0 z-[100] py-4' theme={dashboardNavTheme}>
+                        <Navbar.Toggle onClick={() => setOpenDrawer(true)}/>
+                        <div className='flex flex-row'>
+                            <Button
+                                className='w-14 h-14 inline text-bgDark dark:text-white focus:ring-transparent hover:opacity-80 text-xl'
+                                onClick={() => dispatch(toggleTheme())}
+                            >
+                                {theme === 'dark' ? <FaSun /> : <FaMoon />}
+                            </Button>
+                            <Dropdown
+                                arrowIcon={false}
+                                inline
+                                label={
+                                    <Avatar alt='user' img={currentUser.profilePicture} rounded />
+                                }
+                                theme={dropdownTheme}
+                            >
+                                <Dropdown.Header>
+                                    {/* <span className='block text-sm'>Hi {currentUser.name}</span> */}
+                                    <span className='block text-sm font-medium truncate text-primary'>
+                                        {currentUser.email}
+                                    </span>
+                                </Dropdown.Header>
+                                <Link to={'/dashboard?tab=profile'}>
+                                    <Dropdown.Item>Profile</Dropdown.Item>
+                                </Link>
+                                <Dropdown.Divider />
+                                <Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
+                            </Dropdown>
+                        </div>
+                    </Navbar>
+                    <Drawer 
+                        open={openDrawer} 
+                        onClose={handleClose} 
+                        className='z-[100] dark:bg-bgDark lg:border-r dark:border-darkGray' 
+                        backdrop={false}
+                        theme={drawerTheme}
+                        position='left'
+                    >
+                        <Drawer.Header  titleIcon={() => <></>} />
+                            <Drawer.Items>
+                                <DashSidebar />
+                        </Drawer.Items>
+                    </Drawer>
+                </>
             ) : (
                 <>
-                    <Link to='/sign-in' className='items-center flex'>
-                        <Button className='bg-transparent dark:text-white text-black border-2 dark:border-lightGray border-black rounded-full'>Sign In</Button>
-                     </Link>
-                    <Link to='/sign-up' className='items-center flex'>
-                        <Button className='dark:bg-white bg-black dark:text-black text-white rounded-full'>Sign Up</Button>
-                    </Link>
+                    <Navbar className='dark:bg-transparent bg-transparent border-b dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={customTheme}>
+                        <Navbar.Brand href='/' className=' text-2xl  font-semibold'>
+                            Faves Tracker
+                        </Navbar.Brand>
+                        <div className='flex md:order-2 lg:gap-3 gap-2'>
+                            <Button
+                                className='w-14 h-14 inline text-bgDark dark:text-white focus:ring-transparent hover:opacity-80 text-xl'
+                                onClick={() => dispatch(toggleTheme())}
+                            >
+                                {theme === 'dark' ? <FaSun /> : <FaMoon />}
+                            </Button>
+                            <Link to='/sign-in' className='items-center flex'>
+                                <Button className='bg-transparent dark:text-white text-black border-2 dark:border-lightGray border-black rounded-full'>Sign In</Button>
+                            </Link>
+                            <Link to='/sign-up' className='items-center flex'>
+                                <Button className='dark:bg-white bg-black dark:text-black text-white rounded-full'>Sign Up</Button>
+                            </Link>
+                            <Navbar.Toggle />
+                        </div>
+                        <Navbar.Collapse className='dark:text-[#B8B8B8]'>
+                            <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray dark:hover:bg-darkGray hover:opacity-100'>
+                                <Link to='/'>Home</Link>
+                            </Navbar.Link>
+                            <Navbar.Link active={path === '/about'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
+                                <Link to='/about'>About</Link>
+                            </Navbar.Link>
+                            <Navbar.Link active={path === '/contact'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
+                                <Link to='/contact'>Contact</Link>
+                            </Navbar.Link>
+                        </Navbar.Collapse>
+                    </Navbar>
                 </>
-               
             )}
-            <Navbar.Toggle />
-        </div>
-        <Navbar.Collapse className='dark:text-[#B8B8B8]'>
-            <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray dark:hover:bg-darkGray hover:opacity-100'>
-                <Link to='/'>Home</Link>
-            </Navbar.Link>
-            <Navbar.Link active={path === '/about'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
-                <Link to='/about'>About</Link>
-            </Navbar.Link>
-            <Navbar.Link active={path === '/contact'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
-                <Link to='/contact'>Contact</Link>
-            </Navbar.Link>
-           
-        </Navbar.Collapse>
-    </Navbar>
-  )
+        </>
+    )
 }
