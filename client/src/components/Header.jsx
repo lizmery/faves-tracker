@@ -17,6 +17,12 @@ const customTheme = {
     toggle: {
         base: 'inline-flex items-center rounded-lg p-2 text-sm text-gray-500 focus:outline-none dark:text-grayLine md:hidden dark:hover:text-lightGray hover:text-black'
     },
+    root: {
+        base: 'py-2.5',
+        inner: {
+            base: 'flex items-center justify-between px-2 lg:px-6'
+        }
+    }
 }
 
 const dashboardNavTheme = {
@@ -126,14 +132,14 @@ export default function Header() {
                         position='left'
                     >
                         <Drawer.Header  titleIcon={() => <></>} />
-                            <Drawer.Items>
+                            <Drawer.Items onClick={handleClose}>
                                 <DashSidebar />
                         </Drawer.Items>
                     </Drawer>
                 </>
             ) : (
                 <>
-                    <Navbar className='dark:bg-transparent bg-transparent border-b dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={customTheme}>
+                    <Navbar fluid className='dark:bg-transparent bg-transparent border-b dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={customTheme}>
                         <Navbar.Brand href='/' className=' text-2xl  font-semibold'>
                             Faves Tracker
                         </Navbar.Brand>

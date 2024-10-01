@@ -10,12 +10,12 @@ const tableTheme = {
     head: {
         base: 'font-normal',
         cell: {
-            base: 'lg:px-10 lg:py-6 p-4 2xl:px-16'
+            base: 'lg:px-10 lg:py-6 p-4 2xl:px-[4.5rem]'
         }
     },
     body: {
         cell: {
-            base: 'lg:px-10 lg:py-6 p-4 2xl:px-16'
+            base: 'lg:px-10 lg:py-6 p-4 2xl:px-[4.5rem]'
         }
     },
     root: {
