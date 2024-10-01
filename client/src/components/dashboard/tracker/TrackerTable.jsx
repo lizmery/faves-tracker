@@ -10,12 +10,12 @@ const tableTheme = {
     head: {
         base: 'font-normal',
         cell: {
-            base: 'lg:px-8 lg:py-6 p-4 2xl:px-16'
+            base: 'lg:px-10 lg:py-6 p-4 2xl:px-16'
         }
     },
     body: {
         cell: {
-            base: 'lg:px-8 lg:py-6 p-4 2xl:px-16'
+            base: 'lg:px-10 lg:py-6 p-4 2xl:px-16'
         }
     },
     root: {
@@ -97,12 +97,6 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                     <Table.Cell className='whitespace-nowrap font-medium'>
                                       <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen dark:bg-accent text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple dark:bg-primary text-black' : 'bg-black text-white opacity-60 dark:bg-white dark:text-black'} `}>{tracker.status}</p>
                                     </Table.Cell>
-                                    {/* <Table.Cell>
-                                       {new Date(tracker.dateStarted).toLocaleDateString()}
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                       {new Date(tracker.dateCompleted).toLocaleDateString()}
-                                    </Table.Cell> */}
                                     <Table.Cell>
                                         {tracker.rating}
                                     </Table.Cell>
@@ -116,18 +110,8 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         <span className='truncate'>{tracker.notes}</span>
                                     </Table.Cell> */}
                                     <Table.Cell className='flex flex-row gap-3 justify-center items-center'>
-                                        {/* <Button
-                                            className='bg-black rounded-md text-white dark:bg-white dark:text-black hover:underline'
-                                            onClick={() => {setOpenDrawer(true); setTracker(tracker)}}
-                                            size='xs'
-                                        >
-                                        <span>Edit</span>
-                                        </Button> */}
-                                      
-                                            <FaEdit className='text-black lg:text-lg dark:text-white cursor-pointer' onClick={() => {setOpenDrawer(true); setTracker(tracker)}} />
-                                       
-                                       
-                                            <FaTrashAlt className='text-black lg:text-lg dark:text-white cursor-pointer' onClick={() => {setShowModal(true); setTracker(tracker)}} />
+                                        <FaEdit className='text-black lg:text-lg dark:text-white cursor-pointer' onClick={() => {setOpenDrawer(true); setTracker(tracker)}} />
+                                        <FaTrashAlt className='text-black lg:text-lg dark:text-white cursor-pointer' onClick={() => {setShowModal(true); setTracker(tracker)}} />
                                         
                                     </Table.Cell>
                                 </Table.Row>

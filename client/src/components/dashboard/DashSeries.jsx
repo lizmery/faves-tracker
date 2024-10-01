@@ -48,7 +48,7 @@ export default function DashSeries() {
     }, [currentUser._id])
 
     return (
-        <div className='xl:mr-5 bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden'>
+        <div className='bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden'>
             <div className='flex justify-between'>
                 <h1 className='text-3xl font-bold'>Favorite Series</h1>
                 <Button className='border-black text-black border-2 dark:border-lightGray dark:text-white' onClick={() => setShowForm(true) }>Add Series</Button>
