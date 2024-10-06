@@ -66,7 +66,7 @@ export default function DashSidebar() {
     return (
         <Sidebar className='w-full lg:w-50' theme={customTheme}>
             <Sidebar.Logo href='#' className='items-center flex justify-center lg:justify-start'>
-                <span className='text-2xl'>Faves Tracker</span>
+                <span className='text-2xl'>Media Tracker</span>
             </Sidebar.Logo>
             <Sidebar.Items className='flex flex-col justify-between'>
                 <Sidebar.ItemGroup className='flex flex-col gap-1'>

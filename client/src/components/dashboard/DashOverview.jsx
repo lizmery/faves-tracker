@@ -1,8 +1,6 @@
 import { Modal, Button } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { HiOutlineExclamationCircle } from 'react-icons/hi'
-import { FaCheck, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import TrackerTable from './tracker/TrackerTable'
 import SummaryCards from './tracker/SummaryCards'
@@ -14,27 +12,27 @@ const modalTheme = {
     }
 }
 
-export default function DashMovies() {
+export default function DashOverview() {
     const { currentUser } = useSelector((state) => state.user)
-    const [userMovies, setUserMovies] = useState([])
-    const [moviesCompleted, setMoviesCompleted] = useState()
-    const [moviesInProgress, setMoviesInProgress] = useState()
-    const [moviesNotStarted, setMoviesNotStarted] = useState()
+    const [userTrackers, setUserTrackers] = useState([])
+    const [trackersCompleted, setTrackersCompleted] = useState()
+    const [trackersInProgress, setTrackersInProgress] = useState()
+    const [trackersNotStarted, setTrackersNotStarted] = useState()
     const [showForm, setShowForm] = useState(false)
 
     const handleClose = () => setShowForm(false)
 
     useEffect(() => {
-        const fetchMovies = async () => {
+        const fetchTrackers = async () => {
             try {
-                const res = await fetch(`/api/tracker/get-trackers?userId=${currentUser._id}&category=Movies`)
+                const res = await fetch(`/api/tracker/get-trackers?userId=${currentUser._id}`)
                 const data = await res.json()
 
                 if (res.ok) {
-                    setUserMovies(data.trackers)
-                    setMoviesCompleted(data.totalCompleted)
-                    setMoviesInProgress(data.totalInProgress)
-                    setMoviesNotStarted(data.totalNotStarted)
+                    setUserTrackers(data.trackers)
+                    setTrackersCompleted(data.totalCompleted)
+                    setTrackersInProgress(data.totalInProgress)
+                    setTrackersNotStarted(data.totalNotStarted)
                     // if (data.trackers.length < 10) {
 
                     // }
@@ -44,23 +42,22 @@ export default function DashMovies() {
             }
         }
 
-        fetchMovies()
+        fetchTrackers()
     }, [currentUser._id])
 
     return (
-        <div className='xl:mr-5 bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden'>
+        <div className='bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden'>
             <div className='flex justify-between'>
-                <h1 className='text-3xl font-bold'>Movies</h1>
-                <Button className='border-black text-black border-2 dark:border-lightGray dark:text-white' onClick={() => setShowForm(true) }>Add Movies</Button>
+                <h1 className='text-3xl font-bold'>Overview</h1>
             </div>
             <SummaryCards 
-                trackerCategory='movies' 
-                trackersCompleted={moviesCompleted} 
-                trackersInProgress={moviesInProgress} 
-                trackersNotStarted={moviesNotStarted}
+                trackerCategory='media' 
+                trackersCompleted={trackersCompleted} 
+                trackersInProgress={trackersInProgress} 
+                trackersNotStarted={trackersNotStarted}
             />
             <div className=''>
-                <TrackerTable userTrackers={userMovies} trackerCategory='movies' />
+                <TrackerTable userTrackers={userTrackers} trackerCategory='media' />
             </div>
             <Modal 
                 show={showForm} 

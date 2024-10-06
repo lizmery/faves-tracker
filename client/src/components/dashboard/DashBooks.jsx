@@ -50,7 +50,7 @@ export default function DashBooks() {
     return (
         <div className='xl:mr-5 bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden'>
             <div className='flex justify-between'>
-                <h1 className='text-3xl font-bold'>Favorite Books</h1>
+                <h1 className='text-3xl font-bold'>Books</h1>
                 <Button className='border-black text-black border-2 dark:border-lightGray dark:text-white' onClick={() => setShowForm(true) }>Add Books</Button>
             </div>
             <SummaryCards 

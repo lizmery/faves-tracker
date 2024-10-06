@@ -13,7 +13,7 @@ export default function FooterComponent() {
                     <Footer container className='border-none bg-transparent dark:bg-transparent rounded-none shadow-none px-4 lg:px-8'>
                         <div className="w-full border-none">
                             <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-                                <Link to='/' className='text-2xl font-bold'>Faves Tracker</Link>
+                                <Link to='/' className='text-2xl font-bold'>Media Tracker</Link>
                                 <Footer.LinkGroup className='dark:text-grayLine mt-4 lg:mt-auto text-darkGray'>
                                     <Footer.Link href='/'>Home</Footer.Link>
                                     <Footer.Link href='/'>About</Footer.Link>

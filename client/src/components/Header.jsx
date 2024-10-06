@@ -20,7 +20,7 @@ const customTheme = {
     root: {
         base: 'py-2.5',
         inner: {
-            base: 'flex items-center justify-between px-2 lg:px-6'
+            base: 'flex flex-wrap items-center justify-between px-4 lg:px-6'
         }
     }
 }
@@ -141,7 +141,7 @@ export default function Header() {
                 <>
                     <Navbar fluid className='dark:bg-transparent bg-transparent border-b dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={customTheme}>
                         <Navbar.Brand href='/' className=' text-2xl  font-semibold'>
-                            Faves Tracker
+                            Media Tracker
                         </Navbar.Brand>
                         <div className='flex md:order-2 lg:gap-3 gap-2'>
                             <Button
