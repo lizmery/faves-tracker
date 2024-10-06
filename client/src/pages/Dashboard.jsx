@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import DashSidebar from '../components/dashboard/DashSidebar'
 import DashProfile from '../components/dashboard/DashProfile'
 import DashSeries from '../components/dashboard/DashSeries'
 import DashBooks from '../components/dashboard/DashBooks'
 import DashMovies from '../components/dashboard/DashMovies'
+import DashOverview from '../components/dashboard/DashOverview'
 
 export default function Dashboard() {
     const location = useLocation()
@@ -25,6 +25,7 @@ export default function Dashboard() {
             {tab === 'series' && <DashSeries />}
             {tab === 'books' && <DashBooks />}
             {tab === 'movies' && <DashMovies />}
+            {tab === 'overview' && <DashOverview />}
         </div>
     )
 }

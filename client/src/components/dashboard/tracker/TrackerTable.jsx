@@ -75,8 +75,13 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Status</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Rating</Table.HeadCell>
+                            {trackerCategory === 'media' ? (
+                                <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Category</Table.HeadCell>
+                            ) : ''}
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Type</Table.HeadCell>
-                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Tags</Table.HeadCell>
+                            {trackerCategory === 'media' ? '' : (
+                                <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Tags</Table.HeadCell>
+                            )}
                             {/* <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Notes</Table.HeadCell> */}
                             <Table.HeadCell>
                                 <span className="sr-only">Actions</span>
@@ -100,12 +105,19 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                     <Table.Cell>
                                         {tracker.rating}
                                     </Table.Cell>
+                                    {trackerCategory === 'media' ? (
+                                        <Table.Cell>
+                                            {tracker.category}
+                                        </Table.Cell>
+                                    ) : ''}
                                     <Table.Cell>
                                         {tracker.type}
                                     </Table.Cell>
-                                    <Table.Cell>
-                                        {(tracker.tags).map((tag) => (tag + ', '))}
-                                    </Table.Cell>
+                                    {trackerCategory === 'media' ? '' : (
+                                        <Table.Cell>
+                                            {(tracker.tags).map((tag) => (tag + ', '))}
+                                        </Table.Cell>
+                                    )}
                                     {/* <Table.Cell>
                                         <span className='truncate'>{tracker.notes}</span>
                                     </Table.Cell> */}

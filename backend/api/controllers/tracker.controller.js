@@ -88,15 +88,15 @@ export const getTrackers = async (req, res, next) => {
             const totalTrackers = await Tracker.countDocuments()
             const totalCompleted = await Tracker.find({
                 status: 'Completed',
-                category: req.query.category
+                ...(req.query.category && { category: req.query.category }),
             }).countDocuments()
             const totalInProgress = await Tracker.find({
                 status: 'In Progress',
-                category: req.query.category
+                ...(req.query.category && { category: req.query.category }),
             }).countDocuments()
             const totalNotStarted = await Tracker.find({
                 status: 'Not Started',
-                category: req.query.category
+                ...(req.query.category && { category: req.query.category }),
             }).countDocuments()
 
             const now = new Date()
@@ -121,3 +121,7 @@ export const getTrackers = async (req, res, next) => {
         next(error)
     }
 }
+
+// export const getTrackerSummary = async (req, res, next) => {
+
+// }

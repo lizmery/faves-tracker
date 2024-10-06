@@ -8,5 +8,6 @@ router.post('/create', verifyToken, createTracker)
 router.put('/update/:trackerId/:userId', verifyToken, updateTracker)
 router.delete('/delete/:trackerId/:userId', verifyToken, deleteTracker)
 router.get('/get-trackers', getTrackers)
+// router.get('/summary', getTrackerSummary)
 
 export default router
