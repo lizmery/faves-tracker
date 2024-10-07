@@ -3,14 +3,15 @@ import {
     Button,
     Dropdown,
     Navbar,
-    Drawer
+    Drawer,
+    TextInput
 } from 'flowbite-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { FaMoon, FaSun } from 'react-icons/fa'
+import { FaMoon, FaSun, FaSearch } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutSuccess } from '../redux/user/userSlice'
 import { toggleTheme }from '../redux/theme/themeSlice'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DashSidebar from './dashboard/DashSidebar'
 
 const customTheme = {
@@ -68,8 +69,27 @@ export default function Header() {
     const dispatch = useDispatch()
     const { currentUser } = useSelector((state) => state.user)
     const { theme } = useSelector((state) => state.theme)
+    const [searchTerm, setSearchTerm] = useState('')
     const [openDrawer, setOpenDrawer] = useState(false)
     const handleClose = () => setOpenDrawer(false)
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search)
+        const searchTermFromUrl = urlParams.get('searchTerm')
+
+        if (searchTermFromUrl) {
+            setSearchTerm(searchTermFromUrl)
+        }
+    }, [location.search])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const urlParams = new URLSearchParams(location.search)
+        urlParams.set('searchTerm', searchTerm)
+        const searchQuery = urlParams.toString()
+        navigate(`/search?${searchQuery}`)
+    }
 
     const handleSignout = async () => {
         try {
@@ -94,6 +114,18 @@ export default function Header() {
                 <>
                     <Navbar fluid className='dark:bg-bgDark bg-white sticky top-0 z-[100] py-4' theme={dashboardNavTheme}>
                         <Navbar.Toggle onClick={() => setOpenDrawer(true)}/>
+                        <div>
+                            <form>
+                                <TextInput 
+                                    type='text'
+                                    placeholder='Search...'
+                                    rightIcon={FaSearch}
+                                    className=''
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </form>
+                        </div>
                         <div className='flex flex-row'>
                             <Button
                                 className='w-14 h-14 inline text-bgDark dark:text-white focus:ring-transparent hover:opacity-80 text-xl'
