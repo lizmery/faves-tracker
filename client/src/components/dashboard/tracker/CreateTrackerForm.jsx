@@ -2,8 +2,16 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TextInput, Select, Button, Alert, Datepicker, Label, Textarea } from 'flowbite-react'
-import { HiCalendar, HiUserAdd } from "react-icons/hi";
+import { TextInput, Select, Button, Alert, Datepicker, Label, Textarea, FileInput } from 'flowbite-react'
+import {
+    getDownloadURL,
+    getStorage,
+    ref,
+    uploadBytesResumable,
+} from 'firebase/storage'
+import { app } from '../../../firebase'
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 
 // TODO: if category = 'other' --> add text input for user to add a new category
 
@@ -22,16 +30,70 @@ const customTheme = {
     },
 }
 
+const fileInputTheme = {
+    field: {
+        base: 'relative w-full',
+        input: {
+            colors: {
+                gray: 'border-lightGray border-2 bg-transparent text-darkGray focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500'
+            }
+        }
+    }
+}
+
 export default function CreateTrackerForm({ trackerCategory }) {
     const [formData, setFormData] = useState({})
+    const [file, setFile] = useState(null)
+    const [imageUploadProgress, setImageUploadProgress] = useState(null)
+    const [imageUploadError, setImageUploadError] = useState(null)
     const [publishError, setPublishError] = useState(null)
     const [success, setSuccess] = useState(false)
     const navigate = useNavigate()
+
+    const handleUploadImage = async () => {
+        try {
+            if (!file) {
+                setImageUploadError('Please select an image')
+                return
+            }
+
+            setImageUploadError(null)
+            const storage = getStorage(app)
+            const fileName = new Date().getTime + '-' + file.fileName
+            const storageRef = ref(storage, fileName)
+            const uploadTask = uploadBytesResumable(storageRef, file)
+
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    setImageUploadProgress(progress.toFixed(0))
+                },
+                (error) => {
+                    setImageUploadError('Image failed to upload')
+                    setImageUploadProgress(null)
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        setImageUploadProgress(null)
+                        setImageUploadError(null)
+                        setFormData({ ...formData, image: downloadURL })
+                    })
+                }
+            )
+        } catch (error) {
+            setImageUploadError('Image failed to upload')
+            setImageUploadProgress(null)
+            console.log(error)
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
+            handleUploadImage()
+
             const res = await fetch('/api/tracker/create', {
                 method: 'POST',
                 headers: {
@@ -205,6 +267,44 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         color='info'
                     />
                 </div>
+                <div className="mb-8 flex flex-col">
+                    <Label htmlFor="image" className="mb-2 block">
+                        Image
+                    </Label>
+                    <div className='flex w-full justify-between items-center gap-2 mb-4'>
+                        <FileInput
+                            type='file'
+                            accept='image/*'
+                            onChange={(e) => setFile(e.target.files[0])} 
+                            theme={fileInputTheme}
+                            color='gray'
+                            className='w-full'
+                        />
+                        <Button
+                            type='button'
+                            size='sm'
+                            className='text-nowrap text-primary underline'
+                            onClick={handleUploadImage}
+                            disabled={imageUploadProgress}
+                        >
+                            {imageUploadProgress ? (
+                                <div className='w-5 h-5'>
+                                    <CircularProgressbar
+                                        value={imageUploadProgress}
+                                    />
+                                </div>
+                            ) : 'Upload Image'}
+                        </Button>
+                    </div>
+                    {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
+                    {formData.image && (
+                        <img 
+                            src={formData.image}
+                            alt='media tracker image'
+                            className='w-full h-72 object-contain'
+                        />
+                    )}
+                </div>
                 <div className="mb-8">
                     <Label htmlFor="notes" className="mb-2 block">
                         Notes
@@ -216,7 +316,6 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         onChange={(value) => { setFormData({ ...formData, notes: value }) }}
                     />
                 </div>
-            
                 <div className='mt-6'>
                     <Button type='submit' className='bg-black w-full mt-5 dark:bg-white'>Create</Button>
                     {success && (

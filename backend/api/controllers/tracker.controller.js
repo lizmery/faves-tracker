@@ -40,6 +40,7 @@ export const updateTracker = async (req, res, next) => {
                     notes: req.body.notes,
                     category: req.body.category,
                     type: req.body.type,
+                    image: req.body.image,
                 },
             },
             { new: true }
