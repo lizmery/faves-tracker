@@ -62,6 +62,16 @@ const drawerTheme = {
     }
 }
 
+const inputTheme = {
+    field: {
+        input: {
+            colors: {
+                gray: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary'
+            },
+        },
+    },
+}
+
 export default function Header() {
     const path = useLocation().pathname
     const location = useLocation()
@@ -115,14 +125,16 @@ export default function Header() {
                     <Navbar fluid className='dark:bg-bgDark bg-white sticky top-0 z-[100] py-4' theme={dashboardNavTheme}>
                         <Navbar.Toggle onClick={() => setOpenDrawer(true)}/>
                         <div>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <TextInput 
                                     type='text'
                                     placeholder='Search...'
                                     rightIcon={FaSearch}
-                                    className=''
+                                    className='hidden md:inline'
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
+                                    color='gray'
+                                    theme={inputTheme}
                                 />
                             </form>
                         </div>

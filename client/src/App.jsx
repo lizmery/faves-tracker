@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn"
 import Header from "./components/Header"
 import FooterComponent from "./components/Footer"
 import PrivateRoute from "./components/PrivateRoute"
+import Search from "./pages/Search"
 
 //TODO: create ABOUT, and CONTACT pages
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route element={<PrivateRoute />}>
+              <Route path="/search" element={<Search />} />
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
         </Routes>

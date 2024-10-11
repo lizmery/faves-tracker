@@ -79,6 +79,10 @@ export const getTrackers = async (req, res, next) => {
                 $or: [
                     { title: { $regex: req.query.searchTerm, $options: 'i' } },
                     { tags: { $regex: req.query.searchTerm, $options: 'i' } },
+                    { type: { $regex: req.query.searchTerm, $options: 'i' } },
+                    { category: { $regex: req.query.searchTerm, $options: 'i' } },
+                    { by: { $regex: req.query.searchTerm, $options: 'i' } },
+                    { genre: { $regex: req.query.searchTerm, $options: 'i' } },
                 ],
             }),
         })
