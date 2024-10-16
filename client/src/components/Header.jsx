@@ -130,7 +130,7 @@ export default function Header() {
                                     type='text'
                                     placeholder='Search...'
                                     rightIcon={FaSearch}
-                                    className='hidden md:inline'
+                                    className='ml-2'
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     color='gray'

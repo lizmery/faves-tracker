@@ -17,7 +17,7 @@ export default function TrackerCard({ tracker }) {
                 <img 
                     src={tracker.image}
                     alt={`${tracker.title} cover`}
-                    className='h-[260px] w-full object-cover group-hover:h-[200px] transition-all duration-300 z-20'
+                    className='h-[230px] w-full object-fill group-hover:h-[200px] transition-all duration-300 z-20'
                 />
             </Link>
             <h5 className='text-lg font-semibold line-clamp-2'>{tracker.title}</h5>

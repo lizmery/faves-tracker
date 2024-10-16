@@ -5,7 +5,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { FaCheck, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import TrackerTable from './tracker/TrackerTable'
-import SummaryCards from './tracker/SummaryCards'
+import SummaryCard from './tracker/SummaryCard'
 import CreateTrackerForm from './tracker/CreateTrackerForm'
 
 const modalTheme = {
@@ -53,12 +53,26 @@ export default function DashSeries() {
                 <h1 className='text-3xl font-bold'>Series</h1>
                 <Button className='border-black text-black border-2 dark:border-lightGray dark:text-white' onClick={() => setShowForm(true) }>Add Series</Button>
             </div>
-            <SummaryCards 
-                trackerCategory='series' 
-                trackersCompleted={seriesCompleted} 
-                trackersInProgress={seriesInProgress} 
-                trackersNotStarted={seriesNotStarted}
-            />
+            <div className='flex flex-col md:flex-row gap-4 lg:gap-5 w-full'>
+                <SummaryCard 
+                    cardTitle='Total Series Completed'
+                    trackerData={seriesCompleted}
+                    cardColor='lightGreen'
+                    cardHoverColor='lightestGreen'
+                />
+                <SummaryCard 
+                    cardTitle='Total Series In Progress'
+                    trackerData={seriesInProgress}
+                    cardColor='lightPurple'
+                    cardHoverColor='lightestPurple'
+                />
+                <SummaryCard 
+                    cardTitle='Total Series Not Yet Started'
+                    trackerData={seriesNotStarted}
+                    cardColor=''
+                    cardHoverColor=''
+                />
+            </div>
             <div className=''>
                 <TrackerTable userTrackers={userSeries} trackerCategory='series' />
             </div>

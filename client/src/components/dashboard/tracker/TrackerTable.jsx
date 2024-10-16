@@ -10,7 +10,7 @@ const tableTheme = {
     head: {
         base: 'font-normal',
         cell: {
-            base: 'lg:px-10 lg:py-6 p-4 2xl:px-[4.5rem]'
+            base: 'lg:px-10 lg:py-6 p-4 2xl:px-[4.5rem] text-grayLine'
         }
     },
     body: {
@@ -19,7 +19,7 @@ const tableTheme = {
         }
     },
     root: {
-        base: 'text-left lg:text-sm text-xs'
+        base: 'text-center lg:text-sm text-xs'
     }
 }
 
@@ -70,7 +70,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                 <>
                     <Table className='rounded-lg' theme={tableTheme}>
                         <Table.Head className='border-b  dark:border-b-darkGray font-normal'>
-                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Title</Table.HeadCell>
+                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray text-left'>Title</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>By</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Status</Table.HeadCell>
@@ -90,7 +90,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                         {userTrackers.map((tracker) => (
                             <Table.Body className='divide-y' key={tracker._id}>
                                 <Table.Row className='bg-transparent'>
-                                    <Table.Cell className='lg:whitespace-nowrap lg:font-medium cursor-pointer' onClick={() => {setOpenDrawer(true); setTracker(tracker)}}>
+                                    <Table.Cell className='lg:whitespace-nowrap lg:font-medium cursor-pointer text-left' onClick={() => {setOpenDrawer(true); setTracker(tracker)}}>
                                         {tracker.title}
                                     </Table.Cell>
                                     <Table.Cell className='lg:whitespace-nowrap lg:font-medium'>
@@ -100,7 +100,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         {(tracker.genres).map((genre) => (genre + ' '))}
                                     </Table.Cell>
                                     <Table.Cell className='whitespace-nowrap font-medium'>
-                                      <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen dark:bg-accent text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple dark:bg-primary text-black' : 'bg-black text-white opacity-60 dark:bg-white dark:text-black'} `}>{tracker.status}</p>
+                                      <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>{tracker.status}</p>
                                     </Table.Cell>
                                     <Table.Cell>
                                         {tracker.rating}

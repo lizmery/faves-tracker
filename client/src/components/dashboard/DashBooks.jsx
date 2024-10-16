@@ -5,7 +5,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { FaCheck, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import TrackerTable from './tracker/TrackerTable'
-import SummaryCards from './tracker/SummaryCards'
+import SummaryCard from './tracker/SummaryCard'
 import CreateTrackerForm from './tracker/CreateTrackerForm'
 
 const modalTheme = {
@@ -53,12 +53,26 @@ export default function DashBooks() {
                 <h1 className='text-3xl font-bold'>Books</h1>
                 <Button className='border-black text-black border-2 dark:border-lightGray dark:text-white' onClick={() => setShowForm(true) }>Add Books</Button>
             </div>
-            <SummaryCards 
-                trackerCategory='books' 
-                trackersCompleted={booksCompleted} 
-                trackersInProgress={booksInProgress} 
-                trackersNotStarted={booksNotStarted}
-            />
+            <div className='flex flex-col md:flex-row gap-4 lg:gap-5 w-full'>
+                <SummaryCard 
+                    cardTitle='Total Books Completed'
+                    trackerData={booksCompleted}
+                    cardColor='lightGreen'
+                    cardHoverColor='lightestGreen'
+                />
+                <SummaryCard 
+                    cardTitle='Total Books In Progress'
+                    trackerData={booksInProgress}
+                    cardColor='lightPurple'
+                    cardHoverColor='lightestPurple'
+                />
+                <SummaryCard 
+                    cardTitle='Total Books Not Yet Started'
+                    trackerData={booksNotStarted}
+                    cardColor=''
+                    cardHoverColor=''
+                />
+            </div>
             <div className=''>
                 <TrackerTable userTrackers={userBooks} trackerCategory='books' />
             </div>

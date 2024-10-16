@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import TrackerTable from './tracker/TrackerTable'
-import SummaryCards from './tracker/SummaryCards'
+import SummaryCard from './tracker/SummaryCard'
 import CreateTrackerForm from './tracker/CreateTrackerForm'
 
 const modalTheme = {
@@ -50,12 +50,26 @@ export default function DashOverview() {
             <div className='flex justify-between'>
                 <h1 className='text-3xl font-bold'>Overview</h1>
             </div>
-            <SummaryCards 
-                trackerCategory='media' 
-                trackersCompleted={trackersCompleted} 
-                trackersInProgress={trackersInProgress} 
-                trackersNotStarted={trackersNotStarted}
-            />
+            <div className='flex flex-col md:flex-row gap-4 lg:gap-5 w-full'>
+                <SummaryCard 
+                    cardTitle='Total Trackers Completed'
+                    trackerData={trackersCompleted}
+                    cardColor='lightGreen'
+                    cardHoverColor='lightestGreen'
+                />
+                <SummaryCard 
+                    cardTitle='Total Trackers In Progress'
+                    trackerData={trackersInProgress}
+                    cardColor='lightPurple'
+                    cardHoverColor='lightestPurple'
+                />
+                <SummaryCard 
+                    cardTitle='Total Trackers Not Yet Started'
+                    trackerData={trackersNotStarted}
+                    cardColor=''
+                    cardHoverColor=''
+                />
+            </div>
             <div className=''>
                 <TrackerTable userTrackers={userTrackers} trackerCategory='media' />
             </div>

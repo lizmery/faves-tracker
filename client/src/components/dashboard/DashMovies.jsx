@@ -5,7 +5,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { FaCheck, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import TrackerTable from './tracker/TrackerTable'
-import SummaryCards from './tracker/SummaryCards'
+import SummaryCard from './tracker/SummaryCard'
 import CreateTrackerForm from './tracker/CreateTrackerForm'
 
 const modalTheme = {
@@ -53,12 +53,26 @@ export default function DashMovies() {
                 <h1 className='text-3xl font-bold'>Movies</h1>
                 <Button className='border-black text-black border-2 dark:border-lightGray dark:text-white' onClick={() => setShowForm(true) }>Add Movies</Button>
             </div>
-            <SummaryCards 
-                trackerCategory='movies' 
-                trackersCompleted={moviesCompleted} 
-                trackersInProgress={moviesInProgress} 
-                trackersNotStarted={moviesNotStarted}
-            />
+            <div className='flex flex-col md:flex-row gap-4 lg:gap-5 w-full'>
+                <SummaryCard 
+                    cardTitle='Total Movies Completed'
+                    trackerData={moviesCompleted}
+                    cardColor='lightGreen'
+                    cardHoverColor='lightestGreen'
+                />
+                <SummaryCard 
+                    cardTitle='Total Movies In Progress'
+                    trackerData={moviesInProgress}
+                    cardColor='lightPurple'
+                    cardHoverColor='lightestPurple'
+                />
+                <SummaryCard 
+                    cardTitle='Total Movies Not Yet Started'
+                    trackerData={moviesNotStarted}
+                    cardColor=''
+                    cardHoverColor=''
+                />
+            </div>
             <div className=''>
                 <TrackerTable userTrackers={userMovies} trackerCategory='movies' />
             </div>
