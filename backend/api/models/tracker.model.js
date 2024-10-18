@@ -48,6 +48,7 @@ const trackerSchema = new mongoose.Schema(
             type: String,
         },
     },
+    { timestamps: true }
 )
 
 const Tracker = mongoose.model('Tracker', trackerSchema)
