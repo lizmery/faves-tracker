@@ -2,6 +2,7 @@ import { Table, Drawer, Modal, Button } from 'flowbite-react'
 import { useSelector } from 'react-redux'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
+import { MdDelete, MdEdit } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import TrackerDetails from './TrackerDetails'
@@ -10,7 +11,7 @@ const tableTheme = {
     head: {
         base: 'font-normal',
         cell: {
-            base: 'lg:px-10 lg:py-6 p-4 2xl:px-[4.5rem] text-grayLine'
+            base: 'lg:px-10 lg:py-4 p-4 2xl:px-[4.5rem] text-grayLine'
         }
     },
     body: {
@@ -69,7 +70,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
             {userTrackers.length > 0 ? (
                 <>
                     <Table className='rounded-lg' theme={tableTheme}>
-                        <Table.Head className='border-b  dark:border-b-darkGray font-normal'>
+                        <Table.Head className='border-b  dark:border-b-darkGray font-normal opacity-60'>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray text-left'>Title</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>By</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
@@ -113,17 +114,17 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                     <Table.Cell>
                                         {tracker.type}
                                     </Table.Cell>
-                                    {trackerCategory === 'media' ? '' : (
+                                    {trackerCategory !== 'media' && (
                                         <Table.Cell>
-                                            {(tracker.tags).map((tag) => (tag + ', '))}
+                                            {tracker.tags.join(', ')}
                                         </Table.Cell>
                                     )}
                                     {/* <Table.Cell>
                                         <span className='truncate'>{tracker.notes}</span>
                                     </Table.Cell> */}
-                                    <Table.Cell className='flex flex-row gap-3 justify-center items-center'>
-                                        <FaEdit className='text-black lg:text-lg dark:text-white cursor-pointer' onClick={() => {setOpenDrawer(true); setTracker(tracker)}} />
-                                        <FaTrashAlt className='text-black lg:text-lg dark:text-white cursor-pointer' onClick={() => {setShowModal(true); setTracker(tracker)}} />
+                                    <Table.Cell className='flex flex-row gap-1 justify-center items-center'>
+                                        <MdEdit className='text-black text-md lg:text-xl dark:text-white cursor-pointer' onClick={() => {setOpenDrawer(true); setTracker(tracker)}} />
+                                        <MdDelete className='text-black lg:text-xl dark:text-white cursor-pointer' onClick={() => {setShowModal(true); setTracker(tracker)}} />
                                         
                                     </Table.Cell>
                                 </Table.Row>
