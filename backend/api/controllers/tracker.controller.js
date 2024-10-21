@@ -74,6 +74,7 @@ export const getTrackers = async (req, res, next) => {
             ...(req.query.userId && { userId: req.query.userId }),
             ...(req.query.category && { category: req.query.category }),
             ...(req.query.type && { type: req.query.type }),
+            ...(req.query.status && { status: req.query.status }),
             ...(req.query.trackerId && { _id: req.query.trackerId }),
             ...(req.query.searchTerm && {
                 $or: [
