@@ -55,11 +55,15 @@ export default function TrackersData({ trackerCategory }) {
             setFilteredTrackers(
                 userTrackers.filter((tracker) => {
                     return (
-                        (!filters.genre || tracker.genres.includes(filters.genre)) &&
-                        (!filters.status || tracker.status === filters.status) &&
-                        (!filters.type || tracker.type === filters.type) &&
-                        (!filters.tags || tracker.tags.includes(filters.tags)) &&
-                        (!filters.by || tracker.by === filters.by)
+                        (!filters.genre || tracker.genres.some((genre) => 
+                            genre.toLowerCase().includes(filters.genre.toLowerCase())
+                        )) &&
+                        (!filters.status || tracker.status.toLowerCase() === filters.status.toLowerCase()) &&
+                        (!filters.type || tracker.type.toLowerCase() === filters.type.toLowerCase()) &&
+                        (!filters.tags || tracker.tags.some((tag) => 
+                            tag.toLowerCase().includes(filters.tags.toLowerCase())
+                        )) &&
+                        (!filters.by || tracker.by.toLowerCase() === filters.by.toLowerCase())
                     )
                 })
             )
