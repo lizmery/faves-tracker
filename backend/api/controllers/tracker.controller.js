@@ -6,9 +6,14 @@ export const createTracker = async (req, res, next) => {
         return next(errorHandler(400, 'Please provide all required fields'))
     }
 
+    const genresArr = req.body.genres.split(',')
+    const tagsArr = req.body.tags.split(',')
+
     const newTracker = new Tracker({
         ...req.body,
         userId: req.user.id,
+        genres: genresArr,
+        tags: tagsArr,
     })
 
     try {
@@ -24,19 +29,22 @@ export const updateTracker = async (req, res, next) => {
         return next(errorHandler(403, 'You are not allowed to edit this tracker'))
     }
 
+    const genresArr = req.body.genres.split(',')
+    const tagsArr = req.body.tags.split(',')
+
     try {
         const updatedTracker = await Tracker.findByIdAndUpdate(
             req.params.trackerId,
             {
                 $set: {
                     title: req.body.title,
-                    genres: req.body.genres,
+                    genres: genresArr,
                     status: req.body.status,
                     by: req.body.by,
                     rating: req.body.rating,
                     dateStarted: req.body.dateStarted,
                     dateCompleted: req.body.dateCompleted,
-                    tags: req.body.tags,
+                    tags: tagsArr,
                     notes: req.body.notes,
                     category: req.body.category,
                     type: req.body.type,
@@ -83,7 +91,7 @@ export const getTrackers = async (req, res, next) => {
                     { type: { $regex: req.query.searchTerm, $options: 'i' } },
                     { category: { $regex: req.query.searchTerm, $options: 'i' } },
                     { by: { $regex: req.query.searchTerm, $options: 'i' } },
-                    { genre: { $regex: req.query.searchTerm, $options: 'i' } },
+                    { genres: { $regex: req.query.searchTerm, $options: 'i' } },
                 ],
             }),
         })
@@ -91,43 +99,86 @@ export const getTrackers = async (req, res, next) => {
             .skip(startIndex)
             .limit(limit)
 
-            const totalTrackers = await Tracker.countDocuments()
-            const totalCompleted = await Tracker.find({
-                status: 'Completed',
-                ...(req.query.category && { category: req.query.category }),
-            }).countDocuments()
-            const totalInProgress = await Tracker.find({
-                status: 'In Progress',
-                ...(req.query.category && { category: req.query.category }),
-            }).countDocuments()
-            const totalNotStarted = await Tracker.find({
-                status: 'Not Started',
-                ...(req.query.category && { category: req.query.category }),
-            }).countDocuments()
+        const totalTrackers = await Tracker.countDocuments()
+        const totalCompleted = await Tracker.find({
+            status: 'Completed',
+            ...(req.query.category && { category: req.query.category }),
+        }).countDocuments()
+        const totalInProgress = await Tracker.find({
+            status: 'In Progress',
+            ...(req.query.category && { category: req.query.category }),
+        }).countDocuments()
+        const totalNotStarted = await Tracker.find({
+            status: 'Not Started',
+            ...(req.query.category && { category: req.query.category }),
+        }).countDocuments()
 
-            const now = new Date()
-            const oneMonthAgo = new Date(
-                now.getFullYear(),
-                now.getMonth() - 1,
-                now.getDate()
-            )
-            const prevMonthTrackers = await Tracker.countDocuments({
-                dateStarted: { $gte: oneMonthAgo },
-            })
+        const now = new Date()
+        const oneMonthAgo = new Date(
+            now.getFullYear(),
+            now.getMonth() - 1,
+            now.getDate()
+        )
+        const prevMonthTrackers = await Tracker.countDocuments({
+            dateStarted: { $gte: oneMonthAgo },
+        })
 
-            res.status(200).json({
-                trackers,
-                totalTrackers,
-                totalCompleted,
-                totalInProgress,
-                totalNotStarted,
-                prevMonthTrackers,
-            })
+        res.status(200).json({
+            trackers,
+            totalTrackers,
+            totalCompleted,
+            totalInProgress,
+            totalNotStarted,
+            prevMonthTrackers,
+        })
     } catch (error) {
         next(error)
     }
 }
 
-// export const getTrackerSummary = async (req, res, next) => {
+export const getTrackersOverview = async (req, res, next) => {
+    try {
+        const completedTrackersByCategory = await Tracker.aggregate([
+            {
+                $match: { 
+                    userId: req.query.userId,
+                    status: 'Completed',
+                },
+            },
+            {
+                $group: {
+                    _id: '$category',
+                    totalCompleted: { $sum: 1 },
+                },
+            },
+        ])
 
-// }
+        const popularGenresCompleted = await Tracker.aggregate([
+            {
+                $match: {
+                    userId: req.query.userId,
+                    status: 'Completed', 
+                },
+            },
+            {
+                $unwind: '$genres',
+            },
+            {
+                $group: {
+                    _id: '$genres',
+                    count: { $sum: 1},
+                },
+            },
+            {
+                $sort: { count: -1 },
+            }
+        ])
+
+        res.status(200).json({
+            completedTrackersByCategory,
+            popularGenresCompleted,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
