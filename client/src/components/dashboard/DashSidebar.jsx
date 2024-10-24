@@ -3,10 +3,8 @@ import {
   HiUser,
   HiChartPie,
   HiLogout,
-  HiMusicNote,
   HiOutlineBookOpen,
   HiOutlineFilm,
-  HiDesktopComputer,
   HiOutlineDesktopComputer
 } from 'react-icons/hi'
 import { useEffect, useState } from 'react'

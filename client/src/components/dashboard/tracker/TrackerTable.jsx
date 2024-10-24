@@ -24,6 +24,23 @@ const tableTheme = {
     }
 }
 
+const overviewTableTheme = {
+    head: {
+        base: 'font-normal',
+        cell: {
+            base: 'p-4 text-grayLine'
+        }
+    },
+    body: {
+        cell: {
+            base: 'p-4'
+        }
+    },
+    root: {
+        base: 'text-left lg:text-sm text-xs'
+    }
+}
+
 const drawerTheme = {
     root: {
         position: {
@@ -66,11 +83,11 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
     }
 
     return (
-        <div className='overflow-x-scroll dark:border-darkGray border rounded-lg table-auto md:mx-auto scrollbar scrollbar-track-transparent scrollbar-thumb-[#F5F5F5] dark:scrollbar-thumb-darkGray'>
+        <div className={`overflow-x-scroll ${trackerCategory === 'media' ? '' : 'border'} dark:border-darkGray rounded-lg table-auto md:mx-auto scrollbar scrollbar-track-transparent scrollbar-thumb-[#F5F5F5] dark:scrollbar-thumb-darkGray`}>
             {userTrackers.length > 0 ? (
                 <>
-                    <Table className='rounded-lg' theme={tableTheme}>
-                        <Table.Head className='border-b  dark:border-b-darkGray font-normal opacity-60'>
+                    <Table className='rounded-lg' theme={trackerCategory === 'media' ? overviewTableTheme : tableTheme}>
+                        <Table.Head className={`border-b  dark:border-b-darkGray font-normal opacity-60`}>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray text-left'>Title</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>By</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
@@ -98,7 +115,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         {tracker.by}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        {(tracker.genres).map((genre) => (genre + ' '))}
+                                        {tracker.genres.join(', ')}
                                     </Table.Cell>
                                     <Table.Cell className='whitespace-nowrap font-medium'>
                                       <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>{tracker.status}</p>
