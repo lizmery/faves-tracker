@@ -26,7 +26,7 @@ const customTheme = {
     field: {
         input: {
             colors: {
-                info: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary'
+                info: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-primary dark:focus:ring-primary'
             },
         },
     },

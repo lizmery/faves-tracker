@@ -7,12 +7,12 @@ const customTheme = {
     field: {
         input: {
             colors: {
-                gray: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary'
+                gray: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-primary dark:focus:ring-primary'
             },
         },
         select: {
             colors: {
-                gray: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary',
+                gray: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-primary dark:focus:ring-primary',
             },
         },
     },
@@ -189,7 +189,7 @@ export default function Search() {
                     {showMore && (
                         <Button
                             onClick={handleShowMore}
-                            className='bg-transparent dark:text-white text-black border-2 dark:border-lightGray border-black'
+                            className='bg-transparent dark:text-white text-black border dark:border-lightGray border-black'
                         >
                             Show More
                         </Button>

@@ -42,7 +42,7 @@ export default function OAuth() {
     }
 
     return (
-        <Button type='button' onClick={handleGoogleClick} className='bg-transparent dark:text-white text-black border-2 dark:border-lightGray border-black'>
+        <Button type='button' onClick={handleGoogleClick} className='bg-transparent dark:text-white text-black border dark:border-grayLine border-black'>
             <AiFillGoogleCircle className='w-6 h-6 mr-2' />
             Continue with Google
         </Button>

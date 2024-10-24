@@ -83,11 +83,11 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
     }
 
     return (
-        <div className={`overflow-x-scroll ${trackerCategory === 'media' ? '' : 'border'} dark:border-darkGray rounded-lg table-auto md:mx-auto scrollbar scrollbar-track-transparent scrollbar-thumb-[#F5F5F5] dark:scrollbar-thumb-darkGray`}>
+        <div className={`overflow-x-scroll ${trackerCategory === 'media' ? '' : 'border'} dark:border-grayLine  rounded-lg table-auto md:mx-auto scrollbar scrollbar-track-transparent scrollbar-thumb-[#F5F5F5] dark:scrollbar-thumb-darkGray`}>
             {userTrackers.length > 0 ? (
                 <>
                     <Table className='rounded-lg' theme={trackerCategory === 'media' ? overviewTableTheme : tableTheme}>
-                        <Table.Head className={`border-b  dark:border-b-darkGray font-normal opacity-60`}>
+                        <Table.Head className={`border-b ${trackerCategory === 'media' ? 'dark:border-b-grayLine' : 'dark:border-b-darkGray'} font-normal opacity-60`}>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray text-left'>Title</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>By</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
@@ -175,10 +175,10 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                     Are you sure you want to delete {tracker.title}?
                     </h3>
                     <div className='flex justify-center gap-4'>
-                    <Button className='bg-black dark:bg-white border-2' onClick={handleDeleteTracker}>
+                    <Button className='bg-black dark:bg-white border' onClick={handleDeleteTracker}>
                         Delete
                     </Button>
-                    <Button className='border-black border-2 text-black dark:border-grayLine dark:text-white' onClick={() => setShowModal(false)}>
+                    <Button className='border-black border text-black dark:border-grayLine dark:text-white' onClick={() => setShowModal(false)}>
                         Cancel
                     </Button>
                     </div>

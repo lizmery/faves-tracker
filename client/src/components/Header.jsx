@@ -8,6 +8,7 @@ import {
 } from 'flowbite-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaMoon, FaSun, FaSearch } from 'react-icons/fa'
+import { IoIosSearch } from 'react-icons/io'
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutSuccess } from '../redux/user/userSlice'
 import { toggleTheme }from '../redux/theme/themeSlice'
@@ -66,7 +67,7 @@ const inputTheme = {
     field: {
         input: {
             colors: {
-                gray: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-2 ring-inset ring-lightGray dark:ring-darkGray dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary'
+                gray: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:border-primary focus:ring-primary dark:focus:ring-primary'
             },
         },
     },
@@ -129,7 +130,7 @@ export default function Header() {
                                 <TextInput 
                                     type='text'
                                     placeholder='Search...'
-                                    rightIcon={FaSearch}
+                                    rightIcon={IoIosSearch}
                                     className='ml-2'
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -195,10 +196,10 @@ export default function Header() {
                                 {theme === 'dark' ? <FaSun /> : <FaMoon />}
                             </Button>
                             <Link to='/sign-in' className='items-center flex'>
-                                <Button className='bg-transparent dark:text-white text-black border-2 dark:border-lightGray border-black rounded-full'>Sign In</Button>
+                                <Button className='bg-transparent dark:text-white text-black border dark:border-grayLine border-black rounded-md'>Sign In</Button>
                             </Link>
                             <Link to='/sign-up' className='items-center flex'>
-                                <Button className='dark:bg-white bg-black dark:text-black text-white rounded-full'>Sign Up</Button>
+                                <Button className='dark:bg-white bg-black dark:text-black text-white rounded-md'>Sign Up</Button>
                             </Link>
                             <Navbar.Toggle />
                         </div>

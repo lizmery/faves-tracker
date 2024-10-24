@@ -115,8 +115,8 @@ export default function DashOverview() {
                 {/* completed trackers per category cards */}
                 <div className='col-span-3 flex flex-col lg:flex-row gap-4 lg:max-h-[100px]'>
                     {completedTrackers.map((trackerCategory) => (
-                        <div className='border p-4 lg:p-5 flex gap-6 items-center w-full rounded-md text-left'>
-                            <div className='bg-[#eee] h-full lg:h-auto p-4 lg:p-6 rounded-md flex items-center'>
+                        <div className='border dark:bg-[#1f1f1f] p-4 lg:p-5 flex gap-6 items-center w-full rounded-md text-left dark:border-darkGray'>
+                            <div className='bg-[#eee] dark:bg-bgDark h-full lg:h-auto p-4 lg:p-6 rounded-md flex items-center'>
                                 {trackerCategory._id === 'Series' ? <HiOutlineDesktopComputer className='text-2xl' /> : trackerCategory._id === 'Books' ? <HiOutlineBookOpen className='text-2xl' /> : <HiOutlineFilm className='text-2xl' /> }
                             </div>
                             <div className='flex lg:flex-col lg:gap-2 gap-3 items-center lg:items-start'>
@@ -129,7 +129,7 @@ export default function DashOverview() {
                 </div>
 
                 {/* popular genres pie chart */}
-                <div className='row-span-3 lg:col-span-1 col-span-3 border p-4 rounded-md w-full max-h-[600px] h-full'>
+                <div className='row-span-3 lg:col-span-1 col-span-3 border dark:border-darkGray dark:bg-[#1f1f1f] p-4 rounded-md w-full max-h-[600px] h-full'>
                     <h1 className='text-xl font-bold'>Popular Genres</h1>
                     <p className='text-sm font-light opacity-60 w-full'>Top 5 genres across all 'Completed' media</p>
                     <ResponsiveContainer width='100%' height='90%'>
@@ -145,7 +145,7 @@ export default function DashOverview() {
                                 paddingAngle={2}
                             >
                                 {popularGenres.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} strokeWidth={0} />
                                 ))}
                             </Pie>
                             <Tooltip />
@@ -155,7 +155,7 @@ export default function DashOverview() {
                 </div>
 
                 {/* activity bar chart */}
-                <div className='p-4 row-span-2 col-span-3 border rounded-md max-h-[600px]'>
+                <div className='p-4 row-span-2 col-span-3 border dark:border-darkGray dark:bg-[#1f1f1f] rounded-md max-h-[600px]'>
                     <h1 className='text-xl font-bold'>Activity</h1>
                     <p className='text-sm font-light opacity-60 mb-4'>Tracker activity for the past 6 months across all media</p>
                     <ResponsiveContainer width='100%' height={300}>
@@ -183,17 +183,17 @@ export default function DashOverview() {
                 </div>
 
                 {/* trackers table */}
-                <div className='row-span-3 col-span-3 border p-4 rounded-md'>
+                <div className='row-span-3 col-span-3 border dark:border-darkGray dark:bg-[#1f1f1f] p-4 rounded-md'>
                     <h1 className='text-xl font-bold'>Trackers</h1>
                     <p className='text-sm font-light opacity-60 mb-2'>{trackers.length} Total Trackers</p>
                     <TrackerTable userTrackers={trackers} trackerCategory='media' />
                 </div>
 
                 {/* recently added trackers list */}
-                <div className='row-span-3 p-4 border rounded-md flex flex-col w-full col-span-3 lg:col-span-1'>
+                <div className='row-span-3 p-4 border dark:border-darkGray dark:bg-[#1f1f1f] rounded-md flex flex-col w-full col-span-3 lg:col-span-1'>
                     <h1 className='text-xl font-bold mb-4 w-full'>Recently Added</h1>
                     <div className='flow-root w-full'>
-                        <ul className='divide-y divide-lightGray'>
+                        <ul className='divide-y divide-lightGray dark:divide-grayLine'>
                             {recentTrackers.map((tracker) => (
                                 <li className='py-3 sm:py-4' key={tracker._id}>
                                     <div className='flex items-center space-x-4'>

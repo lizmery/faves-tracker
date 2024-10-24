@@ -10,7 +10,7 @@ const cardTheme = {
 export default function TrackerCard({ tracker }) {
     return (
         <Card
-            className='w-full 2xl:max-w-sm lg:max-w-xs shadow-none'
+            className='w-full 2xl:max-w-sm lg:max-w-xs shadow-none dark:bg-[#1f1f1f] dark:border-darkGray'
             theme={cardTheme}
         >
             <Link to='/'>

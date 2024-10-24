@@ -160,12 +160,12 @@ export default function TrackersData({ trackerCategory }) {
                                 type='text'
                                 name='genre'
                                 onChange={handleFilterChange}
-                                className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-2 ring-inset ring-lightGray dark:ring-darkGray placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
+                                className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400  ring-1 ring-inset ring-lightGray dark:ring-grayLine placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
                             />
                         </div>
                         <div>
                             <label for='status' className="mb-1 block text-sm font-medium leading-6 text-gray-900 dark:text-[#eee]">Status:</label>
-                            <select name='status' onChange={handleFilterChange} className='w-full rounded-md border-lightGray border-2'>
+                            <select name='status' onChange={handleFilterChange} className='w-full rounded-md border-lightGray border'>
                                 <option value=''></option>
                                 <option value='Completed'>Completed</option>
                                 <option value='In Progress'>In Progress</option>
@@ -180,7 +180,7 @@ export default function TrackersData({ trackerCategory }) {
                                 value={filters.type}
                                 onChange={handleFilterChange}
                                 placeholder=''
-                                className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-2 ring-inset ring-lightGray dark:ring-darkGray placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
+                                className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400  ring-1 ring-inset ring-lightGray dark:ring-grayLine placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
                             />
                         </div>
                         <div>
@@ -191,7 +191,7 @@ export default function TrackersData({ trackerCategory }) {
                                 value={filters.tags}
                                 onChange={handleFilterChange}
                                 placeholder=''
-                                className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-2 ring-inset ring-lightGray dark:ring-darkGray placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
+                                className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400  ring-1 ring-inset ring-lightGray dark:ring-grayLine placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
                             />
                         </div>
                         <div>
@@ -202,12 +202,12 @@ export default function TrackersData({ trackerCategory }) {
                                 value={filters.by}
                                 onChange={handleFilterChange}
                                 placeholder=''
-                                className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400 shadow-sm ring-2 ring-inset ring-lightGray dark:ring-darkGray placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
+                                className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400  ring-1 ring-inset ring-lightGray dark:ring-grayLine placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
                             />
                         </div>
                         <div className='flex gap-1 mt-4'>
                             <Button 
-                                className='w-full bg-transparent dark:text-white text-black border-2 dark:border-lightGray border-black' 
+                                className='w-full bg-transparent dark:text-white text-black border dark:border-lightGray border-black' 
                                 onClick={() => {
                                     setShowFilterModal(false)
                                     setFilters({ genre: '', status: '', type: '', tags: '', by: '' })
