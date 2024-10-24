@@ -1,10 +1,26 @@
-import { Modal, Button } from 'flowbite-react'
+import { Modal, Button, Card } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import TrackerTable from './tracker/TrackerTable'
-import SummaryCard from './tracker/SummaryCard'
 import CreateTrackerForm from './tracker/CreateTrackerForm'
+import {
+    HiOutlineBookOpen,
+    HiOutlineFilm,
+    HiOutlineDesktopComputer
+  } from 'react-icons/hi'
+import { 
+    PieChart, 
+    Pie, 
+    Cell, 
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    Tooltip, 
+    Legend, 
+    ResponsiveContainer 
+} from 'recharts'
 
 const modalTheme = {
     root: {
@@ -12,12 +28,15 @@ const modalTheme = {
     }
 }
 
+const COLORS = ['#A1E091', '#5E48A3', '#826EBF', '#DAD4EC', '#D4D2D2'];
+
 export default function DashOverview() {
     const { currentUser } = useSelector((state) => state.user)
-    const [userTrackers, setUserTrackers] = useState([])
-    const [trackersCompleted, setTrackersCompleted] = useState()
-    const [trackersInProgress, setTrackersInProgress] = useState()
-    const [trackersNotStarted, setTrackersNotStarted] = useState()
+    const [completedTrackers, setCompletedTrackers] = useState([])
+    const [popularGenres, setPopularGenres] = useState([])
+    const [userActivity, setUserActivity] = useState([])
+    const [trackers, setTrackers] = useState([])
+    const [recentTrackers, setRecentTrackers] = useState([])
     const [showForm, setShowForm] = useState(false)
 
     const handleClose = () => setShowForm(false)
@@ -25,17 +44,19 @@ export default function DashOverview() {
     useEffect(() => {
         const fetchTrackers = async () => {
             try {
-                const res = await fetch(`/api/tracker/get-trackers?userId=${currentUser._id}`)
+                const res = await fetch(`/api/tracker/get-trackers-overview?userId=${currentUser._id}`)
                 const data = await res.json()
 
                 if (res.ok) {
-                    setUserTrackers(data.trackers)
-                    setTrackersCompleted(data.totalCompleted)
-                    setTrackersInProgress(data.totalInProgress)
-                    setTrackersNotStarted(data.totalNotStarted)
-                    // if (data.trackers.length < 10) {
+                    setCompletedTrackers(data.completedTrackersByCategory)
+                    setTrackers(data.trackers)
+                    setRecentTrackers(data.recentTrackers)
 
-                    // }
+                    const formattedPopularGenres = formatPieChartData(data.popularGenresCompleted)
+                    setPopularGenres(formattedPopularGenres)
+
+                    const formattedUserActivity = formatBarChartData(data.userActivity)
+                    setUserActivity(formattedUserActivity)
                 }
             } catch (error) {
                 console.log(error.message)
@@ -45,34 +66,152 @@ export default function DashOverview() {
         fetchTrackers()
     }, [currentUser._id])
 
+    const formatPieChartData = (data) => {
+        return data.map((item) => ({
+            name: item._id,
+            value: item.count,
+        }))
+    }
+
+    const formatBarChartData = (data) => {
+        const formattedData = {}
+        const months = [ 
+            'January', 
+            'February', 
+            'March', 
+            'April', 
+            'May', 
+            'June', 
+            'July', 
+            'August', 
+            'September',
+            'October',
+            'November',
+            'December'
+        ]
+
+        data.forEach(({ _id, count }) => {
+            const { month, year, category, status } = _id
+            const monthLabel = `${months[month - 1]} ${year}`
+
+            if (!formattedData[monthLabel]) {
+                formattedData[monthLabel] = { month: monthLabel }
+            }
+
+            const key = `${category}_${status}`
+            formattedData[monthLabel][key] = count
+        })
+
+        return Object.values(formattedData)
+    }
+
     return (
-        <div className='bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden'>
+        <div className='bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden h-full'>
             <div className='flex justify-between'>
                 <h1 className='text-3xl font-bold'>Overview</h1>
             </div>
-            <div className='flex flex-col md:flex-row gap-4 lg:gap-5 w-full'>
-                <SummaryCard 
-                    cardTitle='Total Trackers Completed'
-                    trackerData={trackersCompleted}
-                    cardColor='lightGreen'
-                    cardHoverColor='lightestGreen'
-                />
-                <SummaryCard 
-                    cardTitle='Total Trackers In Progress'
-                    trackerData={trackersInProgress}
-                    cardColor='lightPurple'
-                    cardHoverColor='lightestPurple'
-                />
-                <SummaryCard 
-                    cardTitle='Total Trackers Not Yet Started'
-                    trackerData={trackersNotStarted}
-                    cardColor=''
-                    cardHoverColor=''
-                />
+            <div className='h-full grid lg:grid-cols-4 gap-4 w-full grid-cols-1'>
+
+                {/* completed trackers per category cards */}
+                <div className='col-span-3 flex flex-col lg:flex-row gap-4 lg:max-h-[100px]'>
+                    {completedTrackers.map((trackerCategory) => (
+                        <div className='border p-4 lg:p-5 flex gap-6 items-center w-full rounded-md text-left'>
+                            <div className='bg-[#eee] h-full lg:h-auto p-4 lg:p-6 rounded-md flex items-center'>
+                                {trackerCategory._id === 'Series' ? <HiOutlineDesktopComputer className='text-2xl' /> : trackerCategory._id === 'Books' ? <HiOutlineBookOpen className='text-2xl' /> : <HiOutlineFilm className='text-2xl' /> }
+                            </div>
+                            <div className='flex lg:flex-col lg:gap-2 gap-3 items-center lg:items-start'>
+                                <h1 className='text-2xl font-bold'>{trackerCategory.totalCompleted}</h1>
+                                <h3 className='text-sm font-light opacity-60'>Total {trackerCategory._id} Completed</h3>
+                            </div>
+                        </div>
+                    ))}
+                    
+                </div>
+
+                {/* popular genres pie chart */}
+                <div className='row-span-3 lg:col-span-1 col-span-3 border p-4 rounded-md w-full max-h-[600px] h-full'>
+                    <h1 className='text-xl font-bold'>Popular Genres</h1>
+                    <p className='text-sm font-light opacity-60 w-full'>Top 5 genres across all 'Completed' media</p>
+                    <ResponsiveContainer width='100%' height='90%'>
+                        <PieChart height={200}>
+                            <Pie
+                                data={popularGenres}
+                                dataKey='value'
+                                nameKey='name'
+                                cx='50%'
+                                cy='50%'
+                                outerRadius={80}
+                                innerRadius={60}
+                                paddingAngle={2}
+                            >
+                                {popularGenres.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                            <Tooltip />
+                            <Legend iconType='circle' />
+                        </PieChart>
+                    </ResponsiveContainer>
+                </div>
+
+                {/* activity bar chart */}
+                <div className='p-4 row-span-2 col-span-3 border rounded-md max-h-[600px]'>
+                    <h1 className='text-xl font-bold'>Activity</h1>
+                    <p className='text-sm font-light opacity-60 mb-4'>Tracker activity for the past 6 months across all media</p>
+                    <ResponsiveContainer width='100%' height={300}>
+                        <BarChart data={userActivity}>
+                            <XAxis dataKey='month' />
+                            <YAxis />
+                            <Tooltip />
+
+                            {/* Series category */}
+                            <Bar dataKey='Series_Completed' stackId='Series' fill='#A1E091' />
+                            <Bar dataKey='Series_In Progress' stackId='Series' fill='#826EBF' />
+                            <Bar dataKey='Series_Not Started' stackId='Series' fill='#D4D2D2' />
+
+                            {/* Books category */}
+                            <Bar dataKey='Books_Completed' stackId='Books' fill='#A1E091' />
+                            <Bar dataKey='Books_In Progress' stackId='Books' fill='#826EBF' />
+                            <Bar dataKey='Books_Not Started' stackId='Books' fill='#D4D2D2' />
+
+                            {/* Movies category */}
+                            <Bar dataKey='Movies_Completed' stackId='Movies' fill='#A1E091' />
+                            <Bar dataKey='Movies_In Progress' stackId='Movies' fill='#826EBF' />
+                            <Bar dataKey='Movies_Not Started' stackId='Movies' fill='#D4D2D2' />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+
+                {/* trackers table */}
+                <div className='row-span-3 col-span-3 border p-4 rounded-md'>
+                    <h1 className='text-xl font-bold'>Trackers</h1>
+                    <p className='text-sm font-light opacity-60 mb-2'>{trackers.length} Total Trackers</p>
+                    <TrackerTable userTrackers={trackers} trackerCategory='media' />
+                </div>
+
+                {/* recently added trackers list */}
+                <div className='row-span-3 p-4 border rounded-md flex flex-col w-full col-span-3 lg:col-span-1'>
+                    <h1 className='text-xl font-bold mb-4 w-full'>Recently Added</h1>
+                    <div className='flow-root w-full'>
+                        <ul className='divide-y divide-lightGray'>
+                            {recentTrackers.map((tracker) => (
+                                <li className='py-3 sm:py-4' key={tracker._id}>
+                                    <div className='flex items-center space-x-4'>
+                                        <div className='shrink-0 p-1'>
+                                            <img src={tracker.image} className='h-[40px] w-[40px] rounded-full' />
+                                        </div>
+                                        <div className=''>
+                                            <p className='truncate text-sm font-medium'>{tracker.title}</p>
+                                            <p className='truncate text-sm font-light opacity-60'>{tracker.by}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div className=''>
-                <TrackerTable userTrackers={userTrackers} trackerCategory='media' />
-            </div>
+            {/* 
             <Modal 
                 show={showForm} 
                 onClose={handleClose} 
@@ -84,7 +223,7 @@ export default function DashOverview() {
                 <Modal.Body>
                     <CreateTrackerForm />
                 </Modal.Body>
-            </Modal>
+            </Modal> */}
         </div>
     )
 }

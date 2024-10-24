@@ -113,23 +113,12 @@ export const getTrackers = async (req, res, next) => {
             ...(req.query.category && { category: req.query.category }),
         }).countDocuments()
 
-        const now = new Date()
-        const oneMonthAgo = new Date(
-            now.getFullYear(),
-            now.getMonth() - 1,
-            now.getDate()
-        )
-        const prevMonthTrackers = await Tracker.countDocuments({
-            dateStarted: { $gte: oneMonthAgo },
-        })
-
         res.status(200).json({
             trackers,
             totalTrackers,
             totalCompleted,
             totalInProgress,
             totalNotStarted,
-            prevMonthTrackers,
         })
     } catch (error) {
         next(error)
@@ -137,6 +126,9 @@ export const getTrackers = async (req, res, next) => {
 }
 
 export const getTrackersOverview = async (req, res, next) => {
+    const sixMonthsAgo = new Date()
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6)
+
     try {
         const completedTrackersByCategory = await Tracker.aggregate([
             {
@@ -166,17 +158,54 @@ export const getTrackersOverview = async (req, res, next) => {
             {
                 $group: {
                     _id: '$genres',
-                    count: { $sum: 1},
+                    count: { $sum: 1 },
                 },
             },
             {
                 $sort: { count: -1 },
-            }
+            },
+            {
+                $limit: 5,
+            },
         ])
+
+        const userActivity = await Tracker.aggregate([
+            {
+                $match: {
+                    userId: req.query.userId,
+                    createdAt: { $gte: sixMonthsAgo },
+                },
+            },
+            {
+                $group: {
+                    _id: { 
+                        month: { $month: '$createdAt' },
+                        year: { $year: '$createdAt' },
+                        category: '$category', 
+                        status: '$status' 
+                    },
+                    count: { $sum: 1 },
+                },
+            },
+            {
+                $sort: { '_id.year': 1, '_id.month': 1},
+            },
+        ])
+
+        const recentTrackers = await Tracker.find()
+            .sort({ createdAt: -1 })
+            .limit(5)
+
+        const trackers = await Tracker.find({
+            ...(req.query.userId && { userId: req.query.userId }),
+        })
 
         res.status(200).json({
             completedTrackersByCategory,
             popularGenresCompleted,
+            userActivity,
+            trackers,
+            recentTrackers,
         })
     } catch (error) {
         next(error)
