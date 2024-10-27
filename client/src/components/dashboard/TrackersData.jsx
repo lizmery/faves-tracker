@@ -82,7 +82,7 @@ export default function TrackersData({ trackerCategory }) {
             <div className='flex justify-between'>
                 <h1 className='text-3xl font-bold capitalize'>{trackerCategory}</h1>
                 <div className='flex gap-3 items-center'>
-                    <Button className='bg-black dark:bg-white dark:text-black capitalize' onClick={() => setShowForm(true) }>
+                    <Button className='bg-black dark:bg-white dark:text-black capitalize hover:bg-transparent hover:border-black hover:text-black dark:hover:bg-transparent dark:hover:border-white dark:hover:text-white' onClick={() => setShowForm(true) }>
                         Add {trackerCategory}
                     </Button>
                 </div>
@@ -93,6 +93,7 @@ export default function TrackersData({ trackerCategory }) {
                     cardTitle={`Total ${trackerCategory} Completed`}
                     trackerData={trackersCompleted}
                     cardColor='lightGreen'
+                    darkModeCardColor='accent'
                     cardHoverColor='lightestGreen'
                     onClick={() => setFilters({status: 'Completed'})}
                     icon={<RiProgress8Line />}
@@ -102,6 +103,7 @@ export default function TrackersData({ trackerCategory }) {
                     cardTitle={`Total ${trackerCategory} In Progress`}
                     trackerData={trackersInProgress}
                     cardColor='lightPurple'
+                    darkModeCardColor='primary'
                     cardHoverColor='lightestPurple'
                     onClick={() => setFilters({status: 'In Progress'})}
                     icon={<RiProgress5Line />}

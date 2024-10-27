@@ -17,7 +17,7 @@ import DashSidebar from './dashboard/DashSidebar'
 
 const customTheme = {
     toggle: {
-        base: 'inline-flex items-center rounded-lg p-2 text-sm text-gray-500 focus:outline-none dark:text-grayLine md:hidden dark:hover:text-lightGray hover:text-black'
+        base: 'inline-flex items-center rounded-lg p-2 text-sm text-black focus:outline-none dark:text-lightGray md:hidden dark:hover:text-grayLine hover:text-grayLine'
     },
     root: {
         base: 'py-2.5',
@@ -29,7 +29,7 @@ const customTheme = {
 
 const dashboardNavTheme = {
     toggle: {
-        base: 'lg:p-3 p-2 inline-flex items-center text-sm text-gray-500 focus:outline-none dark:text-grayLine dark:hover:text-lightGray hover:text-black'
+        base: 'lg:p-3 p-2 inline-flex items-center text-sm text-black focus:outline-none dark:text-lightGray dark:hover:text-grayLine hover:text-grayLine'
     },
     root: {
         base: 'py-2.5',

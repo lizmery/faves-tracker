@@ -175,7 +175,7 @@ export default function Search() {
             </div>
             <div className='w-full flex flex-col gap-8'>
                 <h1 className='text-3xl font-bold'>Results:</h1>
-                <div className='flex flex-col md:flex-row gap-4 lg:gap-5 w-full flex-wrap p-4 mb-4'>
+                <div className='flex flex-col md:flex-row gap-4 lg:gap-5 w-full flex-wrap p-4 pb-0'>
                     {!loading && trackers.length === 0 && (
                         <p>No results found.</p>
                     )}
@@ -185,7 +185,8 @@ export default function Search() {
                     {!loading && trackers && trackers.map((tracker) => (
                         <TrackerCard  tracker={tracker} key={tracker._id} />
                     ))}
-
+                </div>
+                <div className='pb-10 flex items-center justify-center w-full'>
                     {showMore && (
                         <Button
                             onClick={handleShowMore}

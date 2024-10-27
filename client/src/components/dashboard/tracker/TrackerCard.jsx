@@ -22,6 +22,7 @@ export default function TrackerCard({ tracker }) {
             </Link>
             <h5 className='text-lg font-semibold line-clamp-2'>{tracker.title}</h5>
             <div>
+                <p className='pb-4'>{tracker.rating}</p>
                 <span
                     className={`rounded-full px-2.5 py-1 text-xs font-semibold ${tracker.status  === 'Completed' ? 'bg-lightGreen dark:bg-accent text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple dark:bg-primary text-black' : 'bg-black text-white opacity-60 dark:bg-white dark:text-black'} `} 
                 >
