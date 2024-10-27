@@ -78,6 +78,8 @@ export const getTrackers = async (req, res, next) => {
         const startIndex = parseInt(req.query.startIndex) || 0
         const limit = parseInt(req.query.limit) || 10
         const sortDirection = req.query.order === 'asc' ? 1 : -1
+        const sortBy = req.query.sortBy || 'createdAt'
+        const sortOptions = { [sortBy]: sortDirection }
         const trackers = await Tracker.find({
             ...(req.query.userId && { userId: req.query.userId }),
             ...(req.query.category && { category: req.query.category }),
@@ -95,7 +97,7 @@ export const getTrackers = async (req, res, next) => {
                 ],
             }),
         })
-            .sort({ dateStarted: sortDirection })
+            .sort(sortOptions)
             .skip(startIndex)
             .limit(limit)
 
@@ -192,19 +194,19 @@ export const getTrackersOverview = async (req, res, next) => {
             },
         ])
 
+        const highestRatedTrackers = await Tracker.find()
+            .sort({ rating: -1 })
+            .limit(5)
+
         const recentTrackers = await Tracker.find()
             .sort({ createdAt: -1 })
             .limit(5)
-
-        const trackers = await Tracker.find({
-            ...(req.query.userId && { userId: req.query.userId }),
-        })
 
         res.status(200).json({
             completedTrackersByCategory,
             popularGenresCompleted,
             userActivity,
-            trackers,
+            highestRatedTrackers,
             recentTrackers,
         })
     } catch (error) {

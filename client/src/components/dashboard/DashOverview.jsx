@@ -28,6 +28,12 @@ const modalTheme = {
     }
 }
 
+const btnTheme = {
+    size: {
+        sm: 'px-2 py-1 text-xs md:px-3 md:py-1.5 md:text-sm'
+    }
+}
+
 const COLORS = ['#A1E091', '#5E48A3', '#826EBF', '#DAD4EC', '#D4D2D2'];
 
 export default function DashOverview() {
@@ -35,7 +41,7 @@ export default function DashOverview() {
     const [completedTrackers, setCompletedTrackers] = useState([])
     const [popularGenres, setPopularGenres] = useState([])
     const [userActivity, setUserActivity] = useState([])
-    const [trackers, setTrackers] = useState([])
+    const [highestRatedTrackers, setHighestRatedTrackers] = useState([])
     const [recentTrackers, setRecentTrackers] = useState([])
     const [showForm, setShowForm] = useState(false)
 
@@ -49,7 +55,7 @@ export default function DashOverview() {
 
                 if (res.ok) {
                     setCompletedTrackers(data.completedTrackersByCategory)
-                    setTrackers(data.trackers)
+                    setHighestRatedTrackers(data.highestRatedTrackers)
                     setRecentTrackers(data.recentTrackers)
 
                     const formattedPopularGenres = formatPieChartData(data.popularGenresCompleted)
@@ -184,14 +190,30 @@ export default function DashOverview() {
 
                 {/* trackers table */}
                 <div className='row-span-3 col-span-3 border dark:border-darkGray dark:bg-[#1f1f1f] p-4 rounded-md'>
-                    <h1 className='text-xl font-bold'>Trackers</h1>
-                    <p className='text-sm font-light opacity-60 mb-2'>{trackers.length} Total Trackers</p>
-                    <TrackerTable userTrackers={trackers} trackerCategory='media' />
+                    <div className='flex justify-between items-center'>
+                        <h1 className='text-xl font-bold'>Highest Rated</h1>
+                        <Link 
+                            className='text-black dark:text-white font-semibold text-sm underline-offset-4 hover:underline'
+                            to='/search?sortBy=rating'
+                        >
+                            View All
+                        </Link>
+                    </div>
+                    <p className='text-sm font-light opacity-60 mb-2'>Trackers with the highest ratings across all media</p>
+                    <TrackerTable userTrackers={highestRatedTrackers} trackerCategory='media' />
                 </div>
 
                 {/* recently added trackers list */}
                 <div className='row-span-3 p-4 border dark:border-darkGray dark:bg-[#1f1f1f] rounded-md flex flex-col w-full col-span-3 lg:col-span-1'>
-                    <h1 className='text-xl font-bold mb-4 w-full'>Recently Added</h1>
+                    <div className='flex justify-between items-center mb-4'> 
+                        <h1 className='text-xl font-bold'>Recently Added</h1>
+                        <Link 
+                            className='text-black dark:text-white font-semibold text-sm underline-offset-4 hover:underline'
+                            to='/search?'
+                        >
+                            View All
+                        </Link>
+                    </div>
                     <div className='flow-root w-full'>
                         <ul className='divide-y divide-lightGray dark:divide-grayLine'>
                             {recentTrackers.map((tracker) => (
