@@ -7,7 +7,7 @@ export const createTracker = async (req, res, next) => {
     }
 
     const genresArr = req.body.genres.split(',')
-    const tagsArr = req.body.tags.split(',')
+    const tagsArr = req.body.tags?.split(',') || null
 
     const newTracker = new Tracker({
         ...req.body,
@@ -29,8 +29,13 @@ export const updateTracker = async (req, res, next) => {
         return next(errorHandler(403, 'You are not allowed to edit this tracker'))
     }
 
-    const genresArr = req.body.genres.split(',')
-    const tagsArr = req.body.tags.split(',')
+    if (req.body.genres) {
+        req.body.genres = req.body.genres.split(',')
+    }
+
+    if (req.body.tags) {
+        req.body.tags = req.body.tags.split(',')
+    }
 
     try {
         const updatedTracker = await Tracker.findByIdAndUpdate(
@@ -38,13 +43,13 @@ export const updateTracker = async (req, res, next) => {
             {
                 $set: {
                     title: req.body.title,
-                    genres: genresArr,
+                    genres: req.body.genres,
                     status: req.body.status,
                     by: req.body.by,
                     rating: req.body.rating,
                     dateStarted: req.body.dateStarted,
                     dateCompleted: req.body.dateCompleted,
-                    tags: tagsArr,
+                    tags: req.body.tags,
                     notes: req.body.notes,
                     category: req.body.category,
                     type: req.body.type,

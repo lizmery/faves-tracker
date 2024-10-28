@@ -43,10 +43,11 @@ const overviewTableTheme = {
 
 const drawerTheme = {
     root: {
+        base: 'fixed z-[100] overflow-y-auto bg-white py-1 px-4 transition-transform',
         position: {
             right: {
-                'on': 'right-0 top-0 h-screen lg:w-[35rem] w-80 transform-none',
-                'off': 'right-0 top-0 h-screen lg:w-[35rem] w-80 translate-x-full',
+                'on': 'right-0 top-0 h-screen lg:w-[35rem] w-full transform-none',
+                'off': 'right-0 top-0 h-screen lg:w-[35rem] w-full translate-x-full',
             },
         },
     },
@@ -115,7 +116,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         {tracker.by}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        {tracker.genres.join(', ')}
+                                        {tracker.genres?.join(', ')}
                                     </Table.Cell>
                                     <Table.Cell className='whitespace-nowrap font-medium'>
                                       <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>{tracker.status}</p>
@@ -133,7 +134,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                     </Table.Cell>
                                     {trackerCategory !== 'media' && (
                                         <Table.Cell>
-                                            {tracker.tags.join(', ')}
+                                            {tracker.tags?.join(', ')}
                                         </Table.Cell>
                                     )}
                                     {/* <Table.Cell>
@@ -166,6 +167,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                 onClose={() => setShowModal(false)}
                 popup
                 size='md'
+                className='z-[100]'
             >
                 <Modal.Header />
                 <Modal.Body>
