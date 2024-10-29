@@ -40,7 +40,7 @@ const fileInputTheme = {
     }
 }
 
-export default function TrackerDetails({ tracker }) {
+export default function TrackerDetails({ tracker, onClose }) {
     const { currentUser } = useSelector((state) => state.user)
     const [formData, setFormData] = useState({})
     const [publishError, setPublishError] = useState(null)
@@ -48,6 +48,9 @@ export default function TrackerDetails({ tracker }) {
     const [file, setFile] = useState(null)
     const [imageUploadProgress, setImageUploadProgress] = useState(null)
     const [imageUploadError, setImageUploadError] = useState(null)
+
+    console.log('title: ' + tracker.title)
+    console.log('tags ' + tracker.tags)
 
     const handleUploadImage = async () => {
         try {
@@ -106,6 +109,10 @@ export default function TrackerDetails({ tracker }) {
             } else {
                 setPublishError(null)
                 setSuccess(true)
+                onClose()
+                setSuccess(null)
+
+                window.location.reload()
                 // navigate(`/`)
             }
         } catch (error) {
@@ -239,7 +246,7 @@ export default function TrackerDetails({ tracker }) {
                         type='date'
                         id='dateStarted'
                         className='flex-1'
-                        defaultValue={tracker?.dateStarted || ''}
+                        defaultValue={tracker.dateStarted ? new Date(tracker.dateStarted).toISOString().split('T')[0] : ''}
                         onChange={(e) => setFormData({ ...formData, dateStarted: e.target.value })}
                         theme={customTheme}
                         color='info'
@@ -254,7 +261,7 @@ export default function TrackerDetails({ tracker }) {
                         type='date'
                         id='dateCompleted'
                         className='flex-1'
-                        defaultValue={tracker?.dateCompleted || ''}
+                        defaultValue={tracker.dateCompleted ? new Date(tracker.dateCompleted).toISOString().split('T')[0] : ''}
                         onChange={(e) => setFormData({ ...formData, dateCompleted: e.target.value })}
                         theme={customTheme}
                         color='info'
@@ -269,7 +276,7 @@ export default function TrackerDetails({ tracker }) {
                         placeholder='tag1, tag2, ...'
                         id='tags'
                         className='flex-1'
-                        defaultValue={tracker?.tags || ''}
+                        defaultValue={tracker.tags ? tracker.tags : ''}
                         onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
                         theme={customTheme}
                         color='info'

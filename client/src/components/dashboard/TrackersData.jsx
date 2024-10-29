@@ -130,7 +130,10 @@ export default function TrackersData({ trackerCategory }) {
                     </div>
                 </div>
                 <p className='opacity-50 font-light text-sm mb-8'>Trackers with the <span className='italic'>{trackerCategory}</span> category.</p>
-                <TrackerTable userTrackers={filteredTrackers.length > 0 ? filteredTrackers : userTrackers} trackerCategory={trackerCategory} />              
+                <TrackerTable 
+                    userTrackers={filteredTrackers.length > 0 ? filteredTrackers : userTrackers} 
+                    trackerCategory={trackerCategory} 
+                />              
             </div>
 
             {/* tracker form modal */}

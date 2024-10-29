@@ -11,16 +11,16 @@ const tableTheme = {
     head: {
         base: 'font-normal',
         cell: {
-            base: 'lg:px-10 lg:py-4 p-4 2xl:px-[4.5rem] text-grayLine'
+            base: 'lg:px-5 lg:py-4 p-4 2xl:px-[2rem] text-grayLine text-left'
         }
     },
     body: {
         cell: {
-            base: 'lg:px-10 lg:py-6 p-4 2xl:px-[4.5rem]'
+            base: 'lg:px-5 lg:py-6 p-4 2xl:px-[2rem]'
         }
     },
     root: {
-        base: 'text-center lg:text-sm text-xs'
+        base: 'lg:text-sm text-xs'
     }
 }
 
@@ -28,12 +28,12 @@ const overviewTableTheme = {
     head: {
         base: 'font-normal',
         cell: {
-            base: 'p-4 text-grayLine'
+            base: 'p-4 text-grayLine 2xl:px-[1.5rem]'
         }
     },
     body: {
         cell: {
-            base: 'p-4'
+            base: 'p-4 2xl:px-[1.5rem]'
         }
     },
     root: {
@@ -76,7 +76,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
             if (res.ok) {
                 setShowModal(false)
                 setTracker({})
-
+                window.location.reload()
             }
         } catch (error) {
 
@@ -84,23 +84,33 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
     }
 
     return (
-        <div className={`overflow-x-scroll ${trackerCategory === 'media' ? '' : 'border'} dark:border-grayLine  rounded-lg table-auto md:mx-auto scrollbar scrollbar-track-transparent scrollbar-thumb-[#F5F5F5] dark:scrollbar-thumb-darkGray`}>
+        <div className={`overflow-x-scroll ${trackerCategory === 'media' ? '' : 'border'} dark:border-grayLine table-auto rounded-lg  md:mx-auto scrollbar scrollbar-track-transparent scrollbar-thumb-[#eee] dark:scrollbar-thumb-darkGray`}>
             {userTrackers.length > 0 ? (
                 <>
                     <Table className='rounded-lg' theme={trackerCategory === 'media' ? overviewTableTheme : tableTheme}>
                         <Table.Head className={`border-b ${trackerCategory === 'media' ? 'dark:border-b-grayLine' : 'dark:border-b-darkGray'} font-normal opacity-60`}>
+                            <Table.HeadCell>
+                                <span className="sr-only">Tracker Image</span>
+                            </Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray text-left'>Title</Table.HeadCell>
-                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>By</Table.HeadCell>
-                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
+                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>By</Table.HeadCell>
+                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Status</Table.HeadCell>
-                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Rating</Table.HeadCell>
-                            {trackerCategory === 'media' ? (
+                            <Table.HeadCell className={`${trackerCategory === 'media' ? 'hidden lg:table-cell' : ''} bg-transparent dark:bg-transparent dark:text-lightGray`}>Rating</Table.HeadCell>
+                            {trackerCategory === 'media' && (
                                 <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Category</Table.HeadCell>
-                            ) : ''}
-                            <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Type</Table.HeadCell>
-                            {trackerCategory === 'media' ? '' : (
-                                <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Tags</Table.HeadCell>
                             )}
+                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>Type</Table.HeadCell>
+                            {trackerCategory !== 'media' && (
+                                <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>Tags</Table.HeadCell>
+                            )}
+                            {trackerCategory !== 'media' && (
+                                <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Started</Table.HeadCell>
+                            )}
+                            {trackerCategory !== 'media' && (
+                                <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Completed</Table.HeadCell>
+                            )}
+                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Created</Table.HeadCell>
                             {/* <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Notes</Table.HeadCell> */}
                             <Table.HeadCell>
                                 <span className="sr-only">Actions</span>
@@ -109,41 +119,59 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                         {userTrackers.map((tracker) => (
                             <Table.Body className='divide-y' key={tracker._id}>
                                 <Table.Row className='bg-transparent'>
+                                    <Table.Cell className='' onClick={() => {setOpenDrawer(true); setTracker(tracker)}}>
+                                        <img src={tracker.image} className='w-10 h-10 object-cover rounded-full' alt={`${tracker.title} image`} />
+                                    </Table.Cell>
                                     <Table.Cell className='lg:whitespace-nowrap lg:font-medium cursor-pointer text-left' onClick={() => {setOpenDrawer(true); setTracker(tracker)}}>
                                         {tracker.title}
                                     </Table.Cell>
-                                    <Table.Cell className='lg:whitespace-nowrap lg:font-medium'>
+                                    <Table.Cell className='2xl:whitespace-nowrap lg:font-medium hidden lg:table-cell'>
                                         {tracker.by}
                                     </Table.Cell>
-                                    <Table.Cell>
+                                    <Table.Cell className='hidden lg:table-cell'>
                                         {tracker.genres?.join(', ')}
                                     </Table.Cell>
                                     <Table.Cell className='whitespace-nowrap font-medium'>
                                       <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>{tracker.status}</p>
                                     </Table.Cell>
-                                    <Table.Cell>
+                                    <Table.Cell className={`${trackerCategory === 'media' ? 'hidden lg:table-cell' : ''}`}>
                                         {tracker.rating}
                                     </Table.Cell>
-                                    {trackerCategory === 'media' ? (
+                                    {trackerCategory === 'media' && (
                                         <Table.Cell>
                                             {tracker.category}
                                         </Table.Cell>
-                                    ) : ''}
-                                    <Table.Cell>
+                                    )}
+                                    <Table.Cell className='hidden lg:table-cell'>
                                         {tracker.type}
                                     </Table.Cell>
                                     {trackerCategory !== 'media' && (
-                                        <Table.Cell>
+                                        <Table.Cell className='hidden lg:table-cell'>
                                             {tracker.tags?.join(', ')}
                                         </Table.Cell>
                                     )}
+                                    {trackerCategory !== 'media' && (
+                                        <Table.Cell className='hidden lg:table-cell'>
+                                            {tracker.dateStarted ? 
+                                                new Date(tracker.dateStarted).toLocaleDateString('en-US', { timeZone: 'UTC' }) : '-'}
+                                        </Table.Cell>
+                                    )}
+                                    {trackerCategory !== 'media' && (
+                                        <Table.Cell className='hidden lg:table-cell'>
+                                            {tracker.dateCompleted ? 
+                                                new Date(tracker.dateCompleted).toLocaleDateString('en-US', { timeZone: 'UTC' }) : '-'}
+                                        </Table.Cell>
+                                    )}
+                                    <Table.Cell className='hidden lg:table-cell'>
+                                        {tracker.createdAt ? 
+                                            new Date(tracker.createdAt).toLocaleDateString('en-US', { timeZone: 'UTC' }) : '-'}
+                                    </Table.Cell>
                                     {/* <Table.Cell>
                                         <span className='truncate'>{tracker.notes}</span>
                                     </Table.Cell> */}
                                     <Table.Cell className='flex flex-row gap-1 justify-center items-center'>
                                         <MdEdit className='text-black text-md lg:text-xl dark:text-white cursor-pointer' onClick={() => {setOpenDrawer(true); setTracker(tracker)}} />
-                                        <MdDelete className='text-black lg:text-xl dark:text-white cursor-pointer' onClick={() => {setShowModal(true); setTracker(tracker)}} />
-                                        
+                                        <MdDelete className='text-black lg:text-xl dark:text-white cursor-pointer' onClick={() => {setShowModal(true); setTracker(tracker)}} /> 
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body>
@@ -156,7 +184,10 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                         className='z-[100] dark:bg-bgDark' 
                         theme={drawerTheme}
                     >
-                        <TrackerDetails tracker={tracker} />
+                        <TrackerDetails 
+                            tracker={tracker} 
+                            onClose={handleClose}
+                        />
                     </Drawer>
                 </>
             ) : (
