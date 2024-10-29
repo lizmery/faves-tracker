@@ -1,4 +1,4 @@
-import { Button, Select, TextInput } from 'flowbite-react'
+import { Button, Select, TextInput, Spinner } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TrackerCard from '../components/dashboard/tracker/TrackerCard'
@@ -180,7 +180,7 @@ export default function Search() {
                         <p>No results found.</p>
                     )}
 
-                    {loading && <p>Loading...</p>}
+                    {loading && <Spinner size='xl' color='gray' />}
 
                     {!loading && trackers && trackers.map((tracker) => (
                         <TrackerCard  tracker={tracker} key={tracker._id} />

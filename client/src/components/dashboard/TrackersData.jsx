@@ -1,4 +1,4 @@
-import { Modal, Button, Dropdown } from 'flowbite-react'
+import { Modal, Button, Dropdown, Spinner } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -24,12 +24,14 @@ export default function TrackersData({ trackerCategory }) {
     const [filters, setFilters] = useState({ genre: '', status: '', type: '', tags: '', by: '' })
     const [filteredTrackers, setFilteredTrackers] = useState([])
     const [showFilterModal, setShowFilterModal] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleClose = () => setShowForm(false)
 
     useEffect(() => {
         const fetchTrackers = async () => {
             try {
+                setLoading(true)
                 const res = await fetch(`/api/tracker/get-trackers?userId=${currentUser._id}&category=${trackerCategory}`)
                 const data = await res.json()
 
@@ -38,6 +40,7 @@ export default function TrackersData({ trackerCategory }) {
                     setTrackersCompleted(data.totalCompleted)
                     setTrackersInProgress(data.totalInProgress)
                     setTrackersNotStarted(data.totalNotStarted)
+                    setLoading(false)
                     // if (data.trackers.length < 10) {
 
                     // }
@@ -129,11 +132,23 @@ export default function TrackersData({ trackerCategory }) {
                         />
                     </div>
                 </div>
-                <p className='opacity-50 font-light text-sm mb-8'>Trackers with the <span className='italic'>{trackerCategory}</span> category.</p>
-                <TrackerTable 
-                    userTrackers={filteredTrackers.length > 0 ? filteredTrackers : userTrackers} 
-                    trackerCategory={trackerCategory} 
-                />              
+                {!loading && userTrackers.length === 0 && (
+                    <p>No results found.</p>
+                )}
+
+                {loading && (
+                    <Spinner size='xl' color='gray' />
+                )}
+
+                {!loading && userTrackers && (
+                    <>
+                        <p className='opacity-50 font-light text-sm mb-8'>Trackers with the <span className='italic'>{trackerCategory}</span> category.</p>
+                        <TrackerTable 
+                            userTrackers={filteredTrackers.length > 0 ? filteredTrackers : userTrackers} 
+                            trackerCategory={trackerCategory} 
+                        /> 
+                    </>
+                )}             
             </div>
 
             {/* tracker form modal */}
