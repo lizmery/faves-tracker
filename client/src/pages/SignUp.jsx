@@ -88,25 +88,6 @@ export default function SignUp() {
                                 />
                             </div>
                         </div>
-                        {/* <div>
-                            <Label value='Email' />
-                            <TextInput 
-                                type='email'
-                                placeholder='name@email.com'
-                                id='email'
-                                className='bg-bgDarkSecondary text-accent rounded-md'
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <Label value='Password' />
-                            <TextInput 
-                                type='password'
-                                placeholder='******'
-                                id='password'
-                                onChange={handleChange}
-                            />
-                        </div> */}
                         <Button type='submit' disabled={loading} className='dark:bg-white dark:text-black bg-black text-white mt-5'>
                             {loading ? (
                                 <>

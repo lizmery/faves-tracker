@@ -14,8 +14,6 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import { inputTheme, fileInputTheme } from '../../../flowbiteThemes/customThemes'
 
-// TODO: if category = 'other' --> add text input for user to add a new category
-
 export default function CreateTrackerForm({ trackerCategory }) {
     const [formData, setFormData] = useState({})
     const [file, setFile] = useState(null)
