@@ -57,7 +57,9 @@ export default function Header() {
 
         const urlParams = new URLSearchParams(location.search)
         urlParams.set('searchTerm', searchTerm)
+        urlParams.delete('tab')
         const searchQuery = urlParams.toString()
+
         navigate(`/search?${searchQuery}`)
     }
 

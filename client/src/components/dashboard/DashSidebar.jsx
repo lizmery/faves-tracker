@@ -5,7 +5,8 @@ import {
   HiLogout,
   HiOutlineBookOpen,
   HiOutlineFilm,
-  HiOutlineDesktopComputer
+  HiOutlineDesktopComputer,
+  HiTable,
 } from 'react-icons/hi'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -23,8 +24,12 @@ export default function DashSidebar() {
         const urlParams = new URLSearchParams(location.search)
         const tabFromUrl = urlParams.get('tab')
 
+        console.log('tabFROMurl: ' + tabFromUrl)
+
         if (tabFromUrl) {
             setTab(tabFromUrl)
+        } else {
+            setTab('')
         }
     }, [location.search])
 
