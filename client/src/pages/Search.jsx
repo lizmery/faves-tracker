@@ -2,21 +2,7 @@ import { Button, Select, TextInput, Spinner } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TrackerCard from '../components/dashboard/tracker/TrackerCard'
-
-const customTheme = {
-    field: {
-        input: {
-            colors: {
-                gray: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-primary dark:focus:ring-primary'
-            },
-        },
-        select: {
-            colors: {
-                gray: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-primary dark:focus:ring-primary',
-            },
-        },
-    },
-}
+import { inputTheme } from '../flowbiteThemes/customThemes'
 
 export default function Search() {
     const [sidebarData, setSidebarData] = useState({
@@ -133,7 +119,7 @@ export default function Search() {
                             value={sidebarData.searchTerm}
                             onChange={handleChange}
                             color='gray'
-                            theme={customTheme}
+                            theme={inputTheme}
                         />
                     </div>
                     <div className='flex flex-col gap-2'>
@@ -143,7 +129,7 @@ export default function Search() {
                             value={sidebarData.sort}
                             id='sort'
                             color='gray'
-                            theme={customTheme}
+                            theme={inputTheme}
                         >
                             <option></option>
                             <option value='desc'>Latest</option>
@@ -157,7 +143,7 @@ export default function Search() {
                             value={sidebarData.category}
                             id='category'
                             color='gray'
-                            theme={customTheme}
+                            theme={inputTheme}
                         >
                             <option></option>
                             <option value='Series'>Series</option>

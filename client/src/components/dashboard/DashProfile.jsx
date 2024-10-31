@@ -21,16 +21,7 @@ import {
     deleteUserSuccess,
 } from '../../redux/user/userSlice'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
-
-const customTheme = {
-    field: {
-        input: {
-            colors: {
-                info: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-primary dark:focus:ring-primary'
-            },
-        },
-    },
-}
+import { inputTheme } from '../../flowbiteThemes/customThemes'
 
 export default function DashProfile() {
     const { currentUser, error, loading } = useSelector((state) => state.user)
@@ -237,20 +228,20 @@ export default function DashProfile() {
                     defaultValue={currentUser.email}
                     onChange={handleChange}
                     className='pt-4'
-                    theme={customTheme}
-                    color='info'
+                    theme={inputTheme}
+                    color='gray'
                 />
                 <TextInput 
                     type='password'
                     id='password'
                     placeholder='password'
                     onChange={handleChange}
-                    theme={customTheme}
-                    color='info'
+                    theme={inputTheme}
+                    color='gray'
                 />
                 <Button
                     type='submit'
-                    className='bg-black dark:bg-white text-white dark:text-black mt-4'
+                    className='bg-black dark:bg-white text-white dark:text-black mt-4 hover:border-black hover:bg-transparent hover:text-black hover:dark:border-white hover:dark:bg-transparent hover:dark:text-lightGray'
                     disabled={loading || imageFileUploading}
                 >
                     {loading ? 'Loading...' : 'Save Changes'}

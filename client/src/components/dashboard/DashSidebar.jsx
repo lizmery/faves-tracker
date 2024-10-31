@@ -11,23 +11,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { signOutSuccess } from '../../redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
-
-const customTheme = {
-    root: {
-        inner: 'bg-transparent p-2 overflow-y-auto overflow-x-hidden',
-    },
-    item: {
-        base: 'flex items-center justify-center rounded-lg p-2 text-base font-normal  dark:hover:text-white opacity-60 hover:opacity-100 py-3 px-5',
-        active: 'dark:bg-white bg-black text-white rounded-2xl dark:text-black opacity-100 rounded-full',
-        icon: {
-          base: 'h-6 w-6 flex-shrink-0 text-bgDark transition duration-75 group-hover:text-gray-900 text-primary dark:group-hover:text-white',
-          active: ''
-        },
-    },
-    logo: {
-        base: 'mb-24 lg:mb-16 flex items-center'
-    }
-}
+import { dashSidebarTheme } from '../../flowbiteThemes/customThemes'
 
 export default function DashSidebar() {
     const location = useLocation()
@@ -62,7 +46,7 @@ export default function DashSidebar() {
     }
 
     return (
-        <Sidebar className='w-full lg:w-50' theme={customTheme}>
+        <Sidebar className='w-full lg:w-50' theme={dashSidebarTheme}>
             <Sidebar.Logo href='#' className='items-center flex justify-center lg:justify-start'>
                 <span className='text-2xl'>Media Tracker</span>
             </Sidebar.Logo>

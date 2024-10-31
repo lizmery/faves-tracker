@@ -7,12 +7,7 @@ import SummaryCard from './tracker/SummaryCard'
 import CreateTrackerForm from './tracker/CreateTrackerForm'
 import { RiProgress1Line, RiProgress5Line, RiProgress8Line } from 'react-icons/ri'
 import { FaSlidersH, FaUndoAlt } from 'react-icons/fa'
-
-const modalTheme = {
-    root: {
-        base: 'fixed inset-x-0 top-0 z-[100] h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full'
-    }
-}
+import { modalTheme } from '../../flowbiteThemes/customThemes'
 
 export default function TrackersData({ trackerCategory }) {
     const { currentUser } = useSelector((state) => state.user)

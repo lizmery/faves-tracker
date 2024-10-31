@@ -1,11 +1,6 @@
 import { Card } from 'flowbite-react'
 import { Link } from 'react-router-dom'
-
-const cardTheme = {
-    root: {
-        children: 'flex h-full flex-col justify-center gap-4 py-6 px-4'
-    }
-}
+import { cardTheme } from '../../../flowbiteThemes/customThemes'
 
 export default function TrackerCard({ tracker }) {
     return (

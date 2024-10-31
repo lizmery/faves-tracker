@@ -1,62 +1,11 @@
 import { Table, Drawer, Modal, Button } from 'flowbite-react'
 import { useSelector } from 'react-redux'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import TrackerDetails from './TrackerDetails'
-
-const tableTheme = {
-    head: {
-        base: 'font-normal',
-        cell: {
-            base: 'lg:px-5 lg:py-4 p-4 2xl:px-[2rem] text-grayLine text-left'
-        }
-    },
-    body: {
-        cell: {
-            base: 'lg:px-5 lg:py-6 p-4 2xl:px-[2rem]'
-        }
-    },
-    root: {
-        base: 'lg:text-sm text-xs'
-    }
-}
-
-const overviewTableTheme = {
-    head: {
-        base: 'font-normal',
-        cell: {
-            base: 'p-4 text-grayLine 2xl:px-[1.5rem]'
-        }
-    },
-    body: {
-        cell: {
-            base: 'p-4 2xl:px-[1.5rem]'
-        }
-    },
-    root: {
-        base: 'text-left lg:text-sm text-xs'
-    }
-}
-
-const drawerTheme = {
-    root: {
-        base: 'fixed z-[100] overflow-y-auto bg-white py-1 px-4 transition-transform',
-        position: {
-            right: {
-                'on': 'right-0 top-0 h-screen lg:w-[35rem] w-full transform-none',
-                'off': 'right-0 top-0 h-screen lg:w-[35rem] w-full translate-x-full',
-            },
-        },
-    },
-    header: {
-        inner: {
-            titleText: 'mb-4 inline-flex items-center text-base font-semibold text-lg'
-        }
-    }
-}
+import { tableTheme, overviewTableTheme, drawerTheme } from '../../../flowbiteThemes/customThemes'
 
 export default function TrackerTable({ userTrackers, trackerCategory }) {
     const { currentUser } = useSelector((state) => state.user)

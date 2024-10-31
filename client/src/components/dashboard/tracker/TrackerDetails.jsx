@@ -13,32 +13,7 @@ import {
 import { app } from '../../../firebase'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-
-const customTheme = {
-    field: {
-        input: {
-            colors: {
-                info: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-1 ring-inset ring-lightGray dark:ring-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-inset focus:ring-primary dark:focus:ring-primary',
-            },
-        },
-        select: {
-            colors: {
-                info: 'dark:bg-transparent border-0 text-darkGray dark:text-lightGray ring-1 ring-inset ring-lightGray dark:ring-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-inset focus:ring-primary dark:focus:ring-primary',
-            },
-        }
-    },
-}
-
-const fileInputTheme = {
-    field: {
-        base: 'relative w-full',
-        input: {
-            colors: {
-                gray: 'border-lightGray border bg-transparent text-darkGray focus:border-primary focus:ring-primary dark:border-grayLine dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500'
-            }
-        }
-    }
-}
+import { inputTheme, fileInputTheme } from '../../../flowbiteThemes/customThemes'
 
 export default function TrackerDetails({ tracker, onClose }) {
     const { currentUser } = useSelector((state) => state.user)
@@ -137,8 +112,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker?.title || ''}
                         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     />
                 </div>
                 <div className="mb-6">
@@ -149,8 +124,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         id='category'
                         value={tracker?.category || ''}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     >
                         <option></option>
                         <option value='Series'>Series</option>
@@ -170,8 +145,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker?.type || ''}
                         onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     />
                 </div>
                 <div className="mb-6">
@@ -186,8 +161,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker?.genres || ''}
                         onChange={(e) => setFormData({ ...formData, genres: e.target.value })}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     />
                 </div>
                 <div className="mb-6">
@@ -198,8 +173,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                         id='status'
                         value={tracker?.status || ''}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     >
                         <option></option>
                         <option value='Not Started'>Have Not Started</option>
@@ -218,8 +193,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker?.by || ''}
                         onChange={(e) => setFormData({ ...formData, by: e.target.value })}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     />
                 </div>
                 <div className="mb-6">
@@ -233,8 +208,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker?.rating || ''}
                         onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     />
                 </div>
                 <div className="mb-6">
@@ -248,8 +223,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker.dateStarted ? new Date(tracker.dateStarted).toISOString().split('T')[0] : ''}
                         onChange={(e) => setFormData({ ...formData, dateStarted: e.target.value })}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     />
                 </div>
                 <div className="mb-6">
@@ -263,8 +238,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker.dateCompleted ? new Date(tracker.dateCompleted).toISOString().split('T')[0] : ''}
                         onChange={(e) => setFormData({ ...formData, dateCompleted: e.target.value })}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     />
                 </div>
                 <div className="mb-6">
@@ -278,8 +253,8 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker.tags ? tracker.tags : ''}
                         onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                        theme={customTheme}
-                        color='info'
+                        theme={inputTheme}
+                        color='gray'
                     />
                 </div>
                 <div className="mb-8 flex flex-col">
