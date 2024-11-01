@@ -7,6 +7,7 @@ import Header from "./components/Header"
 import FooterComponent from "./components/Footer"
 import PrivateRoute from "./components/PrivateRoute"
 import Search from "./pages/Search"
+import TrackerPage from "./pages/TrackerPage"
 
 //TODO: create ABOUT, and CONTACT pages
 
@@ -21,6 +22,7 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path="/search" element={<Search />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/tracker/:trackerId" element={<TrackerPage />} />
             </Route>
         </Routes>
         <FooterComponent />

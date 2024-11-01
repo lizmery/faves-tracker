@@ -68,11 +68,15 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                         {userTrackers.map((tracker) => (
                             <Table.Body className='divide-y' key={tracker._id}>
                                 <Table.Row className='bg-transparent'>
-                                    <Table.Cell className='' onClick={() => {setOpenDrawer(true); setTracker(tracker)}}>
-                                        <img src={tracker.image} className='w-10 h-10 object-cover rounded-full' alt={`${tracker.title} image`} />
+                                    <Table.Cell className='' onClick={() => {setTracker(tracker)}}>
+                                        <Link to={`/tracker/${tracker._id}`}>
+                                            <img src={tracker.image} className='w-10 h-10 object-cover rounded-full' alt={`${tracker.title} image`} />
+                                        </Link>
                                     </Table.Cell>
-                                    <Table.Cell className='lg:whitespace-nowrap lg:font-medium cursor-pointer text-left' onClick={() => {setOpenDrawer(true); setTracker(tracker)}}>
-                                        {tracker.title}
+                                    <Table.Cell className='lg:whitespace-nowrap lg:font-medium cursor-pointer text-left' onClick={() => {setTracker(tracker)}}>
+                                        <Link to={`/tracker/${tracker._id}`}>
+                                            {tracker.title}
+                                        </Link>
                                     </Table.Cell>
                                     <Table.Cell className='2xl:whitespace-nowrap lg:font-medium hidden lg:table-cell'>
                                         {tracker.by}

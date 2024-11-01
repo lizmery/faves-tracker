@@ -8,7 +8,7 @@ export default function TrackerCard({ tracker }) {
             className='w-full 2xl:max-w-sm lg:max-w-xs shadow-none dark:bg-[#1f1f1f] dark:border-darkGray'
             theme={cardTheme}
         >
-            <Link to='/'>
+            <Link to={`/tracker/${tracker._id}`}>
                 <img 
                     src={tracker.image}
                     alt={`${tracker.title} cover`}
@@ -17,7 +17,6 @@ export default function TrackerCard({ tracker }) {
             </Link>
             <h5 className='text-lg font-semibold line-clamp-2'>{tracker.title}</h5>
             <div>
-                
                 <span
                     className={`rounded-full px-2.5 py-1 text-xs font-semibold ${tracker.status  === 'Completed' ? 'bg-lightGreen dark:bg-accent text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple dark:bg-primary text-black' : 'bg-black text-white opacity-60 dark:bg-white dark:text-black'} `} 
                 >
@@ -25,7 +24,6 @@ export default function TrackerCard({ tracker }) {
                 </span>
                 <p className='pt-5 text-3xl'>{tracker.rating}</p>
             </div>
-            
         </Card>
     )
 }
