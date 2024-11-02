@@ -89,7 +89,7 @@ export default function CreateTrackerForm({ trackerCategory }) {
 
     return (
         <div className='dark:bg-bgDark'>
-            <h1 className='text-center text-3xl mb-6 font-semibold'>Add {trackerCategory}</h1>
+            <h1 className='text-center text-3xl mb-6 font-semibold'>Add {trackerCategory ? trackerCategory : 'Tracker'}</h1>
             <form className='' onSubmit={handleSubmit}>
                 <div className="mb-6 mt-3">
                     <Label htmlFor="title" className="mb-2 block">

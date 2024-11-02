@@ -21,18 +21,7 @@ import {
     Legend, 
     ResponsiveContainer 
 } from 'recharts'
-
-const modalTheme = {
-    root: {
-        base: 'fixed inset-x-0 top-0 z-[100] h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full'
-    }
-}
-
-const btnTheme = {
-    size: {
-        sm: 'px-2 py-1 text-xs md:px-3 md:py-1.5 md:text-sm'
-    }
-}
+import { modalTheme } from '../../flowbiteThemes/customThemes'
 
 const COLORS = ['#A1E091', '#5E48A3', '#826EBF', '#DAD4EC', '#D4D2D2'];
 
@@ -118,6 +107,9 @@ export default function DashOverview() {
         <div className='bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden h-full'>
             <div className='flex justify-between'>
                 <h1 className='text-3xl font-bold'>Overview</h1>
+                <Button className='bg-black dark:bg-white dark:text-black capitalize hover:bg-transparent hover:border-black hover:text-black dark:hover:bg-transparent dark:hover:border-white dark:hover:text-white' onClick={() => setShowForm(true) }>
+                    Add Tracker
+                </Button>
             </div>
 
             {loading ? 
@@ -245,7 +237,6 @@ export default function DashOverview() {
                 </div>
             )}
 
-            {/* 
             <Modal 
                 show={showForm} 
                 onClose={handleClose} 
@@ -257,7 +248,7 @@ export default function DashOverview() {
                 <Modal.Body>
                     <CreateTrackerForm />
                 </Modal.Body>
-            </Modal> */}
+            </Modal>
         </div>
     )
 }
