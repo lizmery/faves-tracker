@@ -122,7 +122,7 @@ export default function DashOverview() {
                     <div className='col-span-3 flex flex-col lg:flex-row gap-4 lg:max-h-[100px]'>
                         {completedTrackers.map((trackerCategory) => (
                             <div className='border dark:bg-[#1f1f1f] p-4 lg:p-5 flex gap-6 items-center w-full rounded-md text-left dark:border-darkGray'>
-                                <div className='bg-[#eee] dark:bg-bgDark h-full lg:h-auto p-4 lg:p-6 rounded-md flex items-center'>
+                                <div className='bg-[#f0f0eb] dark:bg-bgDark h-full lg:h-auto p-4 lg:p-6 rounded-md flex items-center'>
                                     {trackerCategory._id === 'Series' ? <HiOutlineDesktopComputer className='text-2xl' /> : trackerCategory._id === 'Books' ? <HiOutlineBookOpen className='text-2xl' /> : <HiOutlineFilm className='text-2xl' /> }
                                 </div>
                                 <div className='flex lg:flex-col lg:gap-2 gap-3 items-center lg:items-start'>

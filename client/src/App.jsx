@@ -9,8 +9,6 @@ import PrivateRoute from "./components/PrivateRoute"
 import Search from "./pages/Search"
 import TrackerPage from "./pages/TrackerPage"
 
-//TODO: create ABOUT, and CONTACT pages
-
 function App() {
   return (
     <BrowserRouter>

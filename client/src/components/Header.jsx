@@ -145,34 +145,28 @@ export default function Header() {
                 </>
             ) : (
                 <>
-                    <Navbar fluid className='dark:bg-transparent bg-transparent border-b dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={navTheme}>
+                    <Navbar fluid className='bg-white border-b dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={navTheme}>
                         <Navbar.Brand href='/' className=' text-2xl  font-semibold'>
                             Media Tracker
                         </Navbar.Brand>
                         <div className='flex md:order-2 lg:gap-3 gap-2'>
-                            <Button
-                                className='w-14 h-14 inline text-bgDark dark:text-white focus:ring-transparent hover:opacity-80 text-xl'
-                                onClick={() => dispatch(toggleTheme())}
-                            >
-                                {theme === 'dark' ? <FaSun /> : <FaMoon />}
-                            </Button>
-                            <Link to='/sign-in' className='items-center flex'>
-                                <Button className='bg-transparent dark:text-white text-black border dark:border-grayLine border-black rounded-md'>Sign In</Button>
-                            </Link>
                             <Link to='/sign-up' className='items-center flex'>
                                 <Button className='dark:bg-white bg-black dark:text-black text-white rounded-md'>Sign Up</Button>
+                            </Link>
+                            <Link to='/sign-in' className='items-center flex'>
+                                <Button className='bg-transparent dark:text-white text-black border dark:border-grayLine border-black rounded-md'>Sign In</Button>
                             </Link>
                             <Navbar.Toggle />
                         </div>
                         <Navbar.Collapse className='dark:text-[#B8B8B8]'>
                             <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray dark:hover:bg-darkGray hover:opacity-100'>
-                                <Link to='/'>Home</Link>
+                                <a href='#hero'>Home</a>
                             </Navbar.Link>
-                            <Navbar.Link active={path === '/about'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
-                                <Link to='/about'>About</Link>
+                            <Navbar.Link active={path === '/#features'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
+                                <a href='#features'>Features</a>
                             </Navbar.Link>
-                            <Navbar.Link active={path === '/contact'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
-                                <Link to='/contact'>Contact</Link>
+                            <Navbar.Link active={path === '/#about'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
+                                <a href='#about'>About</a>
                             </Navbar.Link>
                         </Navbar.Collapse>
                     </Navbar>
