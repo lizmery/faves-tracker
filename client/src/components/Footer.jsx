@@ -15,9 +15,9 @@ export default function FooterComponent() {
                             <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
                                 <Link to='/' className='text-2xl font-bold'>Media Tracker</Link>
                                 <Footer.LinkGroup className='dark:text-grayLine mt-4 lg:mt-auto text-darkGray'>
-                                    <Footer.Link href='#hero'>Home</Footer.Link>
-                                    <Footer.Link href='#features'>Features</Footer.Link>
-                                    <Footer.Link href='#about'>About</Footer.Link>
+                                    <Footer.Link href='/#hero'>Home</Footer.Link>
+                                    <Footer.Link href='/#features'>Features</Footer.Link>
+                                    <Footer.Link href='/#about'>About</Footer.Link>
                                 </Footer.LinkGroup>
                             </div>
                             <div className="w-full sm:flex sm:items-center sm:justify-between mt-8 border-t dark:border-darkGray pt-8">

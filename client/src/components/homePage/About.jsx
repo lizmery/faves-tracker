@@ -14,50 +14,48 @@ export default function About() {
             <h2 className="lg:text-6xl text-3xl font-bold mb-4">Everything you need</h2>
             <p className="text-grayLine mb-10">All the tools you need to deploy your app efficiently and effortlessly.</p>
             
-
             <div className="relative mx-auto max-w-3xl mb-8">
                 <img src={heroImg} alt="Product Preview" className="rounded-lg" />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#f0f0eb] rounded-lg"></div>
             </div>
 
             <div>
-            <div className='flex flex-col lg:flex-row gap-4 text-left'>
-                <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
-                    <div className=''>
-                        <HiTable className='text-primary text-3xl' />
+                <div className='flex flex-col lg:flex-row gap-4 text-left'>
+                    <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
+                        <div className=''>
+                            <HiTable className='text-primary text-3xl' />
+                        </div>
+                        <div>
+                            <p className='text-grayLine'>
+                                <span className='text-black font-bold pr-1'>Title. </span>
+                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <p className='text-grayLine'>
-                        <span className='text-black font-bold pr-1'>Title. </span>
-                        Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-                        </p>
+                    <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
+                        <div className=''>
+                            <HiChartPie className='text-primary text-3xl' />
+                        </div>
+                        <div>
+                            <p className='text-grayLine'>
+                                <span className='text-black font-bold pr-1'>Title. </span>
+                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                            </p>
+                        </div>
+                    </div>
+                    <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
+                        <div className=''>
+                            <HiChartBar className='text-primary text-3xl' />
+                        </div>
+                        <div>
+                            <p className='text-grayLine'>
+                                <span className='text-black font-bold pr-1'>Title. </span>
+                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
-                    <div className=''>
-                        <HiChartPie className='text-primary text-3xl' />
-                    </div>
-                    <div>
-                        <p className='text-grayLine'>
-                        <span className='text-black font-bold pr-1'>Title. </span>
-                        Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-                        </p>
-                    </div>
-                </div>
-                <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
-                    <div className=''>
-                        <HiChartBar className='text-primary text-3xl' />
-                    </div>
-                    <div>
-                        <p className='text-grayLine'>
-                        <span className='text-black font-bold pr-1'>Title. </span>
-                        Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-                        </p>
-                    </div>
-                </div>
-            </div>
             </div>
         </section>
-
     )
 }

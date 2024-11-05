@@ -22,16 +22,6 @@ import {
     inputTheme,
  } from '../flowbiteThemes/customThemes'
 
-// const inputTheme = {
-//     field: {
-//         input: {
-//             colors: {
-//                 gray: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:border-primary focus:ring-primary dark:focus:ring-primary'
-//             },
-//         },
-//     },
-// }
-
 export default function Header() {
     const path = useLocation().pathname
     const location = useLocation()
@@ -84,6 +74,7 @@ export default function Header() {
         <>
             {currentUser ? (
                 <>
+                    {/* Dashboard Nav */}
                     <Navbar fluid className='dark:bg-bgDark bg-white sticky top-0 z-[100] py-4' theme={dashNavTheme}>
                         <Navbar.Toggle onClick={() => setOpenDrawer(true)}/>
                         <div>
@@ -160,13 +151,13 @@ export default function Header() {
                         </div>
                         <Navbar.Collapse className='dark:text-[#B8B8B8]'>
                             <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray dark:hover:bg-darkGray hover:opacity-100'>
-                                <a href='#hero'>Home</a>
+                                <a href='/#hero'>Home</a>
                             </Navbar.Link>
                             <Navbar.Link active={path === '/#features'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
-                                <a href='#features'>Features</a>
+                                <a href='/#features'>Features</a>
                             </Navbar.Link>
                             <Navbar.Link active={path === '/#about'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
-                                <a href='#about'>About</a>
+                                <a href='/#about'>About</a>
                             </Navbar.Link>
                         </Navbar.Collapse>
                     </Navbar>

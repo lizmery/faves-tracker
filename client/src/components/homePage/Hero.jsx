@@ -4,7 +4,7 @@ import { Button } from 'flowbite-react'
 export default function Hero() {
     return (
         <section id='hero' className='relative flex flex-col lg:flex-row items-center lg:items-start justify-between p-10 lg:p-20 bg-[#f0f0eb] text-white overflow-hidden'>
-            <div className='flex-1 max-w-xl'>
+            <div className='flex-1 max-w-xl 2xl:max-w-5xl'>
                 <span className='text-sm font-semibold text-primary rounded-full py-1'
                     >What's New
                 </span>
@@ -20,7 +20,7 @@ export default function Hero() {
                 </div>
             </div>
             <div className='flex-1 relative mt-10 lg:mt-0 lg:ml-10'>
-                <img src={heroImg} alt='Product Preview' className=' rounded-md w-[550px] min-h-[350px] lg:w-[700px] lg:min-h-[500px] max-w-none object-fill relative -right-10 lg:-right-40' />
+                <img src={heroImg} alt='Product Preview' className=' rounded-md w-[550px] min-h-[350px] lg:w-[700px] 2xl:w-[900px] lg:min-h-[500px] max-w-none object-fill relative -right-20 lg:-right-40 2xl:-right-80' />
             </div>
         </section>
     )
