@@ -60,7 +60,6 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                 <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Completed</Table.HeadCell>
                             )}
                             <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Created</Table.HeadCell>
-                            {/* <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Notes</Table.HeadCell> */}
                             <Table.HeadCell>
                                 <span className="sr-only">Actions</span>
                             </Table.HeadCell>
@@ -119,9 +118,6 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         {tracker.createdAt ? 
                                             new Date(tracker.createdAt).toLocaleDateString('en-US', { timeZone: 'UTC' }) : '-'}
                                     </Table.Cell>
-                                    {/* <Table.Cell>
-                                        <span className='truncate'>{tracker.notes}</span>
-                                    </Table.Cell> */}
                                     <Table.Cell className='flex flex-row gap-1 justify-center items-center'>
                                         <MdEdit className='text-black text-md lg:text-xl dark:text-white cursor-pointer' onClick={() => {setOpenDrawer(true); setTracker(tracker)}} />
                                         <MdDelete className='text-black lg:text-xl dark:text-white cursor-pointer' onClick={() => {setShowModal(true); setTracker(tracker)}} /> 
@@ -161,12 +157,12 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                     Are you sure you want to delete {tracker.title}?
                     </h3>
                     <div className='flex justify-center gap-4'>
-                    <Button className='bg-black dark:bg-white border' onClick={handleDeleteTracker}>
-                        Delete
-                    </Button>
-                    <Button className='border-black border text-black dark:border-grayLine dark:text-white' onClick={() => setShowModal(false)}>
-                        Cancel
-                    </Button>
+                        <Button className='bg-black dark:bg-white border' onClick={handleDeleteTracker}>
+                            Delete
+                        </Button>
+                        <Button className='border-black border text-black dark:border-grayLine dark:text-white' onClick={() => setShowModal(false)}>
+                            Cancel
+                        </Button>
                     </div>
                 </div>
                 </Modal.Body>

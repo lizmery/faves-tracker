@@ -1,7 +1,6 @@
-import { Modal, Button, Dropdown, Spinner } from 'flowbite-react'
+import { Modal, Button, Spinner } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import TrackerTable from './tracker/TrackerTable'
 import SummaryCard from './tracker/SummaryCard'
 import CreateTrackerForm from './tracker/CreateTrackerForm'
@@ -36,9 +35,6 @@ export default function TrackersData({ trackerCategory }) {
                     setTrackersInProgress(data.totalInProgress)
                     setTrackersNotStarted(data.totalNotStarted)
                     setLoading(false)
-                    // if (data.trackers.length < 10) {
-
-                    // }
                 }
             } catch (error) {
                 console.log(error.message)

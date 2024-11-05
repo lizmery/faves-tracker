@@ -2,7 +2,7 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TextInput, Select, Button, Alert, Datepicker, Label, Textarea, FileInput } from 'flowbite-react'
+import { TextInput, Select, Button, Alert, Label, Textarea, FileInput } from 'flowbite-react'
 import {
     getDownloadURL,
     getStorage,
@@ -200,7 +200,6 @@ export default function CreateTrackerForm({ trackerCategory }) {
                     <Label htmlFor="dateStarted" className="mb-2 block">
                         Date Started
                     </Label>
-                    {/* <Datepicker /> */}
                     <TextInput 
                         type='date'
                         id='dateStarted'
@@ -214,7 +213,6 @@ export default function CreateTrackerForm({ trackerCategory }) {
                     <Label htmlFor="dateCompleted" className="mb-2 block">
                         Date Completed
                     </Label>
-                    {/* <Datepicker /> */}
                     <TextInput 
                         type='date'
                         id='dateCompleted'
@@ -296,11 +294,6 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         <Alert className='mt-5' color='failure'>{publishError}</Alert>
                     )}
                 </div>
-                
-                {/* <Button className="w-full">
-                <HiCalendar className="mr-2" />
-                Create event
-                </Button> */}
             </form>
         </div>
     )

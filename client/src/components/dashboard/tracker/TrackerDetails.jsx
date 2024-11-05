@@ -1,4 +1,4 @@
-import { Drawer, TextInput, Select, Button, Alert, Datepicker, Label, Textarea, FileInput } from 'flowbite-react'
+import { Drawer, TextInput, Select, Button, Alert, Label, Textarea, FileInput } from 'flowbite-react'
 import { PiListMagnifyingGlassBold } from 'react-icons/pi'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -216,7 +216,6 @@ export default function TrackerDetails({ tracker, onClose }) {
                     <Label htmlFor="dateStarted" className="mb-2 block">
                         Date Started
                     </Label>
-                    {/* <Datepicker /> */}
                     <TextInput 
                         type='date'
                         id='dateStarted'
@@ -231,7 +230,6 @@ export default function TrackerDetails({ tracker, onClose }) {
                     <Label htmlFor="dateCompleted" className="mb-2 block">
                         Date Completed
                     </Label>
-                    {/* <Datepicker /> */}
                     <TextInput 
                         type='date'
                         id='dateCompleted'

@@ -1,4 +1,4 @@
-import { Modal, Button, Card, Spinner } from 'flowbite-react'
+import { Modal, Button, Spinner } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
