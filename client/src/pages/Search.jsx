@@ -7,7 +7,7 @@ import { inputTheme } from '../flowbiteThemes/customThemes'
 export default function Search() {
     const [sidebarData, setSidebarData] = useState({
         searchTerm: '',
-        sort: 'desc',
+        sortDirection: 'desc',
         category: ''
     })
 
@@ -22,14 +22,14 @@ export default function Search() {
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search)
         const searchTermFromUrl = urlParams.get('searchTerm')
-        const sortFromUrl = urlParams.get('sort')
+        const sortFromUrl = urlParams.get('sortDirection')
         const categoryFromUrl = urlParams.get('category')
 
         if (searchTermFromUrl || sortFromUrl || categoryFromUrl) {
             setSidebarData({
                 ...sidebarData,
                 searchTerm: searchTermFromUrl,
-                sort: sortFromUrl,
+                sortDirection: sortFromUrl,
                 category: categoryFromUrl,
             })
         }
@@ -63,9 +63,9 @@ export default function Search() {
         if (e.target.id === 'searchTerm') {
             setSidebarData({ ...sidebarData, searchTerm: e.target.value })
         }
-        if (e.target.id === 'sort') {
+        if (e.target.id === 'sortDirection') {
             const order = e.target.value || 'desc'
-            setSidebarData({ ...sidebarData, sort: order })
+            setSidebarData({ ...sidebarData, sortDirection: order })
         }
         if (e.target.id === 'category') {
             setSidebarData({ ...sidebarData, category: e.target.value })
@@ -77,7 +77,7 @@ export default function Search() {
 
         const urlParams = new URLSearchParams(location.search)
         urlParams.set('searchTerm', sidebarData.searchTerm)
-        urlParams.set('sort', sidebarData.sort)
+        urlParams.set('sortDirection', sidebarData.sortDirection)
         urlParams.set('category', sidebarData.category)
         const searchQuery = urlParams.toString()
 
@@ -126,8 +126,8 @@ export default function Search() {
                         <label className='font-semibold'>Sort:</label>
                         <Select
                             onChange={handleChange}
-                            value={sidebarData.sort}
-                            id='sort'
+                            value={sidebarData.sortDirection}
+                            id='sortDirection'
                             color='gray'
                             theme={inputTheme}
                         >
