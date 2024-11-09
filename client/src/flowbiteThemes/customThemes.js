@@ -89,6 +89,12 @@ export const fileInputTheme = {
     }
 }
 
+export const textareaTheme = {
+    colors: {
+        gray: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:border-primary focus:ring-primary dark:focus:ring-primary'
+    }
+}
+
 export const modalTheme = {
     root: {
         base: 'fixed inset-x-0 top-0 z-[100] h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full'

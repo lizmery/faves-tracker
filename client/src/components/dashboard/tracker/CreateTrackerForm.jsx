@@ -1,7 +1,4 @@
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { TextInput, Select, Button, Alert, Label, Textarea, FileInput } from 'flowbite-react'
 import {
     getDownloadURL,
@@ -12,7 +9,7 @@ import {
 import { app } from '../../../firebase'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-import { inputTheme, fileInputTheme } from '../../../flowbiteThemes/customThemes'
+import { inputTheme, fileInputTheme, textareaTheme } from '../../../flowbiteThemes/customThemes'
 
 export default function CreateTrackerForm({ trackerCategory }) {
     const [formData, setFormData] = useState({})
@@ -21,7 +18,6 @@ export default function CreateTrackerForm({ trackerCategory }) {
     const [imageUploadError, setImageUploadError] = useState(null)
     const [publishError, setPublishError] = useState(null)
     const [success, setSuccess] = useState(false)
-    const navigate = useNavigate()
 
     const handleUploadImage = async () => {
         try {
@@ -80,7 +76,8 @@ export default function CreateTrackerForm({ trackerCategory }) {
             } else {
                 setPublishError(null)
                 setSuccess(true)
-                // navigate(`/`)
+
+                window.location.reload()
             }
         } catch (error) {
             setPublishError('Something went wrong. Please try again.')
@@ -123,16 +120,16 @@ export default function CreateTrackerForm({ trackerCategory }) {
                     </Select>
                 </div>
                 <div className="mb-6 mt-3">
-                    <Label htmlFor="type" className="mb-2 block">
-                        Type
+                    <Label htmlFor="subcategory" className="mb-2 block">
+                        Subcategory
                     </Label>
                     <TextInput 
                         type='text'
-                        placeholder='Type of Category (ex: Anime, Manga, etc...)'
+                        placeholder='Subcategory'
                         required
-                        id='type'
+                        id='subcategory'
                         className='flex-1'
-                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                        onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
                         theme={inputTheme}
                         color='gray'
                     />
@@ -278,11 +275,12 @@ export default function CreateTrackerForm({ trackerCategory }) {
                     <Label htmlFor="notes" className="mb-2 block">
                         Notes
                     </Label>
-                    <ReactQuill 
-                        theme='snow'
+                    <Textarea 
+                        htmlFor='notes' 
+                        onChange={(e) => { setFormData({ ...formData, notes: e.target.value }) }} 
                         placeholder='Enter notes here...'
                         className='h-60 pb-12'
-                        onChange={(value) => { setFormData({ ...formData, notes: value }) }}
+                        theme={textareaTheme}
                     />
                 </div>
                 <div className='mt-6'>
