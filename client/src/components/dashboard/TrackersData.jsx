@@ -15,7 +15,7 @@ export default function TrackersData({ trackerCategory }) {
     const [trackersInProgress, setTrackersInProgress] = useState()
     const [trackersNotStarted, setTrackersNotStarted] = useState()
     const [showForm, setShowForm] = useState(false)
-    const [filters, setFilters] = useState({ genre: '', status: '', type: '', tags: '', by: '' })
+    const [filters, setFilters] = useState({ genre: '', status: '', subcategory: '', tags: '', by: '' })
     const [filteredTrackers, setFilteredTrackers] = useState([])
     const [showFilterModal, setShowFilterModal] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -53,7 +53,7 @@ export default function TrackersData({ trackerCategory }) {
                             genre.toLowerCase().includes(filters.genre.toLowerCase())
                         )) &&
                         (!filters.status || tracker.status.toLowerCase() === filters.status.toLowerCase()) &&
-                        (!filters.type || tracker.type.toLowerCase() === filters.type.toLowerCase()) &&
+                        (!filters.subcategory || tracker.subcategory.toLowerCase() === filters.subcategory.toLowerCase()) &&
                         (!filters.tags || tracker.tags.some((tag) => 
                             tag.toLowerCase().includes(filters.tags.toLowerCase())
                         )) &&
@@ -116,7 +116,7 @@ export default function TrackersData({ trackerCategory }) {
                 <div className='flex justify-between'>
                     <h2 className='font-semibold text-lg'>All {trackerCategory}</h2>
                     <div className='flex gap-3 items-center'>
-                        <FaUndoAlt className='text-md lg:text-lg cursor-pointer hover:opacity-60 opacity-100' onClick={() => setFilters({ genre: '', status: '', type: '', tags: '', by: '' })} />
+                        <FaUndoAlt className='text-md lg:text-lg cursor-pointer hover:opacity-60 opacity-100' onClick={() => setFilters({ genre: '', status: '', subcategory: '', tags: '', by: '' })} />
                         <FaSlidersH
                             onClick={() => setShowFilterModal(true)}
                             className='text-xl text-black dark:text-white cursor-pointer hover:opacity-60'
@@ -184,11 +184,11 @@ export default function TrackersData({ trackerCategory }) {
                             </select>  
                         </div>
                         <div>
-                            <label for='type' className="mb-1 block text-sm font-medium leading-6 text-gray-900 dark:text-[#eee]">Type:</label>
+                            <label for='subcategory' className="mb-1 block text-sm font-medium leading-6 text-gray-900 dark:text-[#eee]">Subcategory:</label>
                             <input 
                                 type='text'
-                                name='type'
-                                value={filters.type}
+                                name='subcategory'
+                                value={filters.subcategory}
                                 onChange={handleFilterChange}
                                 placeholder=''
                                 className='dark:bg-transparent block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-gray-400  ring-1 ring-inset ring-lightGray dark:ring-grayLine placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary dark:focus:ring-primary sm:text-sm sm:leading-6'
@@ -221,7 +221,7 @@ export default function TrackersData({ trackerCategory }) {
                                 className='w-full bg-transparent dark:text-white text-black border dark:border-lightGray border-black' 
                                 onClick={() => {
                                     setShowFilterModal(false)
-                                    setFilters({ genre: '', status: '', type: '', tags: '', by: '' })
+                                    setFilters({ genre: '', status: '', subcategory: '', tags: '', by: '' })
                                 }}
                             >
                                 Reset Filter(s)

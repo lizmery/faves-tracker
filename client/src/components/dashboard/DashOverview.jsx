@@ -194,7 +194,7 @@ export default function DashOverview() {
                             <h1 className='text-xl font-bold'>Highest Rated</h1>
                             <Link 
                                 className='text-black dark:text-white font-semibold text-sm underline-offset-4 hover:underline'
-                                to='/search?sortBy=rating'
+                                to='/search?sortBy=rating&sortDirection=desc'
                             >
                                 View All
                             </Link>
@@ -209,7 +209,7 @@ export default function DashOverview() {
                             <h1 className='text-xl font-bold'>Recently Added</h1>
                             <Link 
                                 className='text-black dark:text-white font-semibold text-sm underline-offset-4 hover:underline'
-                                to='/search?'
+                                to='/search?sortDirection=desc'
                             >
                                 View All
                             </Link>

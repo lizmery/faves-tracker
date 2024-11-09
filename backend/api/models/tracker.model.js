@@ -22,7 +22,6 @@ const trackerSchema = new mongoose.Schema(
         },
         rating: {
             type: Number,
-            default: 0,
         },
         dateStarted: {
             type: Date,
@@ -40,7 +39,7 @@ const trackerSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        type: {
+        subcategory: {
             type: String,
             required: true,
         },

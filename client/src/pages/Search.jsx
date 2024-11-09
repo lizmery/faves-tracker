@@ -7,11 +7,9 @@ import { inputTheme } from '../flowbiteThemes/customThemes'
 export default function Search() {
     const [sidebarData, setSidebarData] = useState({
         searchTerm: '',
-        sortDirection: 'desc',
+        sortDirection: '',
         category: ''
     })
-
-    console.log(sidebarData)
 
     const [trackers, setTrackers] = useState([])
     const [loading, setLoading] = useState(false)

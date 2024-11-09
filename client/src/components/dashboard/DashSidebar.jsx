@@ -24,8 +24,6 @@ export default function DashSidebar() {
         const urlParams = new URLSearchParams(location.search)
         const tabFromUrl = urlParams.get('tab')
 
-        console.log('tabFROMurl: ' + tabFromUrl)
-
         if (tabFromUrl) {
             setTab(tabFromUrl)
         } else {

@@ -2,7 +2,7 @@ import Tracker from '../models/tracker.model.js'
 import { errorHandler } from '../utils/error.js'
 
 export const createTracker = async (req, res, next) => {
-    if (!req.body.title || !req.body.genres || !req.body.category || !req.body.type) {
+    if (!req.body.title || !req.body.genres || !req.body.category || !req.body.subcategory) {
         return next(errorHandler(400, 'Please provide all required fields'))
     }
 
@@ -52,7 +52,7 @@ export const updateTracker = async (req, res, next) => {
                     tags: req.body.tags,
                     notes: req.body.notes,
                     category: req.body.category,
-                    type: req.body.type,
+                    subcategory: req.body.subcategory,
                     image: req.body.image,
                 },
             },
@@ -82,20 +82,20 @@ export const getTrackers = async (req, res, next) => {
     try {
         const startIndex = parseInt(req.query.startIndex) || 0
         const limit = parseInt(req.query.limit) || 10
-        const sortDirection = req.query.sortDirection === 'asc' ? 1 : -1
+        const sortDirection = req.query.sortDirection === 'desc' ? -1 : 1
         const sortBy = req.query.sortBy || 'createdAt'
         const sortOptions = { [sortBy]: sortDirection }
         const trackers = await Tracker.find({
             ...(req.query.userId && { userId: req.query.userId }),
             ...(req.query.category && { category: req.query.category }),
-            ...(req.query.type && { type: req.query.type }),
+            ...(req.query.subcategory && { subcategory: req.query.subcategory }),
             ...(req.query.status && { status: req.query.status }),
             ...(req.query.trackerId && { _id: req.query.trackerId }),
             ...(req.query.searchTerm && {
                 $or: [
                     { title: { $regex: req.query.searchTerm, $options: 'i' } },
                     { tags: { $regex: req.query.searchTerm, $options: 'i' } },
-                    { type: { $regex: req.query.searchTerm, $options: 'i' } },
+                    { subcategory: { $regex: req.query.searchTerm, $options: 'i' } },
                     { category: { $regex: req.query.searchTerm, $options: 'i' } },
                     { by: { $regex: req.query.searchTerm, $options: 'i' } },
                     { genres: { $regex: req.query.searchTerm, $options: 'i' } },
