@@ -21,23 +21,19 @@ const __dirname = path.resolve()
 
 const app = express()
 
-// Serve static files from Vite build
-app.use(express.static(path.join(__dirname, '../client/dist')))
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'))
-})
-
 app.use(express.json())
 app.use(cookieParser())
-
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on ${process.env.PORT}`)
-})
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/tracker', trackerRoutes)
+
+// Serve static files from Vite build
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500
@@ -48,4 +44,8 @@ app.use((err, req, res, next) => {
         statusCode,
         message,
     })
+})
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on ${process.env.PORT}`)
 })
