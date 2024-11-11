@@ -3,14 +3,14 @@ import react from '@vitejs/plugin-react-swc'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    proxy: {
-      'api': {
-        target: 'https://media-tracker-delta.vercel.app',
-        secure: true,
-      },
-    },
-  },
-  base: './',
+  // server: {
+  //   proxy: {
+  //     'api': {
+  //       target: 'https://media-tracker-delta.vercel.app',
+  //       secure: true,
+  //     },
+  //   },
+  // },
+  // base: './',
   plugins: [react()],
 })
