@@ -78,7 +78,6 @@ export const getUser = async (req, res, next) => {
     }
 }
 
-//TODO: move to auth.controller.js !!
 // sign out
 export const signout = (req, res, next) => {
     try {
