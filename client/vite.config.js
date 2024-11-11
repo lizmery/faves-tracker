@@ -7,9 +7,13 @@ export default defineConfig({
     proxy: {
       'api': {
         target: 'https://media-tracker-delta.vercel.app',
-        secure: false,
+        secure: true,
       },
     },
+  },
+  base: './',
+  build: {
+    outDir: 'dist',
   },
   plugins: [react()],
 })
