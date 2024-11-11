@@ -1,7 +1,5 @@
 import { Drawer, TextInput, Select, Button, Alert, Label, Textarea, FileInput } from 'flowbite-react'
 import { PiListMagnifyingGlassBold } from 'react-icons/pi'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
@@ -9,11 +7,12 @@ import {
     getStorage,
     ref,
     uploadBytesResumable,
+    deleteObject,
 } from 'firebase/storage'
 import { app } from '../../../firebase'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-import { inputTheme, fileInputTheme } from '../../../flowbiteThemes/customThemes'
+import { inputTheme, fileInputTheme, textareaTheme } from '../../../flowbiteThemes/customThemes'
 
 export default function TrackerDetails({ tracker, onClose }) {
     const { currentUser } = useSelector((state) => state.user)
@@ -24,9 +23,6 @@ export default function TrackerDetails({ tracker, onClose }) {
     const [imageUploadProgress, setImageUploadProgress] = useState(null)
     const [imageUploadError, setImageUploadError] = useState(null)
 
-    console.log('title: ' + tracker.title)
-    console.log('tags ' + tracker.tags)
-
     const handleUploadImage = async () => {
         try {
             if (!file) {
@@ -36,7 +32,16 @@ export default function TrackerDetails({ tracker, onClose }) {
 
             setImageUploadError(null)
             const storage = getStorage(app)
-            const fileName = new Date().getTime + '-' + file.name
+
+            if (tracker.image) {
+                const prevImageRef = ref(storage, tracker.image)
+
+                await deleteObject(prevImageRef).catch((error) => {
+                    console.error('Failed to delete previous image: ', error)
+                })
+            }
+
+            const fileName = new Date().getTime() + '-' + file.name
             const storageRef = ref(storage, fileName)
             const uploadTask = uploadBytesResumable(storageRef, file)
 
@@ -61,7 +66,6 @@ export default function TrackerDetails({ tracker, onClose }) {
         } catch (error) {
             setImageUploadError('Image failed to upload')
             setImageUploadProgress(null)
-            console.log(error)
         }
     }
 
@@ -88,7 +92,6 @@ export default function TrackerDetails({ tracker, onClose }) {
                 setSuccess(null)
 
                 window.location.reload()
-                // navigate(`/`)
             }
         } catch (error) {
             setPublishError('Something went wrong. Please try again.')
@@ -134,17 +137,17 @@ export default function TrackerDetails({ tracker, onClose }) {
                     </Select>
                 </div>
                 <div className="mb-6 mt-3">
-                    <Label htmlFor="type" className="mb-2 block">
-                        Type
+                    <Label htmlFor="subcategory" className="mb-2 block">
+                        Subcategory
                     </Label>
                     <TextInput 
                         type='text'
-                        placeholder='Type of Category (ex: Anime, Manga, etc...)'
+                        placeholder='Subcategory'
                         required
-                        id='type'
+                        id='subcategory'
                         className='flex-1'
-                        defaultValue={tracker?.type || ''}
-                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                        defaultValue={tracker?.subcategory || ''}
+                        onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
                         theme={inputTheme}
                         color='gray'
                     />
@@ -285,9 +288,15 @@ export default function TrackerDetails({ tracker, onClose }) {
                         </Button>
                     </div>
                     {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
-                    {formData.image && (
+                    {formData.image ? (
                         <img 
                             src={formData.image}
+                            alt='media tracker image'
+                            className='w-full h-72 object-contain'
+                        />
+                    ) : (
+                        <img 
+                            src={tracker.image}
                             alt='media tracker image'
                             className='w-full h-72 object-contain'
                         />
@@ -297,12 +306,13 @@ export default function TrackerDetails({ tracker, onClose }) {
                     <Label htmlFor="notes" className="mb-2 block">
                         Notes
                     </Label>
-                    <ReactQuill 
-                        theme='snow'
+                    <Textarea 
+                        htmlFor='notes' 
+                        onChange={(e) => { setFormData({ ...formData, notes: e.target.value }) }} 
                         placeholder='Enter notes here...'
                         className='h-60 pb-12'
                         defaultValue={tracker.notes}
-                        onChange={(value) => { setFormData({ ...formData, notes: value }) }}
+                        theme={textareaTheme}
                     />
                 </div>
             
