@@ -4,6 +4,8 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { getStorage, ref, deleteObject } from 'firebase/storage'
+import { app } from '../../../firebase'
 import TrackerDetails from './TrackerDetails'
 import { tableTheme, overviewTableTheme, drawerTheme } from '../../../flowbiteThemes/customThemes'
 
@@ -17,6 +19,14 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
 
     const handleDeleteTracker = async () => {
         try {
+            if (tracker.image) {
+                const storage = getStorage(app)
+                const storageRef = ref(storage, tracker.image)
+                await deleteObject(storageRef).catch((error) => {
+                    console.error('Failed to delete previous image: ', error)
+                })
+            }
+    
             const res = await fetch(`/api/tracker/delete/${tracker._id}/${currentUser._id}`, {
                 method: 'DELETE',
             })
@@ -28,7 +38,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                 window.location.reload()
             }
         } catch (error) {
-
+            console.log('Error deleting tracker: ', error)
         }
     }
 
@@ -49,17 +59,17 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                             {trackerCategory === 'media' && (
                                 <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Category</Table.HeadCell>
                             )}
-                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>Type</Table.HeadCell>
-                            {trackerCategory !== 'media' && (
+                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>Subcategory</Table.HeadCell>
+                            {/* {trackerCategory !== 'media' && (
                                 <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>Tags</Table.HeadCell>
-                            )}
+                            )} */}
                             {trackerCategory !== 'media' && (
                                 <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Started</Table.HeadCell>
                             )}
                             {trackerCategory !== 'media' && (
                                 <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Completed</Table.HeadCell>
                             )}
-                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Created</Table.HeadCell>
+                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Created Date</Table.HeadCell>
                             <Table.HeadCell>
                                 <span className="sr-only">Actions</span>
                             </Table.HeadCell>
@@ -95,13 +105,13 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         </Table.Cell>
                                     )}
                                     <Table.Cell className='hidden lg:table-cell'>
-                                        {tracker.type}
+                                        {tracker.subcategory}
                                     </Table.Cell>
-                                    {trackerCategory !== 'media' && (
+                                    {/* {trackerCategory !== 'media' && (
                                         <Table.Cell className='hidden lg:table-cell'>
                                             {tracker.tags?.join(', ')}
                                         </Table.Cell>
-                                    )}
+                                    )} */}
                                     {trackerCategory !== 'media' && (
                                         <Table.Cell className='hidden lg:table-cell'>
                                             {tracker.dateStarted ? 
