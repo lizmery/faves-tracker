@@ -9,19 +9,19 @@ export default function FooterComponent() {
     return (
         <>
             {currentUser ? '' : (
-                 <div className=' flex items-center border-t border-lightGray dark:border-darkGray px-0'>
-                    <Footer container className='border-none bg-transparent dark:bg-transparent rounded-none shadow-none px-4 lg:px-8'>
+                 <div className='bg-white flex items-center border-t border-lightGray px-0'>
+                    <Footer container className='border-none bg-transparent rounded-none shadow-none px-4 lg:px-8'>
                         <div className="w-full border-none">
                             <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-                                <Link to='/' className='text-2xl font-bold'>Media Tracker</Link>
-                                <Footer.LinkGroup className='dark:text-grayLine mt-4 lg:mt-auto text-darkGray'>
+                                <Link to='/' className='text-2xl font-bold text-black'>Media Tracker</Link>
+                                <Footer.LinkGroup className=' mt-4 lg:mt-auto text-darkGray'>
                                     <Footer.Link href='/#hero'>Home</Footer.Link>
                                     <Footer.Link href='/#features'>Features</Footer.Link>
                                     <Footer.Link href='/#about'>About</Footer.Link>
                                 </Footer.LinkGroup>
                             </div>
                             <div className="w-full sm:flex sm:items-center sm:justify-between mt-8 border-t dark:border-darkGray pt-8">
-                                <span className='dark:text-lightGray opacity-30 text-sm'>©2024 Lizmery</span>
+                                <span className='opacity-30 text-sm'>©2024 Lizmery</span>
                                 <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
                                     <Footer.Icon href="#" icon={BsFacebook} className='text-primary' />
                                     <Footer.Icon href="#" icon={BsInstagram} className='text-primary' />

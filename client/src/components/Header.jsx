@@ -136,24 +136,24 @@ export default function Header() {
                 </>
             ) : (
                 <>
-                    <Navbar fluid className='bg-white border-b dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={navTheme}>
-                        <Navbar.Brand href='/' className=' text-2xl  font-semibold'>
+                    <Navbar fluid className='bg-white border-b border-[#eee] dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={navTheme}>
+                        <Navbar.Brand href='/' className='text-black text-2xl font-semibold'>
                             Media Tracker
                         </Navbar.Brand>
                         <div className='flex md:order-2 lg:gap-3 gap-2'>
                             <Link to='/sign-up' className='items-center flex'>
-                                <Button className='dark:bg-white bg-black dark:text-black text-white rounded-md'>Sign Up</Button>
+                                <Button className='bg-black text-white rounded-md'>Sign Up</Button>
                             </Link>
                             <Link to='/sign-in' className='items-center flex'>
-                                <Button className='bg-transparent dark:text-white text-black border dark:border-grayLine border-black rounded-md'>Sign In</Button>
+                                <Button className='bg-transparent text-black border border-black rounded-md'>Sign In</Button>
                             </Link>
                             <Navbar.Toggle />
                         </div>
                         <Navbar.Collapse className='dark:text-[#B8B8B8]'>
-                            <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray dark:hover:bg-darkGray hover:opacity-100'>
+                            <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100'>
                                 <a href='/#hero'>Home</a>
                             </Navbar.Link>
-                            <Navbar.Link active={path === '/#features'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
+                            <Navbar.Link active={path === '/#features'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100'>
                                 <a href='/#features'>Features</a>
                             </Navbar.Link>
                             <Navbar.Link active={path === '/#about'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>

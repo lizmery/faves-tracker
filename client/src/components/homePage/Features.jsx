@@ -6,7 +6,7 @@ import {
 
 export default function Features() {
     return (
-        <section id='features' className='mt-20 p-10 flex-col mb-10'>
+        <section id='features' className='mt-20 p-10 flex-col mb-10 bg-white'>
             <div className='flex flex-col justify-center items-center text-center mb-14'>
                 <span className='text-sm font-semibold text-primary rounded-full'>
                     App Features
@@ -24,7 +24,7 @@ export default function Features() {
                         <HiOutlineBookOpen className='text-white text-2xl font-light' />
                     </div>
                     <div>
-                        <h1 className='font-semibold'>Card Title</h1>
+                        <h1 className='font-semibold text-black'>Card Title</h1>
                         <p className=' text-grayLine pt-1'>
                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
@@ -36,7 +36,7 @@ export default function Features() {
                         <HiOutlineFilm className='text-white text-2xl' />
                     </div>
                     <div>
-                        <h1 className='font-semibold'>Card Title</h1>
+                        <h1 className='font-semibold text-black'>Card Title</h1>
                         <p className=' text-grayLine pt-1'>
                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
@@ -48,7 +48,7 @@ export default function Features() {
                         <HiOutlineDesktopComputer className='text-white text-2xl' />
                     </div>
                     <div>
-                        <h1 className='font-semibold'>Card Title</h1>
+                        <h1 className='font-semibold text-black'>Card Title</h1>
                         <p className=' text-grayLine pt-1'>
                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.

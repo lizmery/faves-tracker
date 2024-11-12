@@ -11,7 +11,7 @@ export default function About() {
             <span className='text-sm font-semibold text-primary rounded-full'>
                 About
             </span>
-            <h2 className="lg:text-6xl text-3xl font-bold mb-4">Everything you need</h2>
+            <h2 className="lg:text-6xl text-3xl font-bold mb-4 text-black">Everything you need</h2>
             <p className="text-grayLine mb-10">All the tools you need to track your media</p>
             
             <div className="relative mx-auto max-w-3xl mb-8">
