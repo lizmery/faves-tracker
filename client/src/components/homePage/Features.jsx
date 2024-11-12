@@ -8,11 +8,11 @@ export default function Features() {
     return (
         <section id='features' className='mt-20 p-10 flex-col mb-10'>
             <div className='flex flex-col justify-center items-center text-center mb-14'>
-                <span className='text-sm font-semibold text-primary rounded-full'
-                    >What's New
+                <span className='text-sm font-semibold text-primary rounded-full'>
+                    App Features
                 </span>
                 <h1 className='mt-2 text-4xl lg:text-6xl font-bold leading-tight text-black max-w-xl'>
-                    Deploy to the cloud with confidence
+                    Lorem ipsum, dolor sit amet consectetur
                 </h1>
                 <p className='mt-4 text-grayLine max-w-xl'>
                     Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.

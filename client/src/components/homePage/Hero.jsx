@@ -1,5 +1,6 @@
 import heroImg from '../../assets/heroImg.png'
 import { Button } from 'flowbite-react'
+import { Link } from 'react-router-dom'
 
 export default function Hero() {
     return (
@@ -9,14 +10,19 @@ export default function Hero() {
                     >What's New
                 </span>
                 <h1 className='mt-4 text-4xl lg:text-6xl font-bold leading-tight text-black'>
-                    Deploy to the cloud with confidence
+                    Keep track of everything in one place
                 </h1>
                 <p className='mt-4 text-grayLine'>
                     Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
                 </p>
                 <div className='mt-6 flex space-x-4 items-center'>
-                    <Button className='bg-black text-white rounded-md' size='lg'>Get Started</Button>
-                    <Button className='bg-white text-black border border-black rounded-md' size='lg'>Learn More</Button>
+                    <Link to='/sign-up'>
+                        <Button className='bg-black text-white rounded-md' size='lg'>Get Started</Button>
+                    </Link>
+                    <a href='/#features'>
+                        <Button className='bg-white text-black border border-black rounded-md' size='lg'>Learn More</Button>
+                    </a>
+                    
                 </div>
             </div>
             <div className='flex-1 relative mt-10 lg:mt-0 lg:ml-10'>
