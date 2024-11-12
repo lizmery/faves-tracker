@@ -22,6 +22,7 @@ export default function TrackerDetails({ tracker, onClose }) {
     const [file, setFile] = useState(null)
     const [imageUploadProgress, setImageUploadProgress] = useState(null)
     const [imageUploadError, setImageUploadError] = useState(null)
+    const apiUrl = import.meta.env.VITE_API_URL
 
     const handleUploadImage = async () => {
         try {
@@ -73,7 +74,7 @@ export default function TrackerDetails({ tracker, onClose }) {
         e.preventDefault()
 
         try {
-            const res = await fetch(`/api/tracker/update/${tracker._id}/${currentUser._id}`, {
+            const res = await fetch(`${apiUrl}/api/tracker/update/${tracker._id}/${currentUser._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

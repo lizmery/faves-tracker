@@ -36,6 +36,7 @@ export default function DashProfile() {
     const [formData, setFormData] = useState({})
     const filePickerRef = useRef()
     const dispatch = useDispatch()
+    const apiUrl = import.meta.env.VITE_API_URL
 
     const handleImageChange = (e) => {
         const file = e.target.files[0]
@@ -105,7 +106,7 @@ export default function DashProfile() {
         try {
             dispatch(updateStart())
 
-            const res = await fetch(`/api/user/update/${currentUser._id}`, {
+            const res = await fetch(`${apiUrl}/api/user/update/${currentUser._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,7 +131,7 @@ export default function DashProfile() {
 
     const handleSignout = async () => {
         try {
-            const res = await fetch('/api/user/signout', {
+            const res = await fetch(`${apiUrl}/api/user/signout`, {
                 method: 'POST',
             })
             const data = await res.json()
@@ -151,7 +152,7 @@ export default function DashProfile() {
         try {
             dispatch(deleteUserStart())
 
-            const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+            const res = await fetch(`${apiUrl}/api/user/delete/${currentUser._id}`, {
                 method: 'DELETE',
             })
             const data = await res.json()

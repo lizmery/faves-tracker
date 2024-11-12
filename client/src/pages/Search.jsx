@@ -16,6 +16,7 @@ export default function Search() {
     const [showMore, setShowMore] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
+    const apiUrl = import.meta.env.VITE_API_URL
 
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search)
@@ -35,7 +36,7 @@ export default function Search() {
         const fetchTrackers = async () => {
             setLoading(true)
             const searchQuery = urlParams.toString()
-            const res = await fetch(`/api/tracker/get-trackers?${searchQuery}`)
+            const res = await fetch(`${apiUrl}/api/tracker/get-trackers?${searchQuery}`)
 
             if (res.ok) {
                 const data = await res.json()
@@ -88,7 +89,7 @@ export default function Search() {
         const urlParams = new URLSearchParams(location.search)
         urlParams.set('startIndex', startIndex)
         const searchQuery = urlParams.toString()
-        const res = await fetch(`/api/tracker/get-trackers?${searchQuery}`)
+        const res = await fetch(`${apiUrl}/api/tracker/get-trackers?${searchQuery}`)
 
         if (res.ok) {
             const data = await res.json()

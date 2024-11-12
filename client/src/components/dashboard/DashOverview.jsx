@@ -23,7 +23,8 @@ import {
 } from 'recharts'
 import { modalTheme } from '../../flowbiteThemes/customThemes'
 
-const COLORS = ['#A1E091', '#5E48A3', '#826EBF', '#DAD4EC', '#D4D2D2'];
+const COLORS = ['#A1E091', '#5E48A3', '#826EBF', '#DAD4EC', '#D4D2D2']
+const apiUrl = import.meta.env.VITE_API_URL
 
 export default function DashOverview() {
     const { currentUser } = useSelector((state) => state.user)
@@ -41,7 +42,7 @@ export default function DashOverview() {
         const fetchTrackers = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`/api/tracker/get-trackers-overview?userId=${currentUser._id}`)
+                const res = await fetch(`${apiUrl}/api/tracker/get-trackers-overview?userId=${currentUser._id}`)
                 const data = await res.json()
 
                 if (res.ok) {

@@ -10,13 +10,13 @@ export default function TrackerPage() {
     const [tracker, setTracker] = useState({})
     const { trackerId } = useParams()
     const [openDrawer, setOpenDrawer] = useState(false)
-
     const handleClose = () => setOpenDrawer(false)
+    const apiUrl = import.meta.env.VITE_API_URL
 
     useEffect(() => {
         const fetchTrackers = async () => {
             try {
-                const res = await fetch(`/api/tracker/get-trackers?userId=${currentUser._id}&trackerId=${trackerId}`)
+                const res = await fetch(`${apiUrl}/api/tracker/get-trackers?userId=${currentUser._id}&trackerId=${trackerId}`)
                 const data = await res.json()
 
                 if (res.ok) {

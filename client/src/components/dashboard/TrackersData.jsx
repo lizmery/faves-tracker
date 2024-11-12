@@ -19,6 +19,7 @@ export default function TrackersData({ trackerCategory }) {
     const [filteredTrackers, setFilteredTrackers] = useState([])
     const [showFilterModal, setShowFilterModal] = useState(false)
     const [loading, setLoading] = useState(false)
+    const apiUrl = import.meta.env.VITE_API_URL
 
     const handleClose = () => setShowForm(false)
 
@@ -26,7 +27,7 @@ export default function TrackersData({ trackerCategory }) {
         const fetchTrackers = async () => {
             try {
                 setLoading(true)
-                const res = await fetch(`/api/tracker/get-trackers?userId=${currentUser._id}&category=${trackerCategory}`)
+                const res = await fetch(`${apiUrl}/api/tracker/get-trackers?userId=${currentUser._id}&category=${trackerCategory}`)
                 const data = await res.json()
 
                 if (res.ok) {

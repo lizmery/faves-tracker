@@ -18,6 +18,7 @@ export default function CreateTrackerForm({ trackerCategory }) {
     const [imageUploadError, setImageUploadError] = useState(null)
     const [publishError, setPublishError] = useState(null)
     const [success, setSuccess] = useState(false)
+    const apiUrl = import.meta.env.VITE_API_URL
 
     const handleUploadImage = async () => {
         try {
@@ -61,7 +62,7 @@ export default function CreateTrackerForm({ trackerCategory }) {
         e.preventDefault()
 
         try {
-            const res = await fetch('/api/tracker/create', {
+            const res = await fetch(`${apiUrl}/api/tracker/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

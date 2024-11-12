@@ -14,6 +14,7 @@ export default function OAuth() {
     const auth = getAuth(app)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const apiUrl = import.meta.env.VITE_API_URL
 
     const handleGoogleClick = async () => {
         const provider = new GoogleAuthProvider()
@@ -21,7 +22,7 @@ export default function OAuth() {
 
         try {
             const resultsFromGoogle = await signInWithPopup(auth, provider)
-            const res = await fetch('/api/auth/google', {
+            const res = await fetch(`${apiUrl}/api/auth/google`, {
                 method: 'POST',
                 headers: { 'Content-Type' : 'application/json' },
                 body: JSON.stringify({

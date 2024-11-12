@@ -32,6 +32,7 @@ export default function Header() {
     const [searchTerm, setSearchTerm] = useState('')
     const [openDrawer, setOpenDrawer] = useState(false)
     const handleClose = () => setOpenDrawer(false)
+    const apiUrl = import.meta.env.VITE_API_URL
 
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search)
@@ -55,7 +56,7 @@ export default function Header() {
 
     const handleSignout = async () => {
         try {
-            const res = await fetch('/api/user/signout', {
+            const res = await fetch(`${apiUrl}/api/user/signout`, {
                 method: 'POST',
             })
 

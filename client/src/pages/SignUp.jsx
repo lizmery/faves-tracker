@@ -15,6 +15,7 @@ export default function SignUp() {
     const [errorMessage, setErrorMessage] = useState(null)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const apiUrl = import.meta.env.VITE_API_URL
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value.trim() })
@@ -31,7 +32,7 @@ export default function SignUp() {
             setLoading(true)
             setErrorMessage(null)
 
-            const res = await fetch('/api/auth/signup', {
+            const res = await fetch(`${apiUrl}/api/auth/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -55,7 +56,7 @@ export default function SignUp() {
     }
 
     return (
-        <div className="min-h-screen mt-20">
+        <div className="min-h-screen mt-20 bg-white">
             <div className="flex p-3 max-w-5xl mx-auto flex-col-reverse lg:flex-row lg:items-center gap-6">
                 {/* left column */}
                 <div className="flex-1 lg:pr-2">

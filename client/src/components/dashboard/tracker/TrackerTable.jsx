@@ -14,6 +14,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
     const [openDrawer, setOpenDrawer] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [tracker, setTracker] = useState({})
+    const apiUrl = import.meta.env.VITE_API_URL
 
     const handleClose = () => setOpenDrawer(false)
 
@@ -27,7 +28,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                 })
             }
     
-            const res = await fetch(`/api/tracker/delete/${tracker._id}/${currentUser._id}`, {
+            const res = await fetch(`${apiUrl}/api/tracker/delete/${tracker._id}/${currentUser._id}`, {
                 method: 'DELETE',
             })
             const data = await res.json()

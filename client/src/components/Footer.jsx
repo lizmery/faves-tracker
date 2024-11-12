@@ -10,7 +10,7 @@ export default function FooterComponent() {
         <>
             {currentUser ? '' : (
                  <div className='bg-white flex items-center border-t border-lightGray px-0'>
-                    <Footer container className='border-none bg-transparent rounded-none shadow-none px-4 lg:px-8'>
+                    <Footer container className='border-none bg-white rounded-none shadow-none px-4 lg:px-8'>
                         <div className="w-full border-none">
                             <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
                                 <Link to='/' className='text-2xl font-bold text-black'>Media Tracker</Link>
@@ -20,7 +20,7 @@ export default function FooterComponent() {
                                     <Footer.Link href='/#about'>About</Footer.Link>
                                 </Footer.LinkGroup>
                             </div>
-                            <div className="w-full sm:flex sm:items-center sm:justify-between mt-8 border-t dark:border-darkGray pt-8">
+                            <div className="w-full sm:flex sm:items-center sm:justify-between mt-8 border-t pt-8">
                                 <span className='opacity-30 text-sm'>©2024 Lizmery</span>
                                 <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
                                     <Footer.Icon href="#" icon={BsFacebook} className='text-primary' />
