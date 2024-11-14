@@ -8,7 +8,7 @@
       { "src": "/(.*)", "dest": "/dist/index.html" }
     ],
     "rewrites": [
-        { "source": "/(.*)", "destination": "/" }
+        { "source": "/(.*)", "destination": "/index.html" }
     ]
   }
   
