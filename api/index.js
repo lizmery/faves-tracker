@@ -35,13 +35,10 @@ app.use('/api/user', userRoutes)
 app.use('/api/tracker', trackerRoutes)
 
 // Serve static files from Vite build
-app.use(express.static(path.join(__dirname, '../client/dist')))
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'))
-})
-app.get('*', (req, res) => {
-    res.status(404).json({ message: "Not Found" });
-  })
+// app.use(express.static(path.join(__dirname, '../client/dist')))
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+// })
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on ${process.env.PORT}`)
