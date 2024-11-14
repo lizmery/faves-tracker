@@ -5,10 +5,7 @@
     ],
     "routes": [
       { "src": "/api/(.*)", "dest": "https://media-tracker-backend.vercel.app/api/$1" },
-      { "src": "/(.*)", "dest": "/dist/index.html" }
-    ],
-    "rewrites": [
-        { "source": "/(.*)", "destination": "/index.html" }
+      { "src": "/(.*)", "dest": "/index.html" }
     ]
   }
   
