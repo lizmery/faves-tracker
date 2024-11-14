@@ -3,9 +3,11 @@
     "builds": [
       { "src": "package.json", "use": "@vercel/static-build" }
     ],
-    "rewrites": [
-        { "source": "/(.*)", "destination": "/"}
-    ]
+    "routes": [
+        { "src": "/api/(.*)", "dest": "https://media-tracker-backend.vercel.app/api/$1" },
+        { "src": "/(.*)", "dest": "/dist/index.html" },
+        { "src": "/[^.]+", "dest": "/" }
+      ]  
 }
 
 
