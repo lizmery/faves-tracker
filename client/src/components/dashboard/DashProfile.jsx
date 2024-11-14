@@ -154,6 +154,7 @@ export default function DashProfile() {
 
             const res = await fetch(`${apiUrl}/api/user/delete/${currentUser._id}`, {
                 method: 'DELETE',
+                credentials: 'include', // send cookies in request
             })
             const data = await res.json()
 
