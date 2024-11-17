@@ -64,6 +64,7 @@ export default function CreateTrackerForm({ trackerCategory }) {
         try {
             const res = await fetch(`${apiUrl}/api/tracker/create`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },

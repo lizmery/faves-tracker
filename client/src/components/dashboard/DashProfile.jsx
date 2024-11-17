@@ -108,6 +108,7 @@ export default function DashProfile() {
 
             const res = await fetch(`${apiUrl}/api/user/update/${currentUser._id}`, {
                 method: 'PUT',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },

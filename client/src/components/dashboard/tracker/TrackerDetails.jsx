@@ -76,6 +76,7 @@ export default function TrackerDetails({ tracker, onClose }) {
         try {
             const res = await fetch(`${apiUrl}/api/tracker/update/${tracker._id}/${currentUser._id}`, {
                 method: 'PUT',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },

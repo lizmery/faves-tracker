@@ -30,6 +30,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
     
             const res = await fetch(`${apiUrl}/api/tracker/delete/${tracker._id}/${currentUser._id}`, {
                 method: 'DELETE',
+                credentials: 'include',
             })
             const data = await res.json()
             

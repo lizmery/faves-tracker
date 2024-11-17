@@ -87,6 +87,8 @@ export const google = async (req, res, next) => {
                 .status(200)
                 .cookie('access_token', token, {
                     httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    sameSite: 'None',
                 })
                 .json(rest)
         } else {
@@ -112,6 +114,8 @@ export const google = async (req, res, next) => {
                 .status(200)
                 .cookie('access_token', token, {
                     httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    sameSite: 'None',
                 })
                 .json(rest)
         }
