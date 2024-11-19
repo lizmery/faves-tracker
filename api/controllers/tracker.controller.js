@@ -109,14 +109,17 @@ export const getTrackers = async (req, res, next) => {
         const totalTrackers = await Tracker.countDocuments()
         const totalCompleted = await Tracker.find({
             status: 'Completed',
+            ...(req.query.userId && { userId: req.query.userId }),
             ...(req.query.category && { category: req.query.category }),
         }).countDocuments()
         const totalInProgress = await Tracker.find({
             status: 'In Progress',
+            ...(req.query.userId && { userId: req.query.userId }),
             ...(req.query.category && { category: req.query.category }),
         }).countDocuments()
         const totalNotStarted = await Tracker.find({
             status: 'Not Started',
+            ...(req.query.userId && { userId: req.query.userId }),
             ...(req.query.category && { category: req.query.category }),
         }).countDocuments()
 
@@ -199,11 +202,15 @@ export const getTrackersOverview = async (req, res, next) => {
             },
         ])
 
-        const highestRatedTrackers = await Tracker.find()
+        const highestRatedTrackers = await Tracker.find({
+            ...(req.query.userId && { userId: req.query.userId }),
+        })
             .sort({ rating: -1 })
             .limit(5)
 
-        const recentTrackers = await Tracker.find()
+        const recentTrackers = await Tracker.find({
+            ...(req.query.userId && { userId: req.query.userId }),
+        })
             .sort({ createdAt: -1 })
             .limit(5)
 
