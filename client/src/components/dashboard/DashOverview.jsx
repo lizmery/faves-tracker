@@ -113,11 +113,17 @@ export default function DashOverview() {
                 </Button>
             </div>
 
-            {loading ? 
+            {!loading && recentTrackers.length === 0 && (
+                <p className='text-center pt-8'>You have not added any trackers yet. <br /> Click the "Add Tracker" button to get started.</p>
+            )}
+
+            {loading && (
                 <div className='h-screen text-center'>
                     <Spinner size='xl' color='gray' />
                 </div>
-            : (
+            )}
+
+            {!loading && recentTrackers.length > 0 && (
                 <div className='h-full grid lg:grid-cols-4 gap-4 w-full grid-cols-1'>
                     {/* completed trackers per category cards */}
                     <div className='col-span-3 flex flex-col lg:flex-row gap-4 lg:max-h-[100px]'>
