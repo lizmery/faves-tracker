@@ -138,18 +138,21 @@ export default function Header() {
             ) : (
                 <>
                     <Navbar fluid className='bg-white border-b border-[#eee] dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={navTheme}>
+                        <div className='w-full flex justify-between'>
                         <Navbar.Brand href='/' className='text-black text-2xl font-semibold'>
                             Media Tracker
                         </Navbar.Brand>
                         <div className='flex md:order-2 lg:gap-3 gap-2'>
-                            <Link to='/sign-up' className='items-center flex'>
-                                <Button className='bg-black text-white rounded-md'>Sign Up</Button>
+                            <Link to='/sign-up' className='items-center flex invisible sm:visible'>
+                                <Button className=' bg-black text-white rounded-md'>Sign Up</Button>
                             </Link>
-                            <Link to='/sign-in' className='items-center flex'>
+                            <Link to='/sign-in' className='items-center flex invisible sm:visible'>
                                 <Button className='bg-transparent text-black border border-black rounded-md'>Sign In</Button>
                             </Link>
                             <Navbar.Toggle />
                         </div>
+                        </div>
+                        
                         <Navbar.Collapse className='dark:text-[#B8B8B8]'>
                             <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100'>
                                 <a href='/#hero'>Home</a>

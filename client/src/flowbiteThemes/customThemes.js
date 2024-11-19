@@ -5,7 +5,7 @@ export const navTheme = {
     root: {
         base: 'py-2.5',
         inner: {
-            base: 'flex flex-wrap items-center justify-between px-4 lg:px-6'
+            base: 'flex flex-col items-center justify-between px-4 lg:px-6'
         }
     }
 }
