@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TrackerCard from '../components/dashboard/tracker/TrackerCard'
 import { inputTheme } from '../flowbiteThemes/customThemes'
+import { useSelector } from 'react-redux'
 
 export default function Search() {
     const [sidebarData, setSidebarData] = useState({
@@ -10,7 +11,7 @@ export default function Search() {
         sortDirection: '',
         category: ''
     })
-
+    const { currentUser } = useSelector((state) => state.user)
     const [trackers, setTrackers] = useState([])
     const [loading, setLoading] = useState(false)
     const [showMore, setShowMore] = useState(false)
@@ -36,7 +37,7 @@ export default function Search() {
         const fetchTrackers = async () => {
             setLoading(true)
             const searchQuery = urlParams.toString()
-            const res = await fetch(`${apiUrl}/api/tracker/get-trackers?${searchQuery}`)
+            const res = await fetch(`${apiUrl}/api/tracker/get-trackers?${searchQuery}&userId=${currentUser._id}`)
 
             if (res.ok) {
                 const data = await res.json()
