@@ -138,31 +138,40 @@ export default function Header() {
             ) : (
                 <>
                     <Navbar fluid className='bg-white border-b border-[#eee] dark:border-darkGray backdrop-blur-3xl sticky top-0 z-[100] w-full py-4' theme={navTheme}>
-                        <div className='w-full flex justify-between'>
-                        <Navbar.Brand href='/' className='text-black text-2xl font-semibold'>
+                        <Navbar.Brand href='/' className='text-black text-2xl font-semibold text-wrap'>
                             Media Tracker
                         </Navbar.Brand>
-                        <div className='flex md:order-2 lg:gap-3 gap-2'>
-                            <Link to='/sign-up' className='items-center flex invisible sm:visible'>
+                        <div className='md:flex flex-col md:flex-row order-2 lg:gap-3 gap-2 hidden'>
+                            <Link to='/sign-up' className='items-center flex'>
                                 <Button className=' bg-black text-white rounded-md'>Sign Up</Button>
                             </Link>
-                            <Link to='/sign-in' className='items-center flex invisible sm:visible'>
+                            <Link to='/sign-in' className='items-center flex'>
                                 <Button className='bg-transparent text-black border border-black rounded-md'>Sign In</Button>
                             </Link>
-                            <Navbar.Toggle />
                         </div>
-                        </div>
+                        <Navbar.Toggle />
                         
-                        <Navbar.Collapse className='dark:text-[#B8B8B8]'>
-                            <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100'>
-                                <a href='/#hero'>Home</a>
-                            </Navbar.Link>
-                            <Navbar.Link active={path === '/#features'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100'>
-                                <a href='/#features'>Features</a>
-                            </Navbar.Link>
-                            <Navbar.Link active={path === '/#about'} as={'div'} className='text-bgDark dark:text-lightGray border-none opacity-70 dark:hover:text-lightGray hover:opacity-100 dark:hover:bg-darkGray'>
-                                <a href='/#about'>About</a>
-                            </Navbar.Link>
+                        <Navbar.Collapse className='dark:text-[#B8B8B8] w-full md:flex'>
+                            <div className='flex flex-col md:flex-row gap-3 md:gap-4 lg:gap-8 w-full'>
+                                <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100 bg-transparent'>
+                                    <a href='/#hero'>Home</a>
+                                </Navbar.Link>
+                                <Navbar.Link active={path === '/#features'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100 hover:bg-transparent'>
+                                    <a href='/#features'>Features</a>
+                                </Navbar.Link>
+                                <Navbar.Link active={path === '/#about'} as={'div'} className='text-bgDark border-none opacity-70  hover:opacity-100 bg-transparent'>
+                                    <a href='/#about'>About</a>
+                                </Navbar.Link>
+                            </div>
+                            
+                            <div className='flex flex-col gap-2 md:hidden py-3 mt-8'>
+                                <Navbar.Link active={path === '/sign-in'} href='/sign-in' className='items-center flex text-bgDark opacity-70 hover:opacity-100 pt-2 cursor-pointer border-none'>
+                                    Sign In
+                                </Navbar.Link>
+                                <Navbar.Link href='/sign-up' className='items-center flex border-none'>
+                                    <Button className='bg-black text-white rounded-md border-none'>Sign Up</Button>
+                                </Navbar.Link>
+                            </div>
                         </Navbar.Collapse>
                     </Navbar>
                 </>
