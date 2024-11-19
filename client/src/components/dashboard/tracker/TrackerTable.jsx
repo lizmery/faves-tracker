@@ -81,7 +81,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                 <Table.Row className='bg-transparent'>
                                     <Table.Cell className='' onClick={() => {setTracker(tracker)}}>
                                         <Link to={`/tracker/${tracker._id}`}>
-                                            <img src={tracker.image} className='w-10 h-10 object-cover rounded-full' alt={`${tracker.title} image`} />
+                                            <img src={tracker.image} className={`w-10 h-10 object-cover rounded-full ${!tracker.image ? 'border' : ''}`} alt={`${tracker.title} image`} />
                                         </Link>
                                     </Table.Cell>
                                     <Table.Cell className='lg:whitespace-nowrap lg:font-medium cursor-pointer text-left' onClick={() => {setTracker(tracker)}}>

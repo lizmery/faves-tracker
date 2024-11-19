@@ -296,13 +296,13 @@ export default function TrackerDetails({ tracker, onClose }) {
                             alt='media tracker image'
                             className='w-full h-72 object-contain'
                         />
-                    ) : (
+                    ) :  tracker.image ? (
                         <img 
                             src={tracker.image}
                             alt='media tracker image'
                             className='w-full h-72 object-contain'
                         />
-                    )}
+                    ) : ''}
                 </div>
                 <div className="mb-8">
                     <Label htmlFor="notes" className="mb-2 block">
