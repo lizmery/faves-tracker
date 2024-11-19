@@ -67,7 +67,7 @@ export const updateTracker = async (req, res, next) => {
 
 export const deleteTracker = async (req, res, next) => {
     if (req.user.id !== req.params.userId) {
-        return next(errorHandler(403, 'You are not allow to delete this tracker'))
+        return next(errorHandler(403, 'You are not allowed to delete this tracker'))
     }
 
     try {
