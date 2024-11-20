@@ -90,9 +90,9 @@ export default function TrackersData({ trackerCategory }) {
                     cardColor='lightGreen'
                     darkModeCardColor='accent'
                     cardHoverColor='lightestGreen'
+                    darkCardHoverColor='lightGreen'
                     onClick={() => setFilters({status: 'Completed'})}
                     icon={<RiProgress8Line />}
-                    
                 />
                 <SummaryCard 
                     cardTitle={`Total ${trackerCategory} In Progress`}
@@ -100,14 +100,17 @@ export default function TrackersData({ trackerCategory }) {
                     cardColor='lightPurple'
                     darkModeCardColor='primary'
                     cardHoverColor='lightestPurple'
+                    darkCardHoverColor='lightPurple'
                     onClick={() => setFilters({status: 'In Progress'})}
                     icon={<RiProgress5Line />}
                 />
                 <SummaryCard 
                     cardTitle={`Total ${trackerCategory} Not Started`}
                     trackerData={trackersNotStarted}
-                    cardColor=''
-                    cardHoverColor=''
+                    cardColor='cardColorDark'
+                    darkModeCardColor='cardColorDark'
+                    cardHoverColor='cardColorLight'
+                    darkCardHoverColor='cardColorLight'
                     onClick={() => setFilters({status: 'Not Started'})}
                     icon={<RiProgress1Line />}
                 />

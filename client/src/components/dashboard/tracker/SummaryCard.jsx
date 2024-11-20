@@ -6,13 +6,18 @@ export default function SummaryCard({
     cardColor,
     darkModeCardColor,
     cardHoverColor,
+    darkCardHoverColor,
     onClick,
     icon
 }) {
     return ( 
         <Card 
             href="#" 
-            className={`w-full shadow-none ${darkModeCardColor ? ' dark:bg-' + darkModeCardColor : 'dark:bg-[#a0a0a0]'} ${cardColor ? 'bg-' + cardColor : 'bg-[#A0A0A0]'} ${cardHoverColor ? ' hover:bg-' + cardHoverColor + ' dark:hover:bg-' + cardHoverColor : 'hover:bg-[#D6D6D6] dark:hover:bg-[#D6D6D6]'}`}
+            className={`w-full shadow-none 
+                        dark:bg-${darkModeCardColor} 
+                        bg-${cardColor} 
+                        hover:bg-${cardHoverColor} 
+                        dark:hover:bg-${darkCardHoverColor}`}
             onClick={onClick}
         >
             <div className='text-3xl mb-2 dark:text-black'>
