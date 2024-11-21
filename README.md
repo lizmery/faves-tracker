@@ -5,8 +5,9 @@
 - [Problem](#problem)
 - [Solution](#solution)
   - [Benefits](#benefits)
-- [Technologies](#technologies)
-- [Features](#features)
+- [Overview](#overview)
+  - [Technologies](#technologies)
+  - [Features](#features)
 - [Challenges](#challenges)
   - [Production Errors](#production-errors)
   - [Charts](#charts)
@@ -22,13 +23,13 @@ The hassle of having to create multiple accounts across several different apps i
 ## Solution
 I wanted to create a single fullstack application where users can keep track of everything in one place and would only need to create a single account to do so. 
 ### Benefits
-#### 1. Real-time insights into the user’s media consumption behavior
-#### 2. Track various types of media in a single app
-#### 3. Search functionality and Table filters for flexibility
+1. Real-time insights into the user’s media consumption behavior
+2. Track various types of media in a single app
+3. Search functionality and Table filters for flexibility
 
 
-
-## Technologies
+## Overview
+### Technologies
 - Vite.js
 - Node
 - Express
@@ -39,7 +40,7 @@ I wanted to create a single fullstack application where users can keep track of 
 - Redux
 - Recharts
 
-## Features
+### Features
 - Dashboard Charts
 - Authentication, Authorization, and Session Management
 - Search Functionality
@@ -185,4 +186,14 @@ Figuring out how to create a stacked bar chart that displays data for each track
   
 
 ## Screenshots
+### Dashborad
+![Screen Shot 2024-11-21 at 10 53 09 AM](https://github.com/user-attachments/assets/22ffb250-b646-4b91-b08e-ff7cb0ded52f)
+
+![Screen Shot 2024-11-21 at 10 54 08 AM](https://github.com/user-attachments/assets/0b6fccb1-cd7d-4e89-a63c-0562f1465e8e)
+
+![Screen Shot 2024-11-21 at 10 53 49 AM](https://github.com/user-attachments/assets/913cc728-797b-4137-8df9-7c19c819e9e5)
+
+![Screen Shot 2024-11-21 at 10 54 26 AM](https://github.com/user-attachments/assets/8160fd18-8cc5-4065-b2de-f4c4cb99ae7d)
+
 ### Home Page
+![screencapture-mediatracker-proxy-vercel-app-2024-11-21-12_40_11](https://github.com/user-attachments/assets/e8b2a54a-6a1f-4002-bf3e-4dfc0f01bfc5)
