@@ -1,4 +1,19 @@
 # Media Tracker App (Faves Tracker 2.0)
+[View Live](https://mediatracker-proxy.vercel.app)
+
+## Table of Contents
+- [Problem](#problem)
+- [Solution](#solution)
+  - [Benefits](#benefits)
+- [Technologies](#technologies)
+- [Features](#features)
+- [Challenges](#challenges)
+  - [Production Errors](#production-errors)
+  - [Charts](#charts)
+- [Continued Development](#continued-development)
+  - [User Customization](#user-customization)
+  - [Automation](#automation)
+- [Screenshots](#screenshots)
 
 ## Problem
 The hassle of having to create multiple accounts across several different apps in order to keep track of the various media being consumed (e.g. GoodReads, Myanimelist, etc.), which makes it more time consuming to keep track of everything. 
@@ -11,8 +26,6 @@ I wanted to create a single fullstack application where users can keep track of 
 #### 2. Track various types of media in a single app
 #### 3. Search functionality and Table filters for flexibility
 
-
-[View Live](https://mediatracker-proxy.vercel.app)
 
 
 ## Technologies
@@ -150,22 +163,22 @@ Figuring out how to create a stacked bar chart that displays data for each track
 
 ## Continued Development
 ### User Customization
-#### Dashboard Overview
-- Customize “widgets” shown in overview
-- Filter data by status and date
+- Dashboard Overview
+  - Customize “widgets” shown in overview
+  - Filter data by status and date
 
-#### Tracker Table
-- Option to switch from "TABLE" to "LIST" view
-- Sort table data option
+- Tracker Table
+  - Option to switch from "TABLE" to "LIST" view
+  - Sort table data option
 
-#### Dashboard Sidebar Tabs
-- Option for user to create new categories that are automatically added to the sidebar tabs
-- Edit and Delete default tabs
+- Dashboard Sidebar Tabs
+  - Option for user to create new categories that are automatically added to the sidebar tabs
+  - Edit and Delete default tabs
 
 ### Automation
-#### APIs
-- Sync data from existing accounts such as Goodreads, Myanimelist, etc. *(in progress)*
-- Suggest trackers and automatically fill in form data when creating new trackers
+- APIs
+  - Sync data from existing accounts such as Goodreads, Myanimelist, etc. *(in progress)*
+  - Suggest trackers and automatically fill in form data when creating new trackers
   
 
   
