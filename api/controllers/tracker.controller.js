@@ -6,7 +6,7 @@ export const createTracker = async (req, res, next) => {
         return next(errorHandler(400, 'Please provide all required fields'))
     }
 
-    const genresArr = req.body.genres.split(',')
+    const genresArr = req.body.genres.split(',').map(genre => genre.trim())
     const tagsArr = req.body.tags?.split(',') || null
 
     const newTracker = new Tracker({
@@ -30,7 +30,7 @@ export const updateTracker = async (req, res, next) => {
     }
 
     if (req.body.genres) {
-        req.body.genres = req.body.genres.split(',')
+        req.body.genres = req.body.genres.split(',').map(genre => genre.trim())
     }
 
     if (req.body.tags) {
@@ -176,7 +176,7 @@ export const getTrackersOverview = async (req, res, next) => {
             },
             {
                 $limit: 5,
-            },
+            }
         ])
 
         const userActivity = await Tracker.aggregate([
