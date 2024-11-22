@@ -1,4 +1,4 @@
-# Media Tracker App (Faves Tracker 2.0)
+# Media Tracker App (MyFaves App 2.0)
 [View Live](https://mediatracker-proxy.vercel.app)
 
 ## Table of Contents
@@ -17,11 +17,12 @@
 - [Screenshots](#screenshots)
 
 ## Problem
-The hassle of having to create multiple accounts across several different apps in order to keep track of the various media being consumed (e.g. GoodReads, Myanimelist, etc.), which makes it more time consuming to keep track of everything. 
+The hassle of having to create multiple accounts across several different apps to keep track of the various media being consumed (e.g. GoodReads, Myanimelist, etc.) makes it more time-consuming to keep track of everything. 
 
 
 ## Solution
-I wanted to create a single fullstack application where users can keep track of everything in one place and would only need to create a single account to do so. 
+I created a single full-stack application where users can keep track of everything in one place and would only need to create a single account. Currently, users can keep track of 3 different categories of media: series, books, and movies. The dashboard overview lets users gain insight into their media consumption habits via charts and tables, including popular genres, highest rated, and more. Users can filter their tables based on genre, status, subcategory, etc. Users can also easily find the tracker they are looking for by subcategory, title, tags, genres, etc. 
+
 ### Benefits
 1. Real-time insights into the user’s media consumption behavior
 2. Track various types of media in a single app
