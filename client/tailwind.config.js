@@ -27,6 +27,9 @@ export default {
       'darkGreen': '#337357',
       'lightGreen': '#CAE9C5',
       'lightestGreen': '#DEF1DC',
+      'darkPink': '#DE2B43',
+      'lightPink': '#F2AFB7',
+      'lightestPink': '#FBEFF0',
       'cardColorDark': '#A0A0A0',
       'cardColorLight': '#D6D6D6'
     },
