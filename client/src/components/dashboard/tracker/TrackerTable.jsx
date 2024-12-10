@@ -57,7 +57,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                             <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>By</Table.HeadCell>
                             <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray'>Genre(s)</Table.HeadCell>
                             <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Status</Table.HeadCell>
-                            <Table.HeadCell className={`${trackerCategory === 'media' ? 'hidden lg:table-cell' : ''} bg-transparent dark:bg-transparent dark:text-lightGray`}>Rating</Table.HeadCell>
+                            <Table.HeadCell className={`bg-transparent dark:bg-transparent dark:text-lightGray`}>Rating</Table.HeadCell>
                             {trackerCategory === 'media' && (
                                 <Table.HeadCell className='bg-transparent dark:bg-transparent dark:text-lightGray'>Category</Table.HeadCell>
                             )}
@@ -96,9 +96,11 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         {tracker.genres?.join(', ')}
                                     </Table.Cell>
                                     <Table.Cell className='whitespace-nowrap font-medium'>
-                                      <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>{tracker.status}</p>
+                                        <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : tracker.status  === 'Dropped' ? ' bg-lightPink text-darkPink dark:bg-lightPink dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>
+                                            {tracker.status}
+                                        </p>
                                     </Table.Cell>
-                                    <Table.Cell className={`${trackerCategory === 'media' ? 'hidden lg:table-cell' : ''}`}>
+                                    <Table.Cell className={``}>
                                         {tracker.rating}
                                     </Table.Cell>
                                     {trackerCategory === 'media' && (
