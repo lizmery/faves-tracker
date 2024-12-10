@@ -139,11 +139,15 @@ export const getTrackersOverview = async (req, res, next) => {
     const sixMonthsAgo = new Date()
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6)
 
+    const { userId, category } = req.query
+
     try {
+        const categoryFilter = category && category !== 'All' ? { category } : {}
+
         const completedTrackersByCategory = await Tracker.aggregate([
             {
                 $match: { 
-                    userId: req.query.userId,
+                    userId,
                     status: 'Completed',
                 },
             },
@@ -158,8 +162,9 @@ export const getTrackersOverview = async (req, res, next) => {
         const popularGenresCompleted = await Tracker.aggregate([
             {
                 $match: {
-                    userId: req.query.userId,
+                    userId,
                     status: 'Completed', 
+                    ...categoryFilter,
                 },
             },
             {
@@ -182,8 +187,9 @@ export const getTrackersOverview = async (req, res, next) => {
         const userActivity = await Tracker.aggregate([
             {
                 $match: {
-                    userId: req.query.userId,
+                    userId,
                     createdAt: { $gte: sixMonthsAgo },
+                    ...categoryFilter,
                 },
             },
             {
@@ -203,13 +209,15 @@ export const getTrackersOverview = async (req, res, next) => {
         ])
 
         const highestRatedTrackers = await Tracker.find({
-            ...(req.query.userId && { userId: req.query.userId }),
+            userId,
+            ...categoryFilter,
         })
             .sort({ rating: -1 })
             .limit(5)
 
         const recentTrackers = await Tracker.find({
-            ...(req.query.userId && { userId: req.query.userId }),
+            userId,
+            ...categoryFilter,
         })
             .sort({ createdAt: -1 })
             .limit(5)
