@@ -211,6 +211,7 @@ export const getTrackersOverview = async (req, res, next) => {
         const highestRatedTrackers = await Tracker.find({
             userId,
             ...categoryFilter,
+            rating: { $exists: true, $ne: null },
         })
             .sort({ rating: -1 })
             .limit(5)
