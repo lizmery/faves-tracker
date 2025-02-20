@@ -7,7 +7,7 @@ import CreateTrackerForm from './tracker/CreateTrackerForm'
 import { RiProgress1Line, RiProgress5Line, RiProgress8Line } from 'react-icons/ri'
 import { FaSlidersH, FaUndoAlt } from 'react-icons/fa'
 import { modalTheme } from '../../flowbiteThemes/customThemes'
-import CsvUploader from './tracker/CSVUploader'
+import CsvUploader from './tracker/CsvUploader'
 
 export default function TrackersData({ trackerCategory }) {
     const { currentUser } = useSelector((state) => state.user)
@@ -83,7 +83,7 @@ export default function TrackersData({ trackerCategory }) {
                         className='bg-transparent dark:text-white text-black border dark:border-grayLine border-black' 
                         onClick={() => setShowCsvForm(true) }
                     >
-                        Import Data
+                        Import CSV
                     </Button>
                     <Button 
                         className='bg-black dark:bg-white dark:text-black capitalize hover:bg-transparent hover:border-black hover:text-black dark:hover:bg-transparent dark:hover:border-white dark:hover:text-white' 
