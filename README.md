@@ -9,6 +9,7 @@
   - [Technologies](#technologies)
   - [Features](#features)
 - [Challenges](#challenges)
+  - [CSV Parsing](#csv-parsing)
   - [Production Errors](#production-errors)
   - [Charts](#charts)
 - [Continued Development](#continued-development)
@@ -17,29 +18,23 @@
 - [Screenshots](#screenshots)
 
 ## Problem
-The hassle of having to create multiple accounts across several different apps to keep track of the various media being consumed (e.g. GoodReads, Myanimelist, etc.) makes it more time-consuming to keep track of everything. 
-
+Managing media consumption across multiple platforms requires users to maintain separate accounts, making it difficult to consolidate and track their progress efficiently. Manually logging entries across different apps can be time-consuming and tedious.
 
 ## Solution
-I created a single full-stack application where users can keep track of everything in one place and would only need to create a single account. Currently, users can keep track of 3 different categories of media: series, books, and movies. The dashboard overview lets users gain insight into their media consumption habits via charts and tables, including popular genres, highest rated, and more. Users can filter their tables based on genre, status, subcategory, etc. Users can also easily find the tracker they are looking for by subcategory, title, tags, genres, etc. 
+I created a full-stack application that centralizes media tracking into a single platform. Users can track series, books, and movies without needing multiple accounts. The dashboard overview lets users gain insight into their media consumption habits via charts and tables, including popular genres, highest rated, and more. Users can filter, search, and categorize their entries efficiently. Additionally, a CSV Import feature allows users to import their existing media lists from platforms like Goodreads, IMDb, and MyAnimeList, eliminating the need for manual data entry. For unsupported platforms, users can map CSV headers dynamically to match the app's tracker fields. 
 
 ### Benefits
 1. Real-time insights into the user’s media consumption behavior
 2. Track various types of media in a single app
 3. Search functionality and Table filters for flexibility
+4. Import media tracking data via CSV files from external acocunts
 
 
 ## Overview
 ### Technologies
-- Vite.js
-- Node
-- Express
-- MongoDB
-- TailwindCSS
-- Flowbite-React
-- Firebase
-- Redux
-- Recharts
+- **Frontend:** Vite.js, React, TailwindCSVV, Flowbite-React, Redux, Recharts
+- **Backend:** Node.js, Express.js, MongoDB, Firebase
+- **CSV Parsing:** csv-parser, Multer (for file handling)
 
 ### Features
 - Dashboard Charts
@@ -47,8 +42,17 @@ I created a single full-stack application where users can keep track of everythi
 - Search Functionality
 - Create, Update, Delete Trackers
 - Dark/Light Mode Toggle for Dashboard
+- Importing Data via CSV (Static & Dynamic Parsing)
 
 ## Challenges
+### CSV Parsing
+**API Limitation Workaround**
+- Originally, the goal was to sync data via external APIs. However, Goodreads no longer issues new developer keys, so a CSV import feature was created as an alternative
+
+**Handling Missing Required Fields**
+- Some CSV files may lack required fields, which can cause errors when saving trackers to MongoDB
+- Solution: Implement validation and fallback mechanisms, such as using default values where appropriate
+
 ### Production Errors
 **404 Not Found Error - Page would not load content on refresh**
 - After a bit of digging, I found that the issue was coming from React-Router and Vercel, more specifically that the Vercel server does not know how to handle client-side routing from React-Route
@@ -179,7 +183,7 @@ Figuring out how to create a stacked bar chart that displays data for each track
 
 ### Automation
 - APIs
-  - Sync data from existing accounts such as Goodreads, Myanimelist, etc. *(in progress)*
+  - Sync data from existing accounts such as Goodreads, Myanimelist, etc.
   - Suggest trackers and automatically fill in form data when creating new trackers
   
 

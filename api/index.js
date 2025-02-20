@@ -5,9 +5,10 @@ import path from 'path'
 import authRoutes from './routes/auth.route.js'
 import userRoutes from './routes/user.route.js'
 import trackerRoutes from './routes/tracker.route.js'
-import externalApiRoutes from './routes/externalApi.route.js'
+// import externalSearchRoutes from './routes/externalSearch.route.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import csvRoutes from './routes/csv.route.js'
 
 dotenv.config()
 
@@ -26,7 +27,7 @@ app.use(cors({
     origin: [
         'https://mediatracker.vercel.app', 
         'https://mediatracker-proxy.vercel.app', 
-        'http://localhost:5173'
+        'http://localhost:5174'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true, 
@@ -39,7 +40,8 @@ app.use(cookieParser())
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/tracker', trackerRoutes)
-app.use('/api/search', externalApiRoutes)
+// app.use('/api/search', externalSearchRoutes)
+app.use('/api/csv', csvRoutes)
 
 // Serve static files from Vite build
 // app.use(express.static(path.join(__dirname, '../client/dist')))
