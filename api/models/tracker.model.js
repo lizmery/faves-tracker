@@ -41,11 +41,17 @@ const trackerSchema = new mongoose.Schema(
         },
         subcategory: {
             type: String,
-            required: true,
         },
         image: {
             type: String,
         },
+        progress: {
+            type: {
+                current: { type: Number, default: 0 },
+                total: { type: Number, default: 0 },
+            },
+            default: { current: 0, total: 0 },
+        }
     },
     { timestamps: true }
 )

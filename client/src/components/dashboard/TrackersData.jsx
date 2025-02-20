@@ -7,6 +7,7 @@ import CreateTrackerForm from './tracker/CreateTrackerForm'
 import { RiProgress1Line, RiProgress5Line, RiProgress8Line } from 'react-icons/ri'
 import { FaSlidersH, FaUndoAlt } from 'react-icons/fa'
 import { modalTheme } from '../../flowbiteThemes/customThemes'
+import CsvUploader from './tracker/CsvUploader'
 
 export default function TrackersData({ trackerCategory }) {
     const { currentUser } = useSelector((state) => state.user)
@@ -15,6 +16,7 @@ export default function TrackersData({ trackerCategory }) {
     const [trackersInProgress, setTrackersInProgress] = useState()
     const [trackersNotStarted, setTrackersNotStarted] = useState()
     const [showForm, setShowForm] = useState(false)
+    const [showCsvForm, setShowCsvForm] = useState(false)
     const [filters, setFilters] = useState({ genre: '', status: '', subcategory: '', tags: '', by: '' })
     const [filteredTrackers, setFilteredTrackers] = useState([])
     const [showFilterModal, setShowFilterModal] = useState(false)
@@ -74,10 +76,19 @@ export default function TrackersData({ trackerCategory }) {
 
     return (
         <div className='bg-transparent flex flex-col gap-6 lg:gap-8 w-full overflow-x-hidden'>
-            <div className='flex justify-between'>
+            <div className='flex flex-col md:flex-row justify-between gap-2'>
                 <h1 className='text-3xl font-bold capitalize'>{trackerCategory}</h1>
-                <div className='flex gap-3 items-center'>
-                    <Button className='bg-black dark:bg-white dark:text-black capitalize hover:bg-transparent hover:border-black hover:text-black dark:hover:bg-transparent dark:hover:border-white dark:hover:text-white' onClick={() => setShowForm(true) }>
+                <div className='flex gap-2'>
+                    <Button 
+                        className='bg-transparent dark:text-white text-black border dark:border-grayLine border-black' 
+                        onClick={() => setShowCsvForm(true) }
+                    >
+                        Import CSV
+                    </Button>
+                    <Button 
+                        className='bg-black dark:bg-white dark:text-black capitalize hover:bg-transparent hover:border-black hover:text-black dark:hover:bg-transparent dark:hover:border-white dark:hover:text-white' 
+                        onClick={() => setShowForm(true) }
+                    >
                         Add {trackerCategory}
                     </Button>
                 </div>
@@ -157,6 +168,20 @@ export default function TrackersData({ trackerCategory }) {
                 <Modal.Header  />
                 <Modal.Body>
                     <CreateTrackerForm />
+                </Modal.Body>
+            </Modal>
+
+            {/* csv form modal */}
+            <Modal 
+                show={showCsvForm} 
+                onClose={() => setShowCsvForm(false) }
+                popup
+                theme={modalTheme}
+                className='dark:bg-grayLine'
+            >
+                <Modal.Header  />
+                <Modal.Body>
+                    <CsvUploader />
                 </Modal.Body>
             </Modal>
 
