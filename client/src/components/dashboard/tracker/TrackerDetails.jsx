@@ -24,6 +24,17 @@ export default function TrackerDetails({ tracker, onClose }) {
     const [imageUploadError, setImageUploadError] = useState(null)
     const apiUrl = import.meta.env.VITE_API_URL
 
+    const progressLabels = {
+        Series: { current: 'Episodes Watched', total: 'Total Episodes'},
+        Movies: { current: 'Minutes Watched', total: 'Total Runtime (mins)'},
+        Books: {current: 'Pages Read', total: 'Total Pages'}
+    }
+
+    const { 
+        current: currentLabel, 
+        total: totalLabel
+    } = progressLabels[tracker.category] || { current: 'Current Progress', total: 'Total Count'}
+
     const handleUploadImage = async () => {
         try {
             if (!file) {
@@ -185,6 +196,7 @@ export default function TrackerDetails({ tracker, onClose }) {
                         <option value='Not Started'>Have Not Started</option>
                         <option value='In Progress'>In Progress</option>
                         <option value='Completed'>Completed</option>
+                        <option value='Dropped'>Dropped</option>
                     </Select>
                 </div>
                 <div className="mb-6">
@@ -241,6 +253,44 @@ export default function TrackerDetails({ tracker, onClose }) {
                         className='flex-1'
                         defaultValue={tracker.dateCompleted ? new Date(tracker.dateCompleted).toISOString().split('T')[0] : ''}
                         onChange={(e) => setFormData({ ...formData, dateCompleted: e.target.value })}
+                        theme={inputTheme}
+                        color='gray'
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="currentProgress" className="mb-2 block">
+                        {currentLabel}
+                    </Label>
+                    <TextInput 
+                        type='number'
+                        min='0'
+                        placeholder={currentLabel}
+                        id='currentProgress'
+                        className='flex-1'
+                        defaultValue={tracker.progress?.current || 0}
+                        onChange={(e) => setFormData({ 
+                            ...formData, 
+                            progress: { ...tracker.progress, current: Number(e.target.value) }
+                        })}
+                        theme={inputTheme}
+                        color='gray'
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="totalProgress" className="mb-2 block">
+                        {totalLabel}
+                    </Label>
+                    <TextInput 
+                        type='number'
+                        min='0'
+                        placeholder={totalLabel}
+                        id='totalProgress'
+                        className='flex-1'
+                        defaultValue={tracker.progress?.total || 0}
+                        onChange={(e) => setFormData({ 
+                            ...formData, 
+                            progress: { ...tracker.progress, total: Number(e.target.value) }
+                        })}
                         theme={inputTheme}
                         color='gray'
                     />

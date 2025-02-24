@@ -104,7 +104,7 @@ export default function DashOverview() {
                         onChange={(e) => setTrackerCategory(e.target.value)}
                         id='filter'
                         theme={inputTheme}
-                        color='gray'
+                        color='info'
                     >
                         <option value='All'>All Categories</option>
                         <option value='Series'>Series</option>
