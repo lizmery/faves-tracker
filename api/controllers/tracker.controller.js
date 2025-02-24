@@ -54,6 +54,10 @@ export const updateTracker = async (req, res, next) => {
                     category: req.body.category,
                     subcategory: req.body.subcategory,
                     image: req.body.image,
+                    progress: {
+                        current: req.body.progress.current,
+                        total: req.body.progress.total
+                    },
                 },
             },
             { new: true }
