@@ -1,4 +1,4 @@
-import { Button, Drawer, Spinner } from 'flowbite-react'
+import { Button, Drawer, Spinner, Progress } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -10,9 +10,14 @@ export default function TrackerPage() {
     const [tracker, setTracker] = useState({})
     const { trackerId } = useParams()
     const [openDrawer, setOpenDrawer] = useState(false)
-    const handleClose = () => setOpenDrawer(false)
     const [loading, setLoading] = useState(false)
     const apiUrl = import.meta.env.VITE_API_URL
+
+    const currentProgress = tracker?.progress?.current ?? 0
+    const totalProgress = tracker?.progress?.total ?? 1
+    const progressPercentage = Math.round((currentProgress / totalProgress) * 100)
+
+    const handleClose = () => setOpenDrawer(false)
 
     useEffect(() => {
         const fetchTrackers = async () => {
@@ -46,12 +51,12 @@ export default function TrackerPage() {
             )}
             {!loading && tracker._id && (
                 <div className='flex flex-col-reverse md:flex-row gap-6 lg:pt-6 py-2 lg:px-10 px-4 lg:pb-6'>
-                    <div className='flex flex-col gap-2 basis-3/4'>
+                    <div className='flex flex-col gap-4 basis-3/4'>
                         <h1 className='text-3xl font-bold capitalize'>{tracker.title}</h1>
                         <p className=''>By: {tracker.by}</p>
                         <p>
                             Status: 
-                            <span className={`ml-2 lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>
+                            <span className={`ml-2 lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : tracker.status  === 'Dropped' ? ' bg-lightPink dark:bg-[#F0A8B1] dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>
                                     {tracker.status}
                             </span>
                         </p>
@@ -71,6 +76,16 @@ export default function TrackerPage() {
                             Date Completed: {tracker.dateCompleted ? 
                                 new Date(tracker.dateCompleted).toLocaleDateString('en-US', { timeZone: 'UTC' }) : ' N/A' }
                         </p>
+                        <div>
+                            <p className='pb-2'>Progress: {tracker.progress?.current} / {tracker.progress?.total}</p>
+                            <Progress
+                                progress={progressPercentage} 
+                                size='lg'
+                                color='gray'
+                                labelProgress
+                                progressLabelPosition='inside'
+                            />
+                        </div>
                         <p>Tags: {tracker.tags?.join(', ')}</p>
                         <p>Notes:  <br /> {tracker.notes}</p>
                         <Button onClick={() => setOpenDrawer(true)} className='mt-6 bg-black dark:bg-white dark:text-black capitalize hover:bg-transparent hover:border-black hover:text-black dark:hover:bg-transparent dark:hover:border-white dark:hover:text-white'>

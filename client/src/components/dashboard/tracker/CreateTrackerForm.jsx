@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TextInput, Select, Button, Alert, Label, Textarea, FileInput } from 'flowbite-react'
 import {
     getDownloadURL,
@@ -18,7 +18,44 @@ export default function CreateTrackerForm({ trackerCategory }) {
     const [imageUploadError, setImageUploadError] = useState(null)
     const [publishError, setPublishError] = useState(null)
     const [success, setSuccess] = useState(false)
+    const [progressLabels, setProgressLabels] = useState({
+        current: 'Current Progress',
+        total: 'Total Count'
+    })
     const apiUrl = import.meta.env.VITE_API_URL
+
+    const updateProgressLabels = (category) => {
+        switch (category) {
+            case 'Series':
+                setProgressLabels({
+                    current: 'Episodes Watched',
+                    total: 'Total Episodes'
+                })
+                break
+            case 'Movies':
+                setProgressLabels({
+                    current: 'Minutes Watched',
+                    total: 'Total Runtime (mins)'
+                })
+                break
+            case 'Books':
+                setProgressLabels({
+                    current: 'Pages Read',
+                    total: 'Total Pages'
+                })
+                break
+            default:
+                setProgressLabels({
+                    current: 'Current Progress',
+                    total: 'Total Count'
+                })
+                break
+        }
+    }
+
+    useEffect(() => {
+        if (trackerCategory) updateProgressLabels(trackerCategory)
+    }, [trackerCategory])
 
     const handleUploadImage = async () => {
         try {
@@ -88,7 +125,7 @@ export default function CreateTrackerForm({ trackerCategory }) {
 
     return (
         <div className='dark:bg-bgDark'>
-            <h1 className='text-center text-3xl mb-6 font-semibold'>Add {trackerCategory ? trackerCategory : 'Tracker'}</h1>
+            <h1 className='text-center text-3xl mb-6 font-semibold'>Add {trackerCategory || 'Tracker'}</h1>
             <form className='' onSubmit={handleSubmit}>
                 <div className="mb-6 mt-3">
                     <Label htmlFor="title" className="mb-2 block">
@@ -110,10 +147,13 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         Category
                     </Label>
                     <Select
-                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         id='category'
                         theme={inputTheme}
                         color='gray'
+                        onChange={(e) => {
+                            setFormData({ ...formData, category: e.target.value })
+                            updateProgressLabels(e.target.value)
+                        }}
                     >
                         <option></option>
                         <option value='Series'>Series</option>
@@ -165,6 +205,7 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         <option value='Not Started'>Have Not Started</option>
                         <option value='In Progress'>In Progress</option>
                         <option value='Completed'>Completed</option>
+                        <option value='Dropped'>Dropped</option>
                     </Select>
                 </div>
                 <div className="mb-6">
@@ -217,6 +258,42 @@ export default function CreateTrackerForm({ trackerCategory }) {
                         id='dateCompleted'
                         className='flex-1'
                         onChange={(e) => setFormData({ ...formData, dateCompleted: e.target.value })}
+                        theme={inputTheme}
+                        color='gray'
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="currentProgress" className="mb-2 block">
+                        {progressLabels.current}
+                    </Label>
+                    <TextInput 
+                        type='number'
+                        min='0'
+                        id='currentProgress'
+                        placeholder={`Enter ${progressLabels.current.toLowerCase()}`}
+                        className='flex-1'
+                        onChange={(e) => setFormData({ 
+                            ...formData,
+                            progress: { ...formData.progress, current: Number(e.target.value) } 
+                        })}
+                        theme={inputTheme}
+                        color='gray'
+                    />
+                </div>
+                <div className="mb-6">
+                    <Label htmlFor="totalProgress" className="mb-2 block">
+                        {progressLabels.total}
+                    </Label>
+                    <TextInput 
+                        type='number'
+                        min='0'
+                        id='totalProgress'
+                        placeholder={`Enter ${progressLabels.total.toLowerCase()}`}
+                        className='flex-1'
+                        onChange={(e) => setFormData({ 
+                            ...formData,
+                            progress: { ...formData.progress, total: Number(e.target.value) } 
+                        })}
                         theme={inputTheme}
                         color='gray'
                     />

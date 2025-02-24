@@ -76,6 +76,7 @@ export const inputTheme = {
         select: {
             colors: {
                 gray: 'dark:bg-transparent border text-darkGray dark:text-lightGray border-lightGray dark:border-grayLine dark:placeholder:text-lightGray placeholder:text-darkGray placeholder:opacity-60 focus:ring-1 focus:ring-primary dark:focus:ring-primary focus:border-primary',
+                info: 'bg-transparent dark:text-white text-black border dark:border-grayLine border-black'
             },
         },
     },

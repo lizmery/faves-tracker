@@ -72,6 +72,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                 <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Date Completed</Table.HeadCell>
                             )}
                             <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Created Date</Table.HeadCell>
+                            <Table.HeadCell className='hidden lg:table-cell bg-transparent dark:bg-transparent dark:text-lightGray md:whitespace-nowrap'>Progress</Table.HeadCell>
                             <Table.HeadCell>
                                 <span className="sr-only">Actions</span>
                             </Table.HeadCell>
@@ -84,7 +85,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                             <img src={tracker.image} className={`w-10 h-10 object-cover rounded-full ${!tracker.image ? 'border' : ''}`} alt={`${tracker.title} image`} />
                                         </Link>
                                     </Table.Cell>
-                                    <Table.Cell className='lg:whitespace-nowrap lg:font-medium cursor-pointer text-left' onClick={() => {setTracker(tracker)}}>
+                                    <Table.Cell className='lg:font-medium cursor-pointer text-left' onClick={() => {setTracker(tracker)}}>
                                         <Link to={`/tracker/${tracker._id}`}>
                                             {tracker.title}
                                         </Link>
@@ -96,7 +97,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         {tracker.genres?.join(', ')}
                                     </Table.Cell>
                                     <Table.Cell className='whitespace-nowrap font-medium'>
-                                        <p className={`lg:text-xs text-[.70rem] rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : tracker.status  === 'Dropped' ? ' bg-lightPink text-darkPink dark:bg-lightPink dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>
+                                        <p className={`lg:text-xs text-[.70rem] text-center rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : tracker.status  === 'Dropped' ? ' bg-lightPink text-darkPink dark:bg-[#F0A8B1] dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>
                                             {tracker.status}
                                         </p>
                                     </Table.Cell>
@@ -131,6 +132,9 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                     <Table.Cell className='hidden lg:table-cell'>
                                         {tracker.createdAt ? 
                                             new Date(tracker.createdAt).toLocaleDateString('en-US', { timeZone: 'UTC' }) : '-'}
+                                    </Table.Cell>
+                                    <Table.Cell className='hidden lg:table-cell'>
+                                        {tracker.progress && tracker.progress.total > 0 ? `${tracker.progress.current} / ${tracker.progress.total}` : ''}
                                     </Table.Cell>
                                     <Table.Cell className='flex flex-row gap-1 justify-center items-center'>
                                         <MdEdit className='text-black text-md lg:text-xl dark:text-white cursor-pointer' onClick={() => {setOpenDrawer(true); setTracker(tracker)}} />

@@ -21,6 +21,7 @@ export default function TrackersData({ trackerCategory }) {
     const [filteredTrackers, setFilteredTrackers] = useState([])
     const [showFilterModal, setShowFilterModal] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [showMore, setShowMore] = useState(false)
     const apiUrl = import.meta.env.VITE_API_URL
 
     const handleClose = () => setShowForm(false)
@@ -30,13 +31,22 @@ export default function TrackersData({ trackerCategory }) {
             try {
                 setLoading(true)
                 const res = await fetch(`${apiUrl}/api/tracker/get-trackers?userId=${currentUser._id}&category=${trackerCategory}`)
-                const data = await res.json()
 
                 if (res.ok) {
+                    const data = await res.json()
+
                     setUserTrackers(data.trackers)
                     setTrackersCompleted(data.totalCompleted)
                     setTrackersInProgress(data.totalInProgress)
                     setTrackersNotStarted(data.totalNotStarted)
+                    setLoading(false)
+
+                    if (data.trackers.length === 10) {
+                        setShowMore(true)
+                    } else {
+                        setShowMore(false)
+                    }
+                } else {
                     setLoading(false)
                 }
             } catch (error) {
@@ -72,6 +82,20 @@ export default function TrackersData({ trackerCategory }) {
     const handleFilterChange = (e) => {
         const { name, value } = e.target
         setFilters((prevFilters) => ({ ...prevFilters, [name]: value }))
+    }
+
+    const handleShowMore = async () => {
+        const startIndex = userTrackers.length
+        const res = await fetch(`${apiUrl}/api/tracker/get-trackers?userId=${currentUser._id}&category=${trackerCategory}&startIndex=${startIndex}`)
+
+        if (res.ok) {
+            const data = await res.json()
+
+            setUserTrackers(prevTrackers => [...prevTrackers, ...data.trackers])
+            setShowMore(data.trackers.length === 10)
+        } else {
+            return
+        }
     }
 
     return (
@@ -153,8 +177,18 @@ export default function TrackersData({ trackerCategory }) {
                             userTrackers={filteredTrackers.length > 0 ? filteredTrackers : userTrackers} 
                             trackerCategory={trackerCategory} 
                         /> 
+                        <div className='p-8 flex items-center justify-center w-full'>
+                            {showMore && (
+                                <Button
+                                    onClick={handleShowMore}
+                                    className='bg-white dark:text-white text-black border dark:border-lightGray border-black hover:bg-black hover:text-white'
+                                >
+                                    Show More
+                                </Button>
+                            )}
+                        </div>  
                     </>
-                )}             
+                )}           
             </div>
 
             {/* tracker form modal */}
@@ -167,7 +201,7 @@ export default function TrackersData({ trackerCategory }) {
             >
                 <Modal.Header  />
                 <Modal.Body>
-                    <CreateTrackerForm />
+                    <CreateTrackerForm trackerCategory={trackerCategory} />
                 </Modal.Body>
             </Modal>
 
@@ -210,6 +244,7 @@ export default function TrackersData({ trackerCategory }) {
                                 <option value='Completed'>Completed</option>
                                 <option value='In Progress'>In Progress</option>
                                 <option value='Not Started'>Not Started</option>
+                                <option value='Dropped'>Dropped</option>
                             </select>  
                         </div>
                         <div>
