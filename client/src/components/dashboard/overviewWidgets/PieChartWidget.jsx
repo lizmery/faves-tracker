@@ -7,7 +7,7 @@ import {
     ResponsiveContainer 
 } from 'recharts'
 
-const COLORS = ['#A1E091', '#5E48A3', '#826EBF', '#DAD4EC', '#D4D2D2']
+const COLORS = ['#63BB95', '#826EBF', '#AA9CD3', '#EC8398', '#D4D2D2']
 
 export default function PieChartWidget({data, title, desc}) {
     return (

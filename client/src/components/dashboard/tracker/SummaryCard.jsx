@@ -20,14 +20,14 @@ export default function SummaryCard({
                         dark:hover:bg-${darkCardHoverColor}`}
             onClick={onClick}
         >
-            <div className='text-3xl mb-2 dark:text-black'>
+            <div className='text-3xl mb-2 dark:text-white'>
                 {icon}
             </div>
             <div>
-                <h5 className="text-md font-semibold lg:text-lg tracking-tight text-darkGray capitalize mb-1">
+                <h5 className={`text-md font-semibold lg:text-lg tracking-tight text-darkGray dark:text-${cardHoverColor} capitalize mb-1`}>
                     {cardTitle}
                 </h5>
-                <p className="font-bold text-black text-6xl lg:text-8xl">
+                <p className={`font-bold text-black dark:text-white text-6xl lg:text-8xl`}>
                     {trackerData}
                 </p>
             </div>

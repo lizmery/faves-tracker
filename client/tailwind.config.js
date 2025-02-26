@@ -9,29 +9,30 @@ export default {
   ],
   safelist: [
     {
-      pattern: /bg-(lightGreen|lightPurple|lightestGreen|lightestPurple|cardColorDark|cardColorLight)/,
+      pattern: /bg-(grayLine|accent|primary|lightGreen|lightPurple|lightGray|lightestGreen|lightestPurple|cardColorDark|cardColorLight|darkGreen|darkPurple)/,
       variants: ['hover', 'dark', 'dark:hover'],
     }
   ],
   theme: {
     colors: {
-      'accent': '#A1E091',
+      'accent': '#63BB95',
       'primary': '#826EBF',
       'bgDark': '#121212',
       'lightGray': '#D4D2D2',
       'darkGray': '#292929',
       'grayLine': '#5C5C5C',
-      'darkPurple': '#5E48A3',
-      'lightPurple': '#DAD4EC',
-      'lightestPurple': '#EDEAF6',
-      'darkGreen': '#337357',
-      'lightGreen': '#CAE9C5',
-      'lightestGreen': '#DEF1DC',
-      'darkPink': '#DE2B43',
-      'lightPink': '#F6CAD0',
-      'lightestPink': '#FBEFF0',
-      'cardColorDark': '#A0A0A0',
-      'cardColorLight': '#D6D6D6'
+      'darkPurple': '#5A449C',
+      'lightPurple': '#AA9CD3',
+      'lightestPurple': '#CEC6E6',
+      'darkGreen': '#327156',
+      'lightGreen': '#9CD3BB',
+      'lightestGreen': '#B8E0CF',
+      'darkPink': '#D62246',
+      'pink': '#EC8398',
+      'lightPink': '#F4B8C4',
+      'lightestPink': '#F7CAD3',
+      'cardColorDark': '#5C5C5C',
+      'cardColorLight': '#ADADAD'
     },
   },
   plugins: [

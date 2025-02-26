@@ -97,7 +97,7 @@ export default function TrackerTable({ userTrackers, trackerCategory }) {
                                         {tracker.genres?.join(', ')}
                                     </Table.Cell>
                                     <Table.Cell className='whitespace-nowrap font-medium'>
-                                        <p className={`lg:text-xs text-[.70rem] text-center rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightGreen text-darkGreen dark:bg-accent dark:text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple text-darkPurple dark:bg-primary dark:text-black' : tracker.status  === 'Dropped' ? ' bg-lightPink text-darkPink dark:bg-[#F0A8B1] dark:text-black' : 'bg-black text-white opacity-50 dark:bg-white dark:text-black'} `}>
+                                        <p className={`lg:text-xs text-[.70rem] text-center rounded-full lg:px-3 lg:py-2 px-2 py-1 ${tracker.status  === 'Completed' ? 'bg-lightestGreen text-darkGreen dark:bg-darkGreen dark:text-lightestGreen' : tracker.status  === 'In Progress' ? ' bg-lightestPurple text-darkPurple dark:bg-darkPurple dark:text-lightestPurple' : tracker.status  === 'Dropped' ? ' bg-lightestPink text-darkPink dark:bg-darkPink dark:text-lightestPink' : 'bg-cardColorLight text-darkGray dark:bg-cardColorDark dark:text-lightGray'} `}>
                                             {tracker.status}
                                         </p>
                                     </Table.Cell>

@@ -23,7 +23,7 @@ export default function TrackerCard({ tracker }) {
             </h5>
             <div>
                 <span
-                    className={`rounded-full px-2.5 py-1 text-xs font-semibold ${tracker.status  === 'Completed' ? 'bg-lightGreen dark:bg-accent text-black' : tracker.status  === 'In Progress' ? ' bg-lightPurple dark:bg-primary text-black' : tracker.status  === 'Dropped' ? ' bg-lightPink dark:bg-[#F0A8B1] dark:text-black' : 'bg-black text-white opacity-60 dark:bg-white dark:text-black'} `} 
+                    className={`rounded-full px-2.5 py-1 text-xs font-semibold ${tracker.status  === 'Completed' ? 'bg-lightestGreen text-darkGreen dark:bg-darkGreen dark:text-lightestGreen' : tracker.status  === 'In Progress' ? ' bg-lightestPurple text-darkPurple dark:bg-darkPurple dark:text-lightestPurple' : tracker.status  === 'Dropped' ? ' bg-lightestPink text-darkPink dark:bg-darkPink dark:text-lightestPink' : 'bg-cardColorLight text-darkGray dark:bg-cardColorDark dark:text-lightGray'} `} 
                 >
                     {tracker.status}
                 </span>
