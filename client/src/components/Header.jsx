@@ -156,11 +156,11 @@ export default function Header() {
                                 <Navbar.Link active={path === '/'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100 bg-transparent'>
                                     <a href='/#hero'>Home</a>
                                 </Navbar.Link>
-                                <Navbar.Link active={path === '/#features'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100 hover:bg-transparent'>
-                                    <a href='/#features'>Features</a>
-                                </Navbar.Link>
                                 <Navbar.Link active={path === '/#about'} as={'div'} className='text-bgDark border-none opacity-70  hover:opacity-100 bg-transparent'>
                                     <a href='/#about'>About</a>
+                                </Navbar.Link>
+                                <Navbar.Link active={path === '/#features'} as={'div'} className='text-bgDark border-none opacity-70 hover:opacity-100 hover:bg-transparent'>
+                                    <a href='/#features'>Features</a>
                                 </Navbar.Link>
                             </div>
                             
