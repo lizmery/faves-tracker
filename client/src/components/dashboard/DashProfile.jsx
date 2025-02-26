@@ -250,7 +250,7 @@ export default function DashProfile() {
                     {loading ? 'Loading...' : 'Save Changes'}
                 </Button>
             </form>
-            <div className='text-primary flex justify-between mt-6'>
+            <div className='text-darkPurple dark:text-primary flex justify-between mt-6'>
                 <span onClick={() => setShowModal(true)} className='cursor-pointer'>
                     Delete Account
                 </span>

@@ -23,10 +23,10 @@ export default function FooterComponent() {
                             <div className="w-full sm:flex sm:items-center sm:justify-between mt-8 border-t pt-8">
                                 <span className='opacity-30 text-sm'>©2024 Lizmery</span>
                                 <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-                                    <Footer.Icon href="#" icon={BsFacebook} className='text-primary' />
-                                    <Footer.Icon href="#" icon={BsInstagram} className='text-primary' />
-                                    <Footer.Icon href="#" icon={BsTwitter} className='text-primary' />
-                                    <Footer.Icon href="#" icon={BsGithub} className='text-primary' />
+                                    <Footer.Icon href="#" icon={BsFacebook} className='text-darkPruple' />
+                                    <Footer.Icon href="#" icon={BsInstagram} className='text-darkPruple' />
+                                    <Footer.Icon href="#" icon={BsTwitter} className='text-darkPruple' />
+                                    <Footer.Icon href="#" icon={BsGithub} className='text-darkPruple' />
                                 </div>
                             </div>
                         </div>

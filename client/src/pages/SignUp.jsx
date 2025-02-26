@@ -104,7 +104,7 @@ export default function SignUp() {
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
                         <span>Have an account?</span>
-                        <Link to='/sign-in' className='text-primary flex items-center font-bold'>Sign In</Link>
+                        <Link to='/sign-in' className='text-darkPurple flex items-center font-bold'>Sign In</Link>
                     </div>
 
                     {errorMessage && (
