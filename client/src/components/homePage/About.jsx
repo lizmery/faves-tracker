@@ -1,58 +1,59 @@
-import heroImg from '../../assets/heroImg.png'
-import {
-    HiChartBar,
-    HiChartPie,
-    HiTable,
+  import {
+    HiOutlineBookOpen,
+    HiOutlineFilm,
+    HiOutlineDesktopComputer,
   } from 'react-icons/hi'
 
 export default function About() {
     return (
-        <section id='about' className="relative py-20 p-10 bg-[#f0f0eb] text-center">
-            <span className='text-sm font-semibold text-primary rounded-full'>
-                About
-            </span>
-            <h2 className="lg:text-6xl text-3xl font-bold mb-4 text-black">Everything you need</h2>
-            <p className="text-grayLine mb-10">All the tools you need to track your media</p>
-            
-            <div className="relative mx-auto max-w-3xl mb-8">
-                <img src={heroImg} alt="Product Preview" className="rounded-lg" />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#f0f0eb] rounded-lg"></div>
+        <section id='about' className=' mt-20 lg:mt-40 p-10 flex-col mb-20 lg:mb-40 bg-white'>
+            <div className='flex flex-col justify-center items-center text-center mb-14'>
+                <span className='text-sm md:text-md lg:text-lg font-semibold text-darkPurple rounded-full'>
+                    Stay organized and in control
+                </span>
+                <h1 className='mt-2 text-4xl lg:text-6xl font-bold leading-tight text-black max-w-xl'>
+                    Why Media Tracker?
+                </h1>
+                <p className='mt-4 text-grayLine max-w-2xl'>
+                    Keeping track of books, movies, and shows across different platforms is a hassle.
+                    Media Tracker brings everything together in one place for easy organization and insights.
+                </p>
             </div>
-
-            <div>
-                <div className='flex flex-col lg:flex-row gap-4 text-left'>
-                    <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
-                        <div className=''>
-                            <HiTable className='text-primary text-3xl' />
-                        </div>
-                        <div>
-                            <p className='text-grayLine'>
-                                <span className='text-black font-bold pr-1'>Title. </span>
-                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-                            </p>
-                        </div>
+            <div className='flex flex-col lg:flex-row gap-4'>
+                <div className='flex flex-col gap-4 bg-lightestPurple p-5 rounded-md flex-1 outline-1 outline outline-offset-4'>
+                    <div className=''>
+                        <HiOutlineBookOpen className='text-darkPurple text-4xl lg:text-5xl font-light' />
                     </div>
-                    <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
-                        <div className=''>
-                            <HiChartPie className='text-primary text-3xl' />
-                        </div>
-                        <div>
-                            <p className='text-grayLine'>
-                                <span className='text-black font-bold pr-1'>Title. </span>
-                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-                            </p>
-                        </div>
+                    <div>
+                        <h1 className='font-bold text-black lg:text-lg'>All-in-One-Tracking</h1>
+                        <p className=' text-darkGray pt-1'>
+                            No more switching between apps. Track and manage books, movies, and TV series all in one platform, 
+                            keeping your media collection organized effortlessly.
+                        </p>
                     </div>
-                    <div className='flex gap-4 bg-[#f0f0eb] p-5 rounded-md'>
-                        <div className=''>
-                            <HiChartBar className='text-primary text-3xl' />
-                        </div>
-                        <div>
-                            <p className='text-grayLine'>
-                                <span className='text-black font-bold pr-1'>Title. </span>
-                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-                            </p>
-                        </div>
+                </div>
+                <div className='flex flex-col gap-4 bg-lightestGreen p-5 rounded-md flex-1 outline-1 outline outline-offset-4'>
+                    <div className=''>
+                        <HiOutlineFilm className='text-darkGreen text-4xl lg:text-5xl' />
+                    </div>
+                    <div>
+                        <h1 className='font-bold text-black lg:text-lg'>Smart Insights</h1>
+                        <p className=' text-darkGray pt-1'>
+                            Get a deeper understanding of your media habits with interactive charts and tables that showcase 
+                            your most-watched genres, highest-rated content, and more.
+                        </p>
+                    </div>
+                </div>
+                <div className='flex flex-col gap-4 bg-lightestPink p-5 rounded-md flex-1 outline-1 outline outline-offset-4'>
+                    <div className=''>
+                        <HiOutlineDesktopComputer className='text-darkPink text-4xl lg:text-5xl' />
+                    </div>
+                    <div>
+                        <h1 className='font-bold text-black lg:text-lg'>Seamless Import</h1>
+                        <p className=' text-darkGray pt-1'>
+                            Transfer your existing media lists from Goodreads, IMDb, MyAnimeList, and other platforms with a 
+                            simple CSV upload, saving time and effort.
+                        </p>
                     </div>
                 </div>
             </div>

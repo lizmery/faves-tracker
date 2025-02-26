@@ -8,8 +8,8 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      <Features />
       <About />
+      <Features />
       <CallToAction />
     </div>
   )

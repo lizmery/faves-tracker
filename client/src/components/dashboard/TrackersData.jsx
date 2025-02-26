@@ -181,7 +181,7 @@ export default function TrackersData({ trackerCategory }) {
                             {showMore && (
                                 <Button
                                     onClick={handleShowMore}
-                                    className='bg-white dark:text-white text-black border dark:border-lightGray border-black hover:bg-black hover:text-white'
+                                    className='bg-transparent dark:text-white text-black border dark:border-lightGray border-black hover:bg-black hover:text-white'
                                 >
                                     Show More
                                 </Button>
