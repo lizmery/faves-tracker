@@ -19,8 +19,8 @@ export default function About() {
                     Media Tracker brings everything together in one place for easy organization and insights.
                 </p>
             </div>
-            <div className='flex flex-col lg:flex-row gap-4'>
-                <div className='flex flex-col gap-4 bg-lightestPurple p-5 rounded-md flex-1 outline-1 outline outline-offset-4'>
+            <div className='flex flex-col lg:flex-row gap-8'>
+                <div className='flex flex-col gap-4 bg-lightestPurple p-5 rounded-md flex-1 outline-1 outline outline-offset-8'>
                     <div className=''>
                         <HiOutlineBookOpen className='text-darkPurple text-4xl lg:text-5xl font-light' />
                     </div>
@@ -32,7 +32,7 @@ export default function About() {
                         </p>
                     </div>
                 </div>
-                <div className='flex flex-col gap-4 bg-lightestGreen p-5 rounded-md flex-1 outline-1 outline outline-offset-4'>
+                <div className='flex flex-col gap-4 bg-lightestGreen p-5 rounded-md flex-1 outline-1 outline outline-offset-8'>
                     <div className=''>
                         <HiOutlineFilm className='text-darkGreen text-4xl lg:text-5xl' />
                     </div>
@@ -44,7 +44,7 @@ export default function About() {
                         </p>
                     </div>
                 </div>
-                <div className='flex flex-col gap-4 bg-lightestPink p-5 rounded-md flex-1 outline-1 outline outline-offset-4'>
+                <div className='flex flex-col gap-4 bg-lightestPink p-5 rounded-md flex-1 outline-1 outline outline-offset-8'>
                     <div className=''>
                         <HiOutlineDesktopComputer className='text-darkPink text-4xl lg:text-5xl' />
                     </div>

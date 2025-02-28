@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 export default function CallToAction() {
     return (
-        <section className="relative py-40 p-10 bg-lightestPurple">
+        <section className="relative py-40 p-10 bg-lightestPurple rounded-lg">
             
-            <div className='bg-white text-center flex-col flex items-center rounded-md lg:p-16 p-8 border border-black'>
+            <div className='bg-white text-center flex-col flex items-center rounded-md lg:p-16 p-8 outline outline-1 outline-offset-8'>
             <h2 className="lg:text-6xl text-3xl font-bold mb-4 text-black">Track Your Media Like a Pro</h2>
             <p className="text-darkGray mb-6">Join today and easily organize, analyze, and enjoy your media consumption with personalized tools designed for seamless management.</p>
             <Link to='/sign-up'>

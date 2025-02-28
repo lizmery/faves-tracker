@@ -17,8 +17,8 @@ export default function Features() {
             </p>
             
             <div className="relative mx-auto  mb-16 bg-lightestPink rounded-lg">
-                <img src={heroImg} alt="Product Preview" className="rounded-lg relative top-5 left-5 lg:top-10 lg:left-10 border border-black p-1" />
-                <div className="absolute -inset-5 lg:-inset-10 bg-gradient-to-b from-transparent to-white rounded-lg"></div>
+                <img src={heroImg} alt="Product Preview" className="rounded-lg relative top-5 left-5 lg:top-10 lg:left-10 border border-black p-2" />
+                <div className="absolute -inset-6 lg:-inset-12 bg-gradient-to-b from-transparent to-white rounded-lg"></div>
             </div>
 
             <div>

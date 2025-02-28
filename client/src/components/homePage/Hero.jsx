@@ -26,8 +26,8 @@ export default function Hero() {
                 </div>
             </div>
             <div className='flex-1 relative mt-10 lg:mt-0 left-10 2xl:left-2 2xl:ml-20 bg-lightestGreen rounded-lg'>
-                <img src={heroImg} alt='Product Preview' className='p-1 border border-black rounded-md w-[550px] min-h-[350px] lg:w-[700px] 2xl:w-[900px] lg:min-h-[500px] max-w-none object-fill relative -right-5 lg:-right-10 2xl:-right-30 top-5 lg:top-10' />
-                <div className="absolute -inset-5 lg:-inset-10 bg-gradient-to-b from-transparent to-white rounded-lg"></div>
+                <img src={heroImg} alt='Product Preview' className='p-2 border border-black rounded-md w-[550px] min-h-[350px] lg:w-[700px] 2xl:w-[900px] lg:min-h-[500px] max-w-none object-fill relative -right-5 lg:-right-10 2xl:-right-30 top-5 lg:top-10' />
+                <div className="absolute -inset-5 lg:-inset-12 bg-gradient-to-b from-transparent to-white rounded-lg"></div>
             </div>
         </section>
     )
